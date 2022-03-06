@@ -1,6 +1,6 @@
 @extends('admin.template.admin')
 
-@section('title', 'Edit Kamar')
+@section('title', 'Edit Property')
 
 @section('css')
 <style>
@@ -38,20 +38,71 @@
 @section('main-content')
 <div class="card shadow mx-3">
     <div class="card-body">
-        <form action="{{ route('admin.room.update', $data->id) }}" method="post" enctype="multipart/form-data"
+        <form action="{{ route('admin.properties.update', $data->id) }}" method="post" enctype="multipart/form-data"
             id="form">
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="jenis">Jenis Kamar</label>
-                <input type="text" required name="jenis" class="form-control  @error('jenis') is-invalid @enderror"
-                    value="{{ old('jenis', $data->jenis) }}">
-                @error('jenis')
+                <label for="nama">Nama Property</label>
+                <input type="text" required name="nama" class="form-control  @error('nama') is-invalid @enderror"
+                    value="{{ old('nama', $data->nama) }}">
+                @error('nama')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="lokasi">Nama Lokasi</label>
+                        <input type="text" required name="lokasi" class="form-control  @error('lokasi') is-invalid @enderror" value="{{ old('lokasi', $lokasi) }}">
+                        @error('lokasi')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="latitude">Latitude Lokasi</label>
+                        <input type="text" required name="latitude" class="form-control  @error('latitude') is-invalid @enderror" value="{{ old('latitude', $lat) }}">
+                        @error('latitude')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="longitude">Longitude Lokasi</label>
+                        <input type="text" required name="longitude" class="form-control  @error('longitude') is-invalid @enderror" value="{{ old('longitude', $long) }}">
+                        @error('longitude')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="deskripsi">Deskripsi</label>
+                <textarea required name="deskripsi" id="deskripsi" cols="30" rows="10" class="form-control  @error('deskripsi') is-invalid @enderror">{{ old('deskripsi', $data->deskripsi) }}</textarea>
+                @error('deskripsi')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
-                <label for="harga">Harga</label>
+                <label for="tipe">Tipe</label>
+                <select required name="tipe" id="tipe" class="form-control  @error('tipe') is-invalid @enderror">
+                    <option value="" selected disabled>Pilih Tipe</option>
+                    <option {{ ($data->tipe == 'Tanah') ? 'selected' : '' }} value="Tanah">Tanah</option>
+                    <option {{ ($data->tipe == 'Bangunan') ? 'selected' : '' }} value="Bangunan">Bangunan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="luas">Luas (m<sup>2</sup>)</label>
+                <input type="text" required name="luas" class="form-control  @error('luas') is-invalid @enderror" value="{{ old('luas', $data->luas) }}">
+                @error('luas')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="harga">Harga <span id="tipe_harga"></span></label>
                 <input type="text" required name="harga" class="form-control  @error('harga') is-invalid @enderror"
                     value="{{ old('harga', $data->harga) }}">
                 @error('harga')
@@ -59,37 +110,14 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="jumlah">Jumlah Kamar</label>
-                <input type="number" required name="jumlah"
-                    class="form-control  @error('jumlah') is-invalid @enderror" value="{{ old('jumlah', $data->jumlah) }}">
-                @error('jumlah')
+                <label for="limit">Fasilitas <span class="badge badge-pill badge-secondary" title="Pisahkan dengan tanda |"><i class="fa fa-question"></i></span></label>
+                <input type="text" name="fasilitas" value="{{ old('fasilitas',$data->fasilitas) }}" required class="form-control @error('fasilitas') is-invalid @enderror">
+                @error('fasilitas')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="limit">Fasilitas (ID) <span class="badge badge-pill badge-secondary" title="Pisahkan dengan tanda |"><i class="fa fa-question"></i></span></label>
-                        <input type="text" required name="fasilitas_id" class="form-control  @error('fasilitas_id') is-invalid @enderror"
-                            value="{{ old('fasilitas_id', json_decode($data->fasilitas)->id) }}">
-                        @error('fasilitas_id')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="limit">Fasilitas (EN) <span class="badge badge-pill badge-secondary" title="Pisahkan dengan tanda |"><i class="fa fa-question"></i></span></label>
-                        <input type="text" required name="fasilitas_en" class="form-control  @error('fasilitas_en') is-invalid @enderror"
-                            value="{{ old('fasilitas_en', json_decode($data->fasilitas)->en) }}">
-                        @error('fasilitas_en')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
             <div class="form-group">
-                <label for="text">Foto Kamar</label>
+                <label for="text">Foto Property</label>
                 <div class="custom-file">
                     <input type="file" class="custom-file-input foto" name="foto[]" accept="image/*" multiple>
                     <label class="custom-file-label label-foto">Select file</label>
@@ -98,10 +126,10 @@
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
                 <div class="row my-3">
-                    @foreach ($data->image as $image)
+                    @foreach ($data->images as $image)
                     <div class="col-3">
                         <div class="img-frame">
-                            <img src="{{ json_decode($image->image)->url }}" alt="" class="img-responsive img-crop">
+                            <img src="{{ Storage::url('properties/image/') . $image->name }}" alt="" class="img-responsive img-crop">
                             <div class="delete-image hapus-image" data-id="{{ $image->id }}"><strong>Delete Image</strong></div>
                         </div> 
                     </div>
@@ -170,9 +198,28 @@
         changeLabelFoto()
     })
 
+    $('#tipe').change(function(e){
+        let tipe = $(this).val()
+        if(tipe == 'Tanah'){
+            $('#tipe_harga').text('/are')
+        }
+        else {
+            $('#tipe_harga').text('')
+        }
+    })
+
     $('#form').validate({
         rules: {
-            jenis: 'required',
+            nama: 'required',
+            lokasi: 'required',
+            latitude: 'required',
+            longitude: 'required',
+            deskripsi: 'required',
+            tipe: 'required',
+            luas: {
+                required: true,
+                number: true
+            },
             jumlah: {
                 required: true,
                 digits: true
@@ -181,8 +228,7 @@
                 required: true,
                 number: true
             },
-            fasilitas_id: 'required',
-            fasilitas_en: 'required',
+            fasilitas: 'required',
         },
         submitHandler: function(form, e) {
             e.preventDefault()
@@ -202,7 +248,7 @@
                 contentType: false, 
                 processData: false, 
                 success: (res) => {
-                    if(res == 'Sukses') window.location.href = '{{ route("admin.room.index") }}'
+                    if(res == 'Sukses') window.location.href = '{{ route("admin.properties.index") }}'
                     else window.location.href = ''
                 }, 
                 error: (err) => {
@@ -224,7 +270,7 @@
                 Swal.showLoading()
                 Swal.stopTimer()
                 $.ajax({
-                    url: `{{ route('admin.room.delete.image') }}`,
+                    url: `{{ route('admin.properties.image.delete') }}`,
                     method: 'DELETE',
                     data: {
                         id: id

@@ -33,6 +33,7 @@ Route::prefix('admin')->group(function () {
             Route::controller(AdminController::class)->group(function(){
                 Route::get('/', 'index')->name('index');
             });
+            Route::delete('properties/image/', [PropertyController::class, 'deleteImage'])->name('properties.image.delete');
             Route::resource('properties', PropertyController::class);
         });
     });

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
+use App\Models\PropertyImages;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PropertyController extends Controller
 {
@@ -83,7 +85,13 @@ class PropertyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Property::findOrFail($id);
+        $lokasi = explode('|', $data->lokasi);
+        $latlong = explode(',', $lokasi[1]);
+        $lokasi = $lokasi[0];
+        $lat = trim($latlong[0]);
+        $long = trim($latlong[1]);
+        return view('admin.property.edit', compact('data', 'lokasi', 'lat', 'long'));
     }
 
     /**
@@ -95,7 +103,32 @@ class PropertyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $lokasi = $request->lokasi . "|" . $request->latitude . "," . $request->longitude;
+            $data = Property::findOrFail($id);
+            $data->nama = $request->nama;
+            $data->lokasi = $lokasi;
+            $data->deskripsi = $request->deskripsi;
+            $data->harga = str_replace(',', '', $request->harga);
+            $data->luas = $request->luas;
+            $data->tipe = $request->tipe;
+            $data->fasilitas = $request->fasilitas;
+
+            // save foto
+            if(isset($request->fotofile)){
+                foreach ($request->fotofile as $file) {
+                    $data->images()->create([
+                        'name' => $file->hashName()
+                    ]);
+                    $file->storeAs('public/properties/image', $file->hashName());
+                }
+            }
+            $data->save();
+            $request->session()->flash('success', 'Berhasil update data');
+            return response()->json('Sukses');
+        } catch(\Throwable $th) {
+            return response()->json($th->getMessage(), 500);
+        }
     }
 
     /**
@@ -106,6 +139,16 @@ class PropertyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Property::find($id)->delete();
+        return response()->json('Sukses');
+    }
+
+    public function deleteImage(Request $request)
+    {
+        $id = $request->id;
+        $data = PropertyImages::find($id);
+        Storage::disk('public')->delete('properties/image/' . $data->name);
+        $data->delete();
+        return response()->json('deleted');
     }
 }
