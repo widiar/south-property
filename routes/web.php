@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(SiteController::class)->group(function(){
     Route::get('/', 'index')->name('home');
     Route::get('property/{id}', 'property')->name('property');
+    Route::post('property/{id}', 'propertyView')->name('property.view');
 });
 
 //admin
@@ -34,6 +36,8 @@ Route::prefix('admin')->group(function () {
             Route::controller(AdminController::class)->group(function(){
                 Route::get('/', 'index')->name('index');
             });
+            Route::resource('banner', BannerController::class);
+
             Route::delete('properties/image/', [PropertyController::class, 'deleteImage'])->name('properties.image.delete');
             Route::resource('properties', PropertyController::class);
         });

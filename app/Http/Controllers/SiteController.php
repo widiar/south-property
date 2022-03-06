@@ -9,7 +9,7 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $properties = Property::with('images')->where('is_sold', 0)->orderBy('count_view')->get();
+        $properties = Property::with('images')->where('is_sold', 0)->orderBy('count_view', 'desc')->limit(5)->get();
         return view('home', compact('properties'));
     }
 
@@ -17,5 +17,18 @@ class SiteController extends Controller
     {
         $property = Property::with('images')->findOrFail($id);
         return view('property', compact('property'));
+    }
+
+    public function propertyView($id)
+    {
+        try {
+            $property = Property::findOrFail($id);
+            $property->count_view++;
+            $property->save();
+            return response()->json('viewed');
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
+
     }
 }

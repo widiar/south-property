@@ -22,7 +22,6 @@ return new class extends Migration
             $table->integer('luas');
             $table->string('tipe');
             $table->integer('count_view')->default(0);
-            $table->integer('count_clicked')->default(0);
             $table->text('fasilitas');
             $table->boolean('is_sold')->default(0);
             $table->timestamps();

@@ -139,7 +139,16 @@
         .includes('reload')
     );
     if (isReload == false) {
-        console.log('not reload');
+        $.ajax({
+            url: `{{ route('property.view', $property->id) }}`,
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        });
     }
 </script>
 @endsection

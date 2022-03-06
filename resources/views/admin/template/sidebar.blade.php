@@ -14,6 +14,15 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
+                    <a href="{{ route('admin.banner.index') }}"
+                        class="nav-link{{request()->is('admin/banner*') ? ' active' : '' }}">
+                        <i class="nav-icon fas fa-images"></i>
+                        <p>
+                            Data Banner
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.properties.index') }}"
                         class="nav-link{{request()->is('admin/properties*') ? ' active' : '' }}">
                         <i class="nav-icon fas fa-building"></i>
