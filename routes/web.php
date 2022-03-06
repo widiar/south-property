@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
+Route::controller(SiteController::class)->group(function(){
+    Route::get('/', 'index')->name('home');
+    Route::get('property/{id}', 'property')->name('property');
 });
-
 
 //admin
 Route::prefix('admin')->group(function () {

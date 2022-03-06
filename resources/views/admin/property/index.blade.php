@@ -20,15 +20,6 @@
             <h5><i class="icon fas fa-exclamation-triangle"></i> GAGAL!</h5>
             {{session('error')}}
         </div>
-
-        <iframe 
-            width="100%" 
-            height="450" 
-            frameborder="0"
-            loading="lazy"
-            src="https://maps.google.com/maps?q=-8.788836,115.191021&z=16&amp;output=embed"
-            >
-        </iframe>
         @endif
         <table id="adminTable" class="table table-bordered dt-responsive nowrap" style="width: 100%;">
             <thead>

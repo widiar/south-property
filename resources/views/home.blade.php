@@ -183,7 +183,7 @@
             <div class="col-md-12">
                 <div class="title-wrap d-flex justify-content-between">
                     <div class="title-box">
-                        <h2 class="title-a">Latest Properties</h2>
+                        <h2 class="title-a">Most Viewed Properties</h2>
                     </div>
                     <div class="title-link">
                         <a href="property-grid.html">All Property
@@ -194,121 +194,45 @@
             </div>
         </div>
         <div id="property-carousel" class="owl-carousel owl-theme">
-            <div class="carousel-item-b">
-                <div class="card-box-a card-shadow">
-                    <div class="img-box-a">
-                        <img src="{{ asset('img/property-6.jpg') }}" alt="" class="img-a img-fluid">
-                    </div>
-                    <div class="card-overlay">
-                        <div class="card-overlay-a-content">
-                            <div class="card-header-a">
-                                <h2 class="card-title-a">
-                                <a href="property-single.html">206 Mount
-                                    <br /> Olive Road Two</a>
-                                </h2>
-                            </div>
-                            <div class="card-body-a">
-                                <div class="price-box d-flex">
-                                    <span class="price-a">rent | $ 12.000</span>
+            @foreach ($properties as $property)
+                <div class="carousel-item-b">
+                    <div class="card-box-a card-shadow">
+                        <div class="img-box-a">
+                            <img src="{{ Storage::url('properties/image/') . $property->images[0]->name }}" alt="" class="img-a img-fluid" style="height: 400px;object-fit: cover;
+                            object-position: center;">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-overlay-a-content">
+                                <div class="card-header-a">
+                                    <h2 class="card-title-a">
+                                    <a class="porperty-link" href="{{ route('property', [$property->id]) }}">{{ $property->nama }}</a>
+                                    </h2>
                                 </div>
-                                <a href="#" class="link-a">Click here to view
-                                    <span class="ion-ios-arrow-forward"></span>
-                                </a>
-                            </div>
-                            <div class="card-footer-a">
-                                <ul class="card-info d-flex justify-content-around">
-                                    <li>
-                                        <h4 class="card-info-title">Area</h4>
-                                        <span>340m<sup>2</sup></span>
-                                    </li>
-                                    <li>
-                                        <h4 class="card-info-title">Beds</h4>
-                                        <span>2</span>
-                                    </li>
-                                    <li>
-                                        <h4 class="card-info-title">Baths</h4>
-                                        <span>4</span>
-                                    </li>
-                                    <li>
-                                        <h4 class="card-info-title">Garages</h4>
-                                        <span>1</span>
-                                    </li>
-                                </ul>
+                                <div class="card-body-a">
+                                    <div class="price-box d-flex">
+                                        <span class="price-a">Rp {{ number_format($property->harga, '0', '.', '.') }}</span>
+                                    </div>
+                                    <a href="{{ route('property', [$property->id]) }}" class="link-a property-link">Click here to view
+                                        <span class="ion-ios-arrow-forward"></span>
+                                    </a>
+                                </div>
+                                <div class="card-footer-a">
+                                    <ul class="card-info d-flex justify-content-around">
+                                        <li>
+                                            <h4 class="card-info-title">Luas</h4>
+                                            <span>{{ $property->luas }}m<sup>2</sup></span>
+                                        </li>
+                                        <li>
+                                            <h4 class="card-info-title">Tipe</h4>
+                                            <span>{{ $property->tipe }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="carousel-item-b">
-                <div class="card-box-a card-shadow">
-                    <div class="img-box-a">
-                        <img src="{{ asset('img/property-3.jpg') }}" alt="" class="img-a img-fluid">
-                    </div>
-                    <div class="card-overlay">
-                        <div class="card-overlay-a-content">
-                            <div class="card-header-a">
-                                <h2 class="card-title-a">
-                                <a href="property-single.html">157 West
-                                    <br /> Central Park</a>
-                                </h2>
-                            </div>
-                            <div class="card-body-a">
-                                <div class="price-box d-flex">
-                                    <span class="price-a">rent | $ 12.000</span>
-                                </div>
-                                <a href="property-single.html" class="link-a">Click here to view
-                                    <span class="ion-ios-arrow-forward"></span>
-                                </a>
-                            </div>
-                            <div class="card-footer-a">
-                                <ul class="card-info d-flex justify-content-around">
-                                    <li>
-                                        <h4 class="card-info-title">Area</h4>
-                                        <span>340m<sup>2</sup></span>
-                                    </li>
-                                    <li>
-                                        <h4 class="card-info-title">Beds</h4>
-                                        <span>2</span>
-                                    </li>
-                                    <li>
-                                        <h4 class="card-info-title">Baths</h4>
-                                        <span>4</span>
-                                    </li>
-                                    <li>
-                                        <h4 class="card-info-title">Garages</h4>
-                                        <span>1</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item-b">
-                <div class="card-box-a card-shadow">
-                    <div class="img-box-a">
-                        <img src="{{ asset('img/property-7.jpg') }}" alt="" class="img-a img-fluid">
-                    </div>
-                    <div class="card-overlay">
-                        <div class="card-overlay-a-content">
-                            <div class="card-header-a">
-                                <h2 class="card-title-a">
-                                <a href="property-single.html">245 Azabu
-                                    <br /> Nishi Park let</a>
-                                </h2>
-                            </div>
-                            <div class="card-body-a">
-                                <div class="price-box d-flex">
-                                    <span class="price-a">Rp 1.000.000.000</span>
-                                </div>
-                                <a href="property-single.html" class="link-a">Click here to view
-                                    <span class="ion-ios-arrow-forward"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
