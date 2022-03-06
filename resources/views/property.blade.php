@@ -24,7 +24,7 @@
                 <div id="property-single-carousel" class="owl-carousel owl-arrow gallery-property">
                     @foreach ($property->images as $image)
                         <div class="carousel-item-b">
-                            <img src="{{ Storage::url('properties/image/') . $image->name }}" alt="">
+                            <img src="{{ Storage::url('properties/image/') . $image->name }}" alt="" style="height: 900px; object-fit: cover;object-position: center;">
                         </div>
                     @endforeach
                 </div>

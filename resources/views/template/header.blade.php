@@ -1,6 +1,6 @@
 
 <meta charset="utf-8">
-<title>EstateAgency Bootstrap Template</title>
+<title>South Property Bali</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
