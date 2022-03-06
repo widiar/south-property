@@ -40,18 +40,10 @@
         <form action="{{ route('admin.banner.store') }}" method="post" enctype="multipart/form-data" id="form">
             @csrf
             <div class="form-group">
-                <label for="title_id">Title (ID)</label>
-                <input type="text" required name="title_id" class="form-control  @error('title_id') is-invalid @enderror"
-                    value="{{ old('title_id') }}">
-                @error('title_id')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="title_en">Title (EN)</label>
-                <input type="text" required name="title_en" class="form-control  @error('title_en') is-invalid @enderror"
-                    value="{{ old('title_en') }}">
-                @error('title_en')
+                <label for="title">Title</label>
+                <input type="text" required name="title" class="form-control  @error('title') is-invalid @enderror"
+                    value="{{ old('title') }}">
+                @error('title')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
@@ -79,8 +71,7 @@
 <script>
     $('#form').validate({
         rules: {
-            title_id: 'required',
-            title_en: 'required',
+            title: 'required',
             foto: 'required',
         }
     })

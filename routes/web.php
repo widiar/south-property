@@ -36,7 +36,7 @@ Route::prefix('admin')->group(function () {
             Route::controller(AdminController::class)->group(function(){
                 Route::get('/', 'index')->name('index');
             });
-            Route::resource('banner', BannerController::class);
+            Route::resource('banner', BannerController::class)->except('show');
 
             Route::delete('properties/image/', [PropertyController::class, 'deleteImage'])->name('properties.image.delete');
             Route::resource('properties', PropertyController::class);

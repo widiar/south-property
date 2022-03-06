@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Property;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class SiteController extends Controller
     public function index()
     {
         $properties = Property::with('images')->where('is_sold', 0)->orderBy('count_view', 'desc')->limit(5)->get();
-        return view('home', compact('properties'));
+        $banners = Banner::all();
+        return view('home', compact('properties', 'banners'));
     }
 
     public function property($id)

@@ -4,7 +4,8 @@
 <!--/ Carousel Star /-->
 <div class="intro intro-carousel">
     <div id="carousel" class="owl-carousel owl-theme">
-        <div class="carousel-item-a intro-item bg-image" style="background-image: url({{ asset('img/slide-1.jpg') }})">
+        @foreach ($banners as $banner)
+        <div class="carousel-item-a intro-item bg-image" style="background-image: url({{ Storage::url('banner/') . $banner->foto }})">
             <div class="overlay overlay-a"></div>
             <div class="intro-content display-table">
                 <div class="table-cell">
@@ -16,8 +17,8 @@
                                         South Property Bali
                                     </p>
                                     <h1 class="intro-title mb-4">
-                                        <span class="color-b">204 </span> Mount
-                                        <br> Olive Road Two
+                                        <span class="color-b">{{ explode(' ', $banner->title, 2)[0] }}</span>
+                                        {{ explode(' ', $banner->title, 2)[1] ?? '' }}
                                     </h1>
                                 </div>
                             </div>
@@ -26,6 +27,8 @@
                 </div>
             </div>
         </div>
+        @endforeach
+        
     </div>
 </div>
 <!--/ Carousel end /-->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
@@ -25,7 +26,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.banner.create');
     }
 
     /**
@@ -36,7 +37,13 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $foto = $request->foto;
+        Banner::create([
+            'title' => $request->title,
+            'foto' => $foto->hashName(),
+        ]);
+        $foto->storeAs('public/banner', $foto->hashName());
+        return redirect()->route('admin.banner.index')->with('success', 'Berhasil menambah data');
     }
 
     /**
@@ -58,7 +65,8 @@ class BannerController extends Controller
      */
     public function edit(Banner $banner)
     {
-        //
+        $data = $banner;
+        return view('admin.banner.edit', compact('data'));
     }
 
     /**
@@ -70,7 +78,16 @@ class BannerController extends Controller
      */
     public function update(Request $request, Banner $banner)
     {
-        //
+        $data = $banner;
+        $data->title = $request->title;
+        $foto = $request->file('foto');
+        if ($foto) {
+            Storage::disk('public')->delete('banner/' . $data->foto);
+            $foto->storeAs('public/banner', $foto->hashName());
+            $data->foto = $foto->hashName();
+        }
+        $data->save();
+        return redirect()->route('admin.banner.index')->with('success', 'Berhasil update data');
     }
 
     /**
@@ -81,6 +98,8 @@ class BannerController extends Controller
      */
     public function destroy(Banner $banner)
     {
-        //
+        Storage::disk('public')->delete('banner/' . $banner->foto);
+        $banner->delete();
+        return response()->json("Sukses");
     }
 }

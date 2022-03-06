@@ -42,25 +42,17 @@
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="title_id">Title (ID)</label>
-                <input type="text" required name="title_id" class="form-control  @error('title_id') is-invalid @enderror"
-                    value="{{ old('title_id', json_decode($data->title)->id) }}">
-                @error('title_id')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="title_en">Title (EN)</label>
-                <input type="text" required name="title_en" class="form-control  @error('title_en') is-invalid @enderror"
-                    value="{{ old('title_en', json_decode($data->title)->en) }}">
-                @error('title_en')
+                <label for="title">Title</label>
+                <input type="text" required name="title" class="form-control  @error('title') is-invalid @enderror"
+                    value="{{ old('title', $data->title) }}">
+                @error('title')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="foto">Foto</label>
                 <div class="img-frame">
-                    <img src="{{ json_decode($data->foto)->url }}" alt="" class="img-crop">
+                    <img src="{{ Storage::url('banner/') . $data->foto }}" alt="" class="img-crop">
                     <div id="edit-image"><strong>Edit Image</strong></div>
                 </div>
                 <input style="display: none;" type="file" name="foto" id="foto" value="{{ old('foto') }}"
@@ -81,8 +73,7 @@
 <script>
     $('#form').validate({
         rules: {
-            title_id: 'required',
-            title_en: 'required',
+            title: 'required',
         }
     })
     $("#edit-image").click(function(){
