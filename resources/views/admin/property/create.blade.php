@@ -108,16 +108,8 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="jumlah">Jumlah Kamar</label>
-                <input type="number" required name="jumlah"
-                    class="form-control  @error('jumlah') is-invalid @enderror" value="{{ old('jumlah') }}">
-                @error('jumlah')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group">
                 <label for="limit">Fasilitas <span class="badge badge-pill badge-secondary" title="Pisahkan dengan tanda |"><i class="fa fa-question"></i></span></label>
-                <select name="fasilitas" required class="form-control @error('fasilitas') is-invalid @enderror" multiple></select>
+                <input type="text" name="fasilitas" required class="form-control @error('fasilitas') is-invalid @enderror">
                 @error('fasilitas')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -186,12 +178,6 @@
         }
     }
 
-    $('select[name="fasilitas"]').select2({
-        tags: true,
-        theme: 'bootstrap4',
-        width: '100%'
-    })
-
     $('body').on('click', '.delete-foto', function(e) {
         let id = $(this).data('id')
         fotoData[id] = null
@@ -212,7 +198,16 @@
 
     $('#form').validate({
         rules: {
-            jenis: 'required',
+            nama: 'required',
+            lokasi: 'required',
+            latitude: 'required',
+            longitude: 'required',
+            deskripsi: 'required',
+            tipe: 'required',
+            luas: {
+                required: true,
+                number: true
+            },
             jumlah: {
                 required: true,
                 digits: true
@@ -221,8 +216,7 @@
                 required: true,
                 number: true
             },
-            fasilitas_id: 'required',
-            fasilitas_en: 'required',
+            fasilitas: 'required',
             'foto[]': 'required',
         },
         submitHandler: function(form, e) {

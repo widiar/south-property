@@ -36,7 +36,31 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $lokasi = $request->lokasi . "|" . $request->latitude . "," . $request->longitude;
+            $data = Property::create([
+                'nama' => $request->nama,
+                'lokasi' => $lokasi,
+                'deskripsi' => $request->deskripsi,
+                'harga' => str_replace(',', '', $request->harga),
+                'luas' => $request->luas,
+                'tipe' => $request->tipe,
+                'fasilitas' => $request->fasilitas,
+            ]);
+
+            // save foto
+            foreach ($request->fotofile as $file) {
+                $data->images()->create([
+                    'name' => $file->hashName()
+                ]);
+                $file->storeAs('public/properties/image', $file->hashName());
+            }
+            $request->session()->flash('success', 'Berhasil menambah data');
+            return response()->json('Sukses');
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 500);
+        }
+
     }
 
     /**
