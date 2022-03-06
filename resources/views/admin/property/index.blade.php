@@ -49,7 +49,7 @@
                 <tr>
                     <td>{{ ++$no }}</td>
                     <td>{{ $dt->nama }}</td>
-                    <td>{{ number_format($dt->harga, '0', '.', '.') }}</td>
+                    <td>Rp {{ number_format($dt->harga, '0', '.', '.') }}</td>
                     <td class="text-center">
                         <button data-id="{{ $dt->id }}" class="btn btn-sm btn-primary btn-detail"><i class="fas fa-eye"></i></button>
                     </td>
@@ -107,9 +107,9 @@
         $.ajax({
             url: ul,
             success: (res) => {
-                res.image.forEach(fil => {
+                res.images.forEach(data => {
                     let html = `<div class="col-12 my-2">
-                                    <img src="${JSON.parse(fil.image).url}" alt="" class="img-thumbnail">
+                                    <img src="${urlImage + data.name}" alt="" class="img-thumbnail">
                                 </div>`
                     $('.foto').append(html)
                 })

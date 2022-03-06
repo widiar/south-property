@@ -71,7 +71,8 @@ class PropertyController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Property::with('images')->findOrFail($id);
+        return response()->json($data);
     }
 
     /**
