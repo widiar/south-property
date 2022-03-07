@@ -21,6 +21,8 @@ Route::controller(SiteController::class)->group(function(){
     Route::get('/', 'index')->name('home');
     Route::get('property/{id}', 'property')->name('property');
     Route::post('property/{id}', 'propertyView')->name('property.view');
+
+    Route::post('book-property/{id}', 'bookProperty')->name('book.property');
 });
 
 //admin

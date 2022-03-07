@@ -84,7 +84,33 @@
 <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('lib/scrollreveal/scrollreveal.min.js') }}"></script>
 
+<script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
+<script src="{{ asset('plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('plugins/jquery-validation/additional-methods.min.js') }}"></script>
+
 <!-- Template Main Javascript File -->
 <script src="{{ asset('js/main.js') }}"></script>
+
+<script>
+  jQuery.validator.setDefaults({
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+      }
+  });
+  $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": '{{ csrf_token() }}',
+        },
+    });
+</script>
 
 @yield('script')

@@ -122,16 +122,57 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary btn-block mt-4">Pesan Sekarang</button>
+        <button class="btn btn-primary btn-block mt-4" data-toggle="modal" data-target="#bayarModal">Pesan Sekarang</button>
     </div>
 </section>
 <!--/ Property Single End /-->
 
+<div class="modal fade" id="bayarModal" tabindex="-1" role="dialog" aria-labelledby="pembayaranModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="pembayaranModal">Detail</h3>
+            </div>
+            <form action="{{ route('book.property', $property->id) }}" method="POST" id="form-pemesanan">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap</label>
+                        <input type="text" class="form-control" name="nama"
+                            placeholder="Masukkan Nama Lengkap" value="{{ @$user->nama }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="telp">No. Handphone (WA)</label>
+                        <input type="text" class="form-control" name="telp" placeholder="Masukkan No. Handphone"
+                            value="{{ @$user->nik }}">
+                        <small class="text-info"><i>*Pastikan nomor adalah nomor yang aktif</i></small><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email"
+                            placeholder="Masukkan Email" value="{{ @$user->nama }}">
+                        <small class="text-info"><i>*Pastikan email adalah email aktif</i></small><br>
+                    </div>
+                    <input type="hidden" name="jumlahhari" id="hari">
+                    <input type="hidden" id="harga" value="{{ $property->harga }}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Pesan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@if(session('msg'))
+<small class="msg" style="display: none">{{ session('msg') }}</small>
+@endif
 @endsection
 
 @section('script')
 <script>
-    const isReload = (
+    let isReload = (
     (window.performance.navigation && window.performance.navigation.type === 1) ||
         window.performance
         .getEntriesByType('navigation')
@@ -150,5 +191,57 @@
             }
         });
     }
+
+    $(document).ready(function() {
+        let msg = $('.msg').text();
+        if (msg != '') {
+            Swal.fire({
+                title: 'Sukses',
+                text: msg,
+                icon: 'success'
+            });
+        }
+    });
+
+    // jquery validation make validation for handphone number Indonesia
+    $.validator.addMethod('phone', function(value, element) {
+        return this.optional(element) || /^\+?[0-9]{6,}$/.test(value);
+    }, 'Nomor handphone harus berupa angka dan minimal 6 digit');
+
+    $('#form-pemesanan').validate({
+        rules: {
+            nama: 'required',
+            telp: {
+                required: true,
+                phone: true
+            },
+            email: {
+                required: true,
+                email: true
+            }
+        },
+        submitHandler: (form, e) => {
+            e.preventDefault();
+            $.ajax({
+                url: $(form).attr('action'),
+                type: 'POST',
+                data: $(form).serialize(),
+                success: (data) => {
+                    if (data.status == 'success') {
+                        Swal.fire({
+                            title: 'Sukses',
+                            text: data.msg,
+                            icon: 'success'
+                        }).then((result) => {
+                            if (result.isConfirmed) window.location.reload()
+                        });
+                    }
+                },
+                error: (res) => {
+                    console.log(res.ResponseJSON);
+                }
+            })
+        }
+    })
 </script>
 @endsection
