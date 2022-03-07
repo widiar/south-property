@@ -24,6 +24,8 @@ Route::controller(SiteController::class)->group(function(){
     Route::post('property/{id}', 'propertyView')->name('property.view');
 
     Route::post('book-property/{id}', 'bookProperty')->name('book.property');
+
+    Route::get('about', 'about')->name('about');
 });
 
 //admin

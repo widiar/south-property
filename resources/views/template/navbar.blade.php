@@ -107,13 +107,13 @@
         <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('home') }}">Home</a>
+                    <a class="nav-link {{request()->is('/') ? ' active' : '' }}" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
+                    <a class="nav-link{{request()->is('about') ? ' active' : '' }}" href="{{ route('about') }}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="property-grid.html">Property</a>
+                    <a class="nav-link{{request()->is('properties') || request()->is('property*') ? ' active' : '' }}" href="{{ route('properties') }}">Property</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="contact.html">Contact</a>
