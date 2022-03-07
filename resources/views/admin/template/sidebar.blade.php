@@ -32,8 +32,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#"
-                        class="nav-link{{request()->is('admin/reservasi*') ? ' active' : '' }}">
+                    <a href="{{ route('admin.pesanan') }}"
+                        class="nav-link{{request()->is('admin/pesanan*') ? ' active' : '' }}">
                         <i class="nav-icon fas fa-swatchbook"></i>
                         <p>
                             Data Pesanan

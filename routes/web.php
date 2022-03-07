@@ -37,6 +37,9 @@ Route::prefix('admin')->group(function () {
         Route::name('admin.')->group(function () {
             Route::controller(AdminController::class)->group(function(){
                 Route::get('/', 'index')->name('index');
+                Route::get('pesanan', 'pesanan')->name('pesanan');
+                Route::patch('pesanan/approve/{id}', 'approvePesanan')->name('pesanan.approve');
+                Route::delete('pesanan/delete/{id}', 'deletePesanan')->name('pesanan.delete');
             });
             Route::resource('banner', BannerController::class)->except('show');
 

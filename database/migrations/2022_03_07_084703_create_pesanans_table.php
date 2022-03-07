@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('email');
             $table->string('no_hp');
             $table->unsignedBigInteger('harga');
+            $table->integer('jumlah')->default(1);
             $table->unsignedBigInteger('property_id')->nullable();
+            $table->smallInteger('status')->default(0);
             $table->timestamps();
         });
     }

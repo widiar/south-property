@@ -4,7 +4,7 @@ $(document).ready(function(){
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
     });
-    $(".actionz").on('submit', '.deleted', function(e){
+    $("body").on('submit', '.deleted', function(e){
         e.preventDefault()
         var form = $(this);
         Swal.fire({

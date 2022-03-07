@@ -38,11 +38,16 @@ class SiteController extends Controller
     {
         try {
             $property = Property::findOrFail($id);
+            $jumlah = 1;
+            if($property->tipe == 'Tanah') {
+                $jumlah = $request->jumlah;
+            }
             Pesanan::create([
                 'nama' => $request->nama,
                 'email' => $request->email,
                 'no_hp' => $request->telp,
                 'harga' => $property->harga,
+                'jumlah' => $jumlah,
                 'property_id' => $property->id,
             ]);
             return response()->json([

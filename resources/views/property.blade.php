@@ -153,6 +153,12 @@
                             placeholder="Masukkan Email" value="{{ @$user->nama }}">
                         <small class="text-info"><i>*Pastikan email adalah email aktif</i></small><br>
                     </div>
+                    @if($property->tipe == 'Tanah')
+                    <div class="form-group">
+                        <label for="tanah">Tanah (are)</label>
+                        <input type="number" required class="form-control" name="jumlah" placeholder="Masukkan Jumlah">
+                    </div>
+                    @endif
                     <input type="hidden" name="jumlahhari" id="hari">
                     <input type="hidden" id="harga" value="{{ $property->harga }}">
                 </div>
@@ -205,8 +211,8 @@
 
     // jquery validation make validation for handphone number Indonesia
     $.validator.addMethod('phone', function(value, element) {
-        return this.optional(element) || /^\+?[0-9]{6,}$/.test(value);
-    }, 'Nomor handphone harus berupa angka dan minimal 6 digit');
+        return this.optional(element) || /^(62)[0-9]{8,}$/.test(value);
+    }, 'Nomor handphone harus berupa angka dengan format awal 62 dan minimal 8 digit');
 
     $('#form-pemesanan').validate({
         rules: {
