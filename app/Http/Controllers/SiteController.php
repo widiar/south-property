@@ -16,6 +16,12 @@ class SiteController extends Controller
         return view('home', compact('properties', 'banners'));
     }
 
+    public function allProperty()
+    {
+        $properties = Property::with('images')->where('is_sold', 0)->orderBy('count_view', 'desc')->paginate(9);
+        return view('site.properties', compact('properties'));
+    }
+
     public function property($id)
     {
         $property = Property::with('images')->findOrFail($id);

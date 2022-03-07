@@ -44,7 +44,7 @@
                         <h2 class="title-a">Most Viewed Properties</h2>
                     </div>
                     <div class="title-link">
-                        <a href="property-grid.html">All Property
+                        <a href="{{ route('properties') }}">All Property
                             <span class="ion-ios-arrow-forward"></span>
                         </a>
                     </div>
@@ -63,7 +63,7 @@
                             <div class="card-overlay-a-content">
                                 <div class="card-header-a">
                                     <h2 class="card-title-a">
-                                    <a class="porperty-link" href="{{ route('property', [$property->id]) }}">{{ $property->nama }}</a>
+                                        <a class="porperty-link" href="{{ route('property', [$property->id]) }}">{{ $property->nama }}</a>
                                     </h2>
                                 </div>
                                 <div class="card-body-a">
