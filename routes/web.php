@@ -26,6 +26,7 @@ Route::controller(SiteController::class)->group(function(){
     Route::post('book-property/{id}', 'bookProperty')->name('book.property');
 
     Route::get('about', 'about')->name('about');
+    Route::get('contact', 'contact')->name('contact');
 });
 
 //admin

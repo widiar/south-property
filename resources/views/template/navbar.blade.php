@@ -116,7 +116,7 @@
                     <a class="nav-link{{request()->is('properties') || request()->is('property*') ? ' active' : '' }}" href="{{ route('properties') }}">Property</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link{{request()->is('contact') ? ' active' : '' }}" href="{{ route('contact') }}">Contact</a>
                 </li>
             </ul>
         </div>

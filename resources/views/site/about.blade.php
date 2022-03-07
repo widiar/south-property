@@ -51,5 +51,135 @@
     </div>
 </section>
 <!--/ About End /-->
+
+<!--/ Team Star /-->
+<section class="section-agents section-t8">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-wrap d-flex justify-content-between">
+                    <div class="title-box">
+                        <h2 class="title-a">Meet Our Team</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card-box-d">
+                    <div class="card-img-d">
+                        <img src="{{ asset('img/agent-7.jpg') }}" alt="" class="img-d img-fluid">
+                    </div>
+                    <div class="card-overlay card-overlay-hover">
+                        <div class="card-header-d">
+                            <div class="card-title-d align-self-center">
+                                <h3 class="title-d">
+                                    <p class="link-two">Ari</p>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="card-body-d">
+                            <p class="content-d color-text-a">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolorem similique quidem tempora et reprehenderit modi repudiandae perspiciatis dignissimos aspernatur!
+                            </p>
+                            <div class="info-agents color-a">
+                                <p><strong>Phone: </strong> +54 356 945234</p>
+                                <p><strong>Email: </strong> mail@example.com</p>
+                            </div>
+                        </div>
+                        <div class="card-footer-d">
+                            <div class="socials-footer d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                        <a href="#" class="link-one">
+                                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#" class="link-one">
+                                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#" class="link-one">
+                                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#" class="link-one">
+                                        <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#" class="link-one">
+                                        <i class="fa fa-dribbble" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-box-d">
+                    <div class="card-img-d">
+                        <img src="{{ asset('img/agent-6.jpg') }}" alt="" class="img-d img-fluid">
+                    </div>
+                    <div class="card-overlay card-overlay-hover">
+                        <div class="card-header-d">
+                            <div class="card-title-d align-self-center">
+                                <h3 class="title-d">
+                                    <p class="link-two">Widiarsana</p>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="card-body-d">
+                            <p class="content-d color-text-a">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolorem similique quidem tempora et reprehenderit modi repudiandae perspiciatis dignissimos aspernatur!
+                            </p>
+                            <div class="info-agents color-a">
+                                <p><strong>Phone: </strong> +54 356 945234</p>
+                                <p><strong>Email: </strong> mail@example.com</p>
+                            </div>
+                        </div>
+                        <div class="card-footer-d">
+                            <div class="socials-footer d-flex justify-content-center">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                        <a href="#" class="link-one">
+                                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#" class="link-one">
+                                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#" class="link-one">
+                                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#" class="link-one">
+                                        <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#" class="link-one">
+                                        <i class="fa fa-dribbble" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Team End /-->
 @endsection
 
