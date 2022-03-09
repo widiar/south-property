@@ -26,7 +26,8 @@
                     <th>Email</th>
                     <th>No. Telepon</th>
                     <th>Property</th>
-                    <th>Harga</th>
+                    <th>Jumlah</th>
+                    <th>Total Harga</th>
                     <th class="text-center">Aksi</th>
                     <th class="text-center">Status</th>
                 </tr>
@@ -43,6 +44,7 @@
                     <td>{{ $dt->email }}</td>
                     <td>{{ $dt->no_hp }}</td>
                     <td>{{ $dt->property->nama }} ({{ $dt->property->tipe }})</td>
+                    <td>{{ $dt->jumlah }} @if($dt->property->tipe == 'Tanah') are @endif</td>
                     <td>Rp {{ number_format($dt->harga * $dt->jumlah, '0', '.', '.') }}</td>
                     <td class="row justify-content-center">
                         <a href="https://wa.me/{{ $dt->no_hp}}?text={{ str_replace('%23nama', $dt->nama, $pesan) }}" target="_blank" class="mx-3">

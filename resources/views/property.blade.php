@@ -61,7 +61,13 @@
                                     </li>
                                     <li class="d-flex justify-content-between">
                                         <strong>Status:</strong>
-                                        <span>Sale</span>
+                                        <span>
+                                            @if($property->is_sold == 1)
+                                                Sold
+                                            @else
+                                                Sale
+                                            @endif
+                                        </span>
                                     </li>
                                     <li class="d-flex justify-content-between">
                                         <strong>Luas:</strong>
@@ -122,7 +128,7 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary btn-block mt-4" data-toggle="modal" data-target="#bayarModal">Pesan Sekarang</button>
+        <button @if($property->is_sold) disabled title="Property sudah terjual" @endif class="btn btn-primary btn-block mt-4" data-toggle="modal" data-target="#bayarModal">Pesan Sekarang</button>
     </div>
 </section>
 <!--/ Property Single End /-->

@@ -45,7 +45,17 @@ Terimakasih';
     public function approvePesanan($id)
     {
         try {
-            $pesanan = Pesanan::findOrFail($id);
+            $pesanan = Pesanan::with('property')->findOrFail($id);
+            if($pesanan->property->tipe == 'Tanah'){
+                $terjual = $pesanan->property->terjual + $pesanan->jumlah * 100;
+                $pesanan->property->terjual = $terjual;
+                if($terjual >= $pesanan->property->luas){
+                    $pesanan->property->is_sold = 1;
+                }
+            } else {
+                $pesanan->property->is_sold = 1;
+            }
+            $pesanan->property->save();
             $pesanan->status = 1;
             $pesanan->save();
             return response()->json('Success');

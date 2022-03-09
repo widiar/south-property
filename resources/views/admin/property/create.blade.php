@@ -235,8 +235,19 @@
                 type: 'POST',
                 contentType: false, 
                 processData: false, 
+                beforeSend: () => {
+                    Swal.fire({
+                        title: 'Loading',
+                        showConfirmButton: false,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                        }
+                    })
+                },
                 success: (res) => {
-                    if(res == 'Sukses') window.location.href = '{{ route("admin.properties.index") }}'
+                    if(res == 'Sukses') {
+                        window.location.href = '{{ route("admin.properties.index") }}'
+                    }
                     else window.location.href = ''
                 }, 
                 error: (err) => {
