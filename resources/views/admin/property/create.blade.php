@@ -41,7 +41,7 @@
         <form action="{{ route('admin.properties.store') }}" method="post" enctype="multipart/form-data" id="form">
             @csrf
             <div class="form-group">
-                <label for="nama">Nama Property</label>
+                <label for="nama">Judul Iklan</label>
                 <input type="text" required name="nama" class="form-control  @error('nama') is-invalid @enderror"
                     value="{{ old('nama') }}">
                 @error('nama')
@@ -51,27 +51,59 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="lokasi">Nama Lokasi</label>
-                        <input type="text" required name="lokasi" class="form-control  @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}">
-                        @error('lokasi')
+                        <label for="provinsi">Provinsi</label>
+                        <select name="provinsi" id="provinsi" class="form-control @error('provinsi') is-invalid @enderror">
+                            <option value="51|Bali" selected>Bali</option>
+                        </select>
+                        @error('provinsi')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="latitude">Latitude Lokasi</label>
+                        <label for="kabupaten">Kabupaten</label>
+                        <select name="kabupaten" id="kabupaten" class="form-control @error('kabupaten') is-invalid @enderror">
+                        </select>
+                        @error('kabupaten')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="kecamatan">Kecamatan</label>
+                        <select name="kecamatan" id="kecamatan" class="form-control @error('kecamatan') is-invalid @enderror">
+                        </select>
+                        @error('kecamatan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="kelurahan">Kelurahan</label>
+                        <select name="kelurahan" id="kelurahan" class="form-control @error('kelurahan') is-invalid @enderror">
+                        </select>
+                        @error('kelurahan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="area">Area Detail</label>
+                        <input type="text" required name="area" class="form-control  @error('area') is-invalid @enderror" value="{{ old('area') }}">
+                        @error('area')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="latitude">Latitude Longitude Lokasi</label>
                         <input type="text" required name="latitude" class="form-control  @error('latitude') is-invalid @enderror" value="{{ old('latitude') }}">
                         @error('latitude')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="longitude">Longitude Lokasi</label>
-                        <input type="text" required name="longitude" class="form-control  @error('longitude') is-invalid @enderror" value="{{ old('longitude') }}">
-                        @error('longitude')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -89,8 +121,28 @@
                 <select required name="tipe" id="tipe" class="form-control  @error('tipe') is-invalid @enderror">
                     <option value="" selected disabled>Pilih Tipe</option>
                     <option value="Tanah">Tanah</option>
-                    <option value="Bangunan">Bangunan</option>
+                    <option value="Rumah">Rumah</option>
+                    <option value="Komersil">Komersil</option>
                 </select>
+            </div>
+            <div class="form-group sub_tipe" style="display: none">
+                <label for="sub_tipe">Sub Type</label>
+                <select name="sub_tipe" id="sub_tipe" class="form-control  @error('sub_tipe') is-invalid @enderror">
+                </select>
+            </div>
+            <div class="form-group hargaAre" style="display: none">
+                <label for="panjang">Panjang Tahan (m)</label>
+                <input type="text" required name="panjang" class="form-control  @error('panjang') is-invalid @enderror" value="{{ old('panjang') }}">
+                @error('panjang')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group hargaAre" style="display: none">
+                <label for="lebar">Lebar Tanah (m)</label>
+                <input type="text" required name="lebar" class="form-control  @error('lebar') is-invalid @enderror" value="{{ old('lebar') }}">
+                @error('lebar')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="luas">Luas (m<sup>2</sup>)</label>
@@ -99,8 +151,16 @@
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="form-group hargaAre" style="display: none">
+                <label for="harga_satuan">Harga per are</label>
+                <input type="text" name="harga_satuan" class="form-control  @error('harga_satuan') is-invalid @enderror"
+                    value="{{ old('harga_satuan') }}">
+                @error('harga_satuan')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
             <div class="form-group">
-                <label for="harga">Harga <span id="tipe_harga"></span></label>
+                <label for="harga">Total Harga</label>
                 <input type="text" required name="harga" class="form-control  @error('harga') is-invalid @enderror"
                     value="{{ old('harga') }}">
                 @error('harga')
@@ -189,21 +249,52 @@
     $('#tipe').change(function(e){
         let tipe = $(this).val()
         if(tipe == 'Tanah'){
-            $('#tipe_harga').text('/are')
+            $('.hargaAre').show(300)
+            $('#sub_tipe').empty()
+            $('.sub_tipe').hide()
         }
         else {
-            $('#tipe_harga').text('')
+            $('.hargaAre').hide(300)
+            if(tipe == 'Rumah'){
+                $('#sub_tipe').html(`
+                    <option selected value="">Pilih Sub Type</option>
+                    <option value="Rumah">Rumah</option>
+                    <option value="Rumah Kosan">Rumah Kosan</option>
+                    <option value="Villa atau Guest House">Villa atau Guest House</option>
+                `)
+            } else {
+                $('#sub_tipe').html(`
+                    <option selected value="">Pilih Sub Type</option>
+                    <option value="Ruko">Ruko</option>
+                    <option value="Kantor">Kantor</option>
+                    <option value="Gudang">Gudang</option>
+                `)
+            }
+            $('.sub_tipe').show(300)
         }
     })
 
     $('#form').validate({
         rules: {
             nama: 'required',
-            lokasi: 'required',
+            provinsi: 'required',
+            kabupaten: 'required',
+            kecamatan: 'required',
+            kelurahan: 'required',
+            area: 'required',
             latitude: 'required',
-            longitude: 'required',
             deskripsi: 'required',
             tipe: 'required',
+            sub_tipe: {
+                required: function(element){
+                    return $('#tipe').val() == 'Rumah' || $('#tipe').val() == 'Komersil'
+                }
+            },
+            harga_satuan: {
+                required: function(element){
+                    return $('#tipe').val() == 'Tanah'
+                }
+            },
             luas: {
                 required: true,
                 number: true
@@ -257,7 +348,89 @@
 
         }
     })
-    // $('#form').submit(function(e){
-    // })
+    
+    $('#provinsi').select2({
+        placeholder: 'Pilih Provinsi',
+        width: '100%',
+        theme: 'bootstrap4',
+    })
+
+    $('#kabupaten').select2({
+        placeholder: 'Pilih Kabupaten',
+        width: '100%',
+        theme: 'bootstrap4',
+        ajax: {
+            url: `{{ route('api.city') }}`,
+            type: 'GET',
+            data: function (params) {
+                return {
+                    id_province: $('#provinsi').val()
+                }
+            },
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            }
+        }
+    })
+    $('#kabupaten').change(function(e){
+        $('#kecamatan').empty().trigger('change')
+        $('#kecamatan').select2({
+            placeholder: 'Pilih Kecamatan',
+            width: '100%',
+            theme: 'bootstrap4',
+            ajax: {
+                url: `{{ route('api.district') }}`,
+                type: 'GET',
+                data: function (params) {
+                    return {
+                        id_city: $('#kabupaten').val()
+                    }
+                },
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                }
+            }
+        })
+    })
+
+    $('#kecamatan').change(function(){
+        $('#kelurahan').empty().trigger('change')
+        $('#kelurahan').select2({
+            placeholder: 'Pilih Kelurahan',
+            width: '100%',
+            theme: 'bootstrap4',
+            ajax: {
+                url: `{{ route('api.village') }}`,
+                type: 'GET',
+                data: function (params) {
+                    return {
+                        id_district: $('#kecamatan').val()
+                    }
+                },
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                }
+            }
+        })
+    })
+
+    $('#kelurahan').select2({
+        placeholder: 'Pilih Kelurahan',
+        width: '100%',
+        theme: 'bootstrap4',
+    })
+
+    $('#kecamatan').select2({
+        placeholder: 'Pilih Kecamatan',
+        width: '100%',
+        theme: 'bootstrap4'
+    })
 </script>
+
 @endsection

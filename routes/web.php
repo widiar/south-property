@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('dev', function(){
+//     $res = Http::get('http://indonesian-area.herokuapp.com/api/city/?id_province=51');
+//     dd($res->json());
+// });
+
 Route::controller(SiteController::class)->group(function(){
     Route::get('/', 'index')->name('home');
     Route::get('properties', 'allProperty')->name('properties');

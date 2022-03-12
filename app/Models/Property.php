@@ -25,4 +25,9 @@ class Property extends Model
         $this->images()->delete();
         parent::delete();
     }
+
+    public function location()
+    {
+        return $this->hasOne(PropertyLocation::class, 'id', 'location_id');
+    }
 }

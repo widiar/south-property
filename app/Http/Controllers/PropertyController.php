@@ -16,7 +16,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $data = Property::all();
+        $data = Property::with('location')->get();
         return view('admin.property.index', compact('data'));
     }
 
