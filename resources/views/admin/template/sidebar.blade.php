@@ -31,15 +31,6 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.pesanan') }}"
-                        class="nav-link{{request()->is('admin/pesanan*') ? ' active' : '' }}">
-                        <i class="nav-icon fas fa-swatchbook"></i>
-                        <p>
-                            Data Pesanan
-                        </p>
-                    </a>
-                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

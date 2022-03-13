@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Facility;
 use App\Models\Property;
 use App\Models\PropertyImages;
 use App\Models\PropertyLocation;
@@ -32,7 +33,8 @@ class PropertyController extends Controller
         $kabupaten = Http::get(route('api.city'), [
             'id_province' => 51
         ])->object();
-        return view('admin.property.create', compact('kabupaten'));
+        $facilities = Facility::all();
+        return view('admin.property.create', compact('kabupaten', 'facilities'));
     }
 
     /**
@@ -74,6 +76,11 @@ class PropertyController extends Controller
                 'location_id' => $location->id,
                 'panjang' => $request->panjang,
                 'lebar' => $request->lebar,
+                'lantai' => $request->lantai,
+                'kamar_mandi' => $request->kamar_mandi,
+                'kamar_tidur' => $request->kamar_tidur,
+                'kamar_pegawai' => $request->kamar_pegawai,
+                'kamar_mandi_pegawai' => $request->kamar_mandi_pegawai,
             ]);
 
             if(isset($request->file_sertif)){
@@ -125,8 +132,9 @@ class PropertyController extends Controller
         $kabupaten = Http::get(route('api.city'), [
             'id_province' => 51
         ])->object();
+        $facilities = Facility::all();
         // dd($data->location->area);
-        return view('admin.property.edit', compact('data', 'kabupaten'));
+        return view('admin.property.edit', compact('data', 'kabupaten', 'facilities'));
     }
 
     /**
@@ -169,6 +177,11 @@ class PropertyController extends Controller
             $data->sub_tipe = $request->tipe == 'Tanah' ? 'Tanah' : $request->sub_tipe;
             $data->panjang = $request->panjang;
             $data->lebar = $request->lebar;
+            $data->lantai = $request->lantai;
+            $data->kamar_mandi = $request->kamar_mandi;
+            $data->kamar_tidur = $request->kamar_tidur;
+            $data->kamar_pegawai = $request->kamar_pegawai;
+            $data->kamar_mandi_pegawai = $request->kamar_mandi_pegawai;
 
             // save foto
             if(isset($request->fotofile)){

@@ -176,18 +176,14 @@
             <div class="form-group sub_tipe" style="display: none">
                 <label for="limit">Fasilitas</label>
                 <div class="row">
+                    @foreach ($facilities as $facility)
                     <div class="col-md-4">
                         <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="fasilitas1" name="fasilitas[]" value="Fasilitas 1">
-                            <label for="fasilitas1" class="custom-control-label">Fasilitas 1</label>
+                            <input class="custom-control-input" type="checkbox" id="{{ $facility->id }}" name="fasilitas[]" value="{{ $facility->name }}">
+                            <label for="{{ $facility->id }}" class="custom-control-label">{{ $facility->name }}</label>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="fasilitas2" name="fasilitas[]" value="Fasilitas 2">
-                            <label for="fasilitas2" class="custom-control-label">Fasilitas 2</label>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 @error('fasilitas')
                 <div class="invalid-feedback">{{ $message }}</div>
@@ -213,6 +209,59 @@
                     </div>
                 </div>
                 <button type="button" class="btn btn-sm btn-primary tambah-sertif">Tambah Sertifikat</button>
+            </div>
+            <div class="form-group sub_tipe" style="display: none">
+                <label for="lantai">Jumlah Lantai</label>
+                <select required name="lantai" id="lantai" class="form-control  @error('lantai') is-invalid @enderror">
+                    <option value="" selected disabled>Jumlah lantai</option>
+                    <option value="1">1 Lantai</option>
+                    <option value="2">2 Lantai</option>
+                    <option value="3">3 Lantai</option>
+                    <option value="4">4 Lantai</option>
+                    <option value="5">5 Lantai</option>
+                </select>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="kamar_tidur">Kamar Tidur</label>
+                        <input type="text" required name="kamar_tidur" class="form-control  @error('kamar_tidur') is-invalid @enderror"
+                            value="{{ old('kamar_tidur') }}">
+                        @error('kamar_tidur')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="kamar_mandi">Kamar Mandi</label>
+                        <input type="text" required name="kamar_mandi" class="form-control  @error('kamar_mandi') is-invalid @enderror"
+                            value="{{ old('kamar_mandi') }}">
+                        @error('kamar_mandi')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="kamar_pegawai">Kamar Pegawai</label>
+                        <input type="text" required name="kamar_pegawai" class="form-control  @error('kamar_pegawai') is-invalid @enderror"
+                            value="{{ old('kamar_pegawai') }}">
+                        @error('kamar_pegawai')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="kamar_mandi_pegawai">Kamar Mandi Pegawai</label>
+                        <input type="text" required name="kamar_mandi_pegawai" class="form-control  @error('kamar_mandi_pegawai') is-invalid @enderror"
+                            value="{{ old('kamar_mandi_pegawai') }}">
+                        @error('kamar_mandi_pegawai')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="text">Foto Property</label>
@@ -356,6 +405,35 @@
                 required: function(element){
                     return $('#tipe').val() == 'Rumah' || $('#tipe').val() == 'Komersil'
                 }
+            },
+            lantai: {
+                required: function(element){
+                    return $('#tipe').val() == 'Rumah' || $('#tipe').val() == 'Komersil'
+                }
+            },
+            kamar_tidur: {
+                required: function(element){
+                    return $('#tipe').val() == 'Rumah' || $('#tipe').val() == 'Komersil'
+                },
+                digits: true
+            },
+            kamar_mandi: {
+                required: function(element){
+                    return $('#tipe').val() == 'Rumah' || $('#tipe').val() == 'Komersil'
+                },
+                digits: true
+            },
+            kamar_pegawai: {
+                required: function(element){
+                    return $('#tipe').val() == 'Rumah' || $('#tipe').val() == 'Komersil'
+                },
+                digits: true
+            },
+            kamar_mandi_pegawai: {
+                required: function(element){
+                    return $('#tipe').val() == 'Rumah' || $('#tipe').val() == 'Komersil'
+                },
+                digits: true
             },
             'sertifikat[]': {
                 required: function(element){
