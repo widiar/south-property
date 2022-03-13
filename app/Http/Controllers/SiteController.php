@@ -24,7 +24,7 @@ class SiteController extends Controller
 
     public function property($id)
     {
-        $property = Property::with('images')->findOrFail($id);
+        $property = Property::with(['images', 'location', 'certificates'])->findOrFail($id);
         return view('property', compact('property'));
     }
 

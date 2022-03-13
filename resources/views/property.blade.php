@@ -35,10 +35,16 @@
                                 <div class="card-box-ico">
                                     <span class="ion-money">Rp</span>
                                 </div>
+                                @if($property->tipe == 'Tanah')
+                                <div class="card-title-c align-self-center">
+                                    <h5 class="title-c">{{ number_format($property->harga_satuan, '0', '.', '.') }}</h5>
+                                    <h5>/ are</h5>
+                                </div>
+                                @else
                                 <div class="card-title-c align-self-center">
                                     <h5 class="title-c">{{ number_format($property->harga, '0', '.', '.') }}</h5>
-                                    <h5 style="display: {{ $property->tipe == 'Bangunan' ? 'none': 'block' }}">/ are</h5>
                                 </div>
+                                @endif
                             </div>
                         </div>
                         <div class="property-summary">
@@ -53,11 +59,17 @@
                                 <ul class="list">
                                     <li class="d-flex justify-content-between">
                                         <strong>Location:</strong>
-                                        <span><a href="https://maps.google.com/maps?q={{ explode('|', $property->lokasi)[1] }}&z=16" target="_blank" rel="noopener noreferrer">{{ explode('|', $property->lokasi)[0] }}</a></span>
+                                        <span><a href="https://maps.google.com/maps?q={{ $property->location->latlng }}&z=16" target="_blank" rel="noopener noreferrer">
+                                            {{ $property->location->area . ", " . $property->location->kelurahan }}
+                                        </a></span>
                                     </li>
                                     <li class="d-flex justify-content-between">
                                         <strong>Property Type:</strong>
-                                        <span>{{ $property->tipe }}</span>
+                                        <span>{{ $property->sub_tipe ?? 'Tanah' }}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Total Harga:</strong>
+                                        <span>{{ number_format($property->harga, '0', '.', '.') }}</span>
                                     </li>
                                     <li class="d-flex justify-content-between">
                                         <strong>Status:</strong>
@@ -70,9 +82,48 @@
                                         </span>
                                     </li>
                                     <li class="d-flex justify-content-between">
-                                        <strong>Luas:</strong>
+                                        <strong>Luas {{ $property->tipe == 'Tanah' ? 'Tanah' : 'Bangunan' }}:</strong>
                                         <span>{{ $property->luas }}m<sup>2</sup></span>
                                     </li>
+                                    @if($property->tipe == 'Tanah')
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Panjang Tanah:</strong>
+                                        <span>{{ $property->panjang }}m</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Lebar Tanah:</strong>
+                                        <span>{{ $property->lebar }}m</span>
+                                    </li>
+                                    @else
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Jumlah Lantai:</strong>
+                                        <span>{{ $property->lantai }} Lantai</span>
+                                    </li>
+                                    @if($property->kamar_mandi > 0)
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Kamar Mandi:</strong>
+                                        <span>{{ $property->kamar_mandi }}</span>
+                                    </li>
+                                    @endif
+                                    @if($property->kamar_tidur > 0)
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Kamar Tidur:</strong>
+                                        <span>{{ $property->kamar_tidur }}</span>
+                                    </li>
+                                    @endif
+                                    @if($property->kamar_pegawai > 0)
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Kamar Pegawai:</strong>
+                                        <span>{{ $property->kamar_pegawai }}</span>
+                                    </li>
+                                    @endif
+                                    @if($property->kamar_mandi_pegawai > 0)
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Kamar Mandi Pegawai:</strong>
+                                        <span>{{ $property->kamar_mandi_pegawai }}</span>
+                                    </li>
+                                    @endif
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -93,17 +144,34 @@
                         <div class="row section-t3">
                             <div class="col-sm-12">
                                 <div class="title-box-d">
-                                    <h3 class="title-d">Fasilitas</h3>
+                                    <h3 class="title-d">{{ $property->tipe == 'Tanah' ? 'Sertifikat' : 'Fasilitas' }}</h3>
                                 </div>
                             </div>
                         </div>
+                        @if($property->tipe == 'Tanah')
+                        <div class="amenities-list row color-text-a">
+                            @foreach ($property->certificates as $certificate)
+                            <div class="col-md-6 mb-3">
+                                <a href="{{ Storage::url('properties/certificates/') . $certificate->file }}" style="text-decoration:none;color:inherit;" target="_blank">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <img src="https://ik.imagekit.io/prbydmwbm8c/pdf_fQHgq0p6H.png?ik-sdk-version=javascript-1.4.3" style="width: 50px; height: 50px;" class="card-img-top" style="display: inline">
+                                            <small align="center">{{ $certificate->name }}</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            @endforeach
+                        </div>
+                        @else
                         <div class="amenities-list color-text-a">
                             <ul class="list-a no-margin">
-                                @foreach (explode('|', $property->fasilitas) as $fasilitas)
+                                @foreach (json_decode($property->fasilitas) as $fasilitas)
                                     <li>{{ $fasilitas }}</li>
                                 @endforeach
                             </ul>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -121,7 +189,7 @@
                             height="450" 
                             frameborder="0"
                             loading="lazy"
-                            src="https://maps.google.com/maps?q={{ explode('|', $property->lokasi)[1] }}&z=16&amp;output=embed"
+                            src="https://maps.google.com/maps?q={{ $property->location->latlng }}&z=16&amp;output=embed"
                             >
                         </iframe>
                     </div>
