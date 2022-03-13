@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-md-12 col-lg-8">
           <div class="title-single-box">
-            <h1 class="title-single">Our Amazing Properties</h1>
+            <h1 class="title-single">{{ $title }}</h1>
             <span class="color-text-a">South Properties</span>
           </div>
         </div>

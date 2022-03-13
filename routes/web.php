@@ -32,6 +32,8 @@ Route::controller(SiteController::class)->group(function(){
 
     Route::get('about', 'about')->name('about');
     Route::get('contact', 'contact')->name('contact');
+    Route::get('properties/popular/{tipe}', 'popular')->name('properties.popular');
+    Route::get('properties/{prop}/{tipe}/{subTipe}', 'properties')->name('properties.tipe');
 });
 
 //admin

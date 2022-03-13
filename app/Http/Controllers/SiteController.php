@@ -12,14 +12,18 @@ class SiteController extends Controller
     public function index()
     {
         $properties = Property::with('images')->where('is_sold', 0)->orderBy('count_view', 'desc')->limit(5)->get();
+        $lokasiRumah = Property::with('location')->where('is_sold', 0)->where('tipe', 'Rumah')->orderBy('count_view', 'desc')->limit(6)->get();
+        $lokasiTanah = Property::with('location')->where('is_sold', 0)->where('tipe', 'Tanah')->orderBy('count_view', 'desc')->limit(6)->get();
+        $lokasiKomersil = Property::with('location')->where('is_sold', 0)->where('tipe', 'Komersil')->orderBy('count_view', 'desc')->limit(6)->get();
         $banners = Banner::all();
-        return view('home', compact('properties', 'banners'));
+        return view('home', compact('properties', 'banners', 'lokasiRumah', 'lokasiTanah', 'lokasiKomersil'));
     }
 
     public function allProperty()
     {
         $properties = Property::with('images')->where('is_sold', 0)->orderBy('count_view', 'desc')->paginate(9);
-        return view('site.properties', compact('properties'));
+        $title = 'Our Amazing Properties';
+        return view('site.properties', compact('properties', 'title'));
     }
 
     public function property($id)
@@ -38,6 +42,34 @@ class SiteController extends Controller
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);
         }
+    }
+
+    public function properties($prop, $tipe, $subTipe)
+    {
+        if($tipe == 'jenis') {
+            if($prop == 'Tanah') {
+                $title = 'Tanah';
+                $properties = Property::with('images')->where('is_sold', 0)->where('tipe', 'Tanah')->orderBy('count_view', 'desc')->paginate(9);
+            } else {
+                $sub_tipe = str_replace('-', ' ', $subTipe);
+                $title = $sub_tipe;
+                $properties = Property::with('images')->where('is_sold', 0)->where('sub_tipe', $sub_tipe)->orderBy('count_view', 'desc')->paginate(9);
+            }
+        } else if($tipe == 'lokasi'){
+            $lokasi = str_replace('-', ' ', $subTipe);
+            $title = $prop . ' ' . $lokasi;
+            $properties = Property::with(['images', 'location' => function($q) use($lokasi) {
+                $q->where('kecamatan', $lokasi);
+            }])->where('is_sold', 0)->where('tipe', $prop)->orderBy('count_view', 'desc')->paginate(9);
+        }
+        return view('site.properties', compact('properties', 'title'));
+    }
+
+    public function popular($tipe)
+    {
+        $title = 'Popular ' . $tipe;
+        $properties = Property::with('images')->where('tipe', $tipe)->where('is_sold', 0)->orderBy('count_view', 'desc')->paginate(9);
+        return view('site.properties', compact('properties', 'title'));
     }
 
     public function bookProperty(Request $request, $id)

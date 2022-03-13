@@ -33,6 +33,88 @@
 </div>
 <!--/ Carousel end /-->
 
+<!--/ Services Star /-->
+<section class="section-services section-t8">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-wrap d-flex justify-content-between">
+                    <div class="title-box">
+                        <h2 class="title-a">Jelajahi Properti</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link link-tipe active" data-value="Rumah" id="rumah-tab" data-toggle="tab" href="#rumah" role="tab" aria-controls="rumah" aria-selected="true">Rumah</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link link-tipe" data-value="Tanah" id="tanah-tab" data-toggle="tab" href="#tanah" role="tab" aria-controls="tanah" aria-selected="false">Tanah</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link link-tipe" data-value="Komersial" id="komersil-tab" data-toggle="tab" href="#komersil" role="tab" aria-controls="komersil" aria-selected="false">Komersial</a>
+            </li>
+          </ul>
+          <div class="tab-content mt-4" id="myTabContent">
+            <div class="row">
+                <div class="col-md-2 col-cek">
+                    <button class="btn btn-primary rounded-btn active" value="populer">Populer</button>
+                </div>
+                <div class="col-md-2 col-cek">
+                    <button class="btn btn-primary rounded-btn" value="jenis">Jenis</button>
+                </div>
+                <div class="col-md-2 col-cek">
+                    <button class="btn btn-primary rounded-btn" value="lokasi">Lokasi</button>
+                </div>
+            </div>
+            <div class="tab-pane fade show active mt-4" id="rumah" role="tabpanel" aria-labelledby="rumah-tab">
+                <div class="populer">
+                </div>
+                <div class="jenis" style="display: none">
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Rumah">Rumah</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Rumah Kosan">Rumah Kosan</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Villa atau Guest House">Villa atau Guest House</button>
+                </div>
+                <div class="lokasi" style="display: none">
+                    @foreach ($lokasiRumah as $item)
+                    <button type="button" class="btn btn-outline-success m-4 btn-lokasi" value="{{ $item->location->kecamatan }}">{{ $item->location->kecamatan }}</button>
+                    @endforeach
+                </div>
+            </div>
+            <div class="tab-pane fade mt-4" id="tanah" role="tabpanel" aria-labelledby="tanah-tab">
+                <div class="populer">
+                </div>
+                <div class="jenis" style="display: none">
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Tanah">Tanah</button>
+                </div>
+                <div class="lokasi" style="display: none">
+                    @foreach ($lokasiTanah as $item)
+                    <button type="button" class="btn btn-outline-success m-4 btn-lokasi" value="{{ $item->location->kecamatan }}">{{ $item->location->kecamatan }}</button>
+                    @endforeach
+                </div>
+            </div>
+            <div class="tab-pane fade mt-4" id="komersil" role="tabpanel" aria-labelledby="komersil-tab">
+                <div class="populer">
+                </div>
+                <div class="jenis" style="display: none">
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Ruko">Ruko</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Kantor">Kantor</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Gudang">Gudang</button>
+                </div>
+                <div class="lokasi" style="display: none">
+                    @foreach ($lokasiKomersil as $item)
+                    <button type="button" class="btn btn-outline-success m-4 btn-lokasi" value="{{ $item->location->kecamatan }}">{{ $item->location->kecamatan }}</button>
+                    @endforeach
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="mt-3 btn btn-success btn-circle btn-lg btn-search"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+    </div>
+</section>
+<!--/ Services End /-->
 
 <!--/ Property Star /-->
 <section class="section-property section-t8">
@@ -96,6 +178,68 @@
 </section>
 <!--/ Property End /-->
 
+@endsection
 
+@section('script')
+<script>
+    $('.rounded-btn').click(function(e){
+        $('.rounded-btn').removeClass('active');
+        $(this).addClass('active');
+        let value = $(this).val();
+        if(value == 'populer'){
+            $('.populer').show();
+            $('.jenis').hide();
+            $('.lokasi').hide();
+        }else if(value == 'jenis'){
+            $('.populer').hide();
+            $('.jenis').show();
+            $('.lokasi').hide();
+        }else if(value == 'lokasi'){
+            $('.populer').hide();
+            $('.jenis').hide();
+            $('.lokasi').show();
+        }
+    })
 
+    $('.btn-jenis').click(function(e){
+        $('.btn-jenis').removeClass('active')
+        $(this).addClass('active')
+    })
+
+    $('.btn-lokasi').click(function(e){
+        $('.btn-lokasi').removeClass('active')
+        $(this).addClass('active')
+    })
+
+    $('.btn-search').click(function(e){
+        let tipeAwal = $('.link-tipe.active').data('value')
+        let tipe = $('.rounded-btn.active').val();
+
+        if(tipe == 'populer') {
+            let urlPopular = `{{ route('properties.popular', ['tipe' => '#tipeAwal']) }}`
+            urlPopular = urlPopular.replace('#tipeAwal', tipeAwal)
+            window.location.href = urlPopular
+        }else {
+            let jenis = $('.btn-jenis.active').val();
+            let lokasi = $('.btn-lokasi.active').val();
+    
+            let url = `{{ route('properties.tipe', ['prop' => '#tipeawal', 'tipe' => '#tipe', 'subTipe' => '#subTipe']) }}`;
+            url = url.replace('#tipeawal', tipeAwal);
+            let ceklink = false
+            if(jenis != undefined){
+                url = url.replace('#tipe', tipe);
+                url = url.replace('#subTipe', convertToSlug(jenis));
+                ceklink = true
+            }
+            if(lokasi != undefined){
+                url = url.replace('#tipe', tipe);
+                url = url.replace('#subTipe', convertToSlug(lokasi));
+                ceklink = true
+                console.log(url)
+            }
+            if(ceklink) window.location.href = url;
+        }
+
+    })
+</script>
 @endsection

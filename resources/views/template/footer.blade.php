@@ -111,6 +111,11 @@
             "X-CSRF-TOKEN": '{{ csrf_token() }}',
         },
     });
+  const convertToSlug = (text) => {
+    return text
+      .replace(/ /g, '-')
+      .replace(/[^\w-]+/g, '');
+  }
 </script>
 
 @yield('script')

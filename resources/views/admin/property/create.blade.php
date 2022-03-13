@@ -128,7 +128,7 @@
                     <option value="" selected disabled>Pilih Tipe</option>
                     <option value="Tanah">Tanah</option>
                     <option value="Rumah">Rumah</option>
-                    <option value="Komersil">Komersil</option>
+                    <option value="Komersial">Komersial</option>
                 </select>
             </div>
             <div class="form-group sub_tipe" style="display: none">

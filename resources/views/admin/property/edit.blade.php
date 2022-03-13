@@ -130,7 +130,7 @@
                     <option value="" selected disabled>Pilih Tipe</option>
                     <option {{ $data->tipe == 'Tanah' ? 'selected' : '' }} value="Tanah">Tanah</option>
                     <option {{ $data->tipe == 'Rumah' ? 'selected' : '' }} value="Rumah">Rumah</option>
-                    <option {{ $data->tipe == 'Komersil' ? 'selected' : '' }} value="Komersil">Komersil</option>
+                    <option {{ $data->tipe == 'Komersial' ? 'selected' : '' }} value="Komersial">Komersial</option>
                 </select>
             </div>
             <div class="form-group sub_tipe" style="display: none">
