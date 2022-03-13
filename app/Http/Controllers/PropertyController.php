@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use App\Models\PropertyImages;
+use App\Models\PropertyLocation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class PropertyController extends Controller
@@ -27,7 +29,10 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        return view('admin.property.create');
+        $kabupaten = Http::get(route('api.city'), [
+            'id_province' => 51
+        ])->object();
+        return view('admin.property.create', compact('kabupaten'));
     }
 
     /**
@@ -39,15 +44,36 @@ class PropertyController extends Controller
     public function store(Request $request)
     {
         try {
-            $lokasi = $request->lokasi . "|" . $request->latitude . "," . $request->longitude;
+            // return response()->json($request->all());
+            // $lokasi = NULL;
+            $provinsi = explode('|', $request->provinsi);
+            $kabupaten = explode('|', $request->kabupaten);
+            $kecamatan = explode('|', $request->kecamatan);
+            $kelurahan = explode('|', $request->kelurahan);
+            $location = PropertyLocation::create([
+                'id_provinsi' => $provinsi[0],
+                'provinsi' => $provinsi[1],
+                'id_kabupaten' => $kabupaten[0],
+                'kabupaten' => $kabupaten[1],
+                'id_kecamatan' => $kecamatan[0],
+                'kecamatan' => $kecamatan[1],
+                'id_kelurahan' => $kelurahan[0],
+                'kelurahan' => $kelurahan[1],
+                'area' => $request->area,
+                'latlng' => $request->latlng,
+            ]);
             $data = Property::create([
                 'nama' => $request->nama,
-                'lokasi' => $lokasi,
                 'deskripsi' => $request->deskripsi,
                 'harga' => str_replace(',', '', $request->harga),
                 'luas' => $request->luas,
                 'tipe' => $request->tipe,
                 'fasilitas' => $request->fasilitas,
+                'harga_satuan' => $request->harga_satuan ? str_replace(',', '', $request->harga_satuan) : 0,
+                'sub_tipe' => $request->sub_tipe,
+                'location_id' => $location->id,
+                'panjang' => $request->panjang,
+                'lebar' => $request->lebar,
             ]);
 
             // save foto
@@ -85,13 +111,12 @@ class PropertyController extends Controller
      */
     public function edit($id)
     {
-        $data = Property::findOrFail($id);
-        $lokasi = explode('|', $data->lokasi);
-        $latlong = explode(',', $lokasi[1]);
-        $lokasi = $lokasi[0];
-        $lat = trim($latlong[0]);
-        $long = trim($latlong[1]);
-        return view('admin.property.edit', compact('data', 'lokasi', 'lat', 'long'));
+        $data = Property::with('location')->findOrFail($id);
+        $kabupaten = Http::get(route('api.city'), [
+            'id_province' => 51
+        ])->object();
+        // dd($data->location->area);
+        return view('admin.property.edit', compact('data', 'kabupaten'));
     }
 
     /**
@@ -104,15 +129,34 @@ class PropertyController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $lokasi = $request->lokasi . "|" . $request->latitude . "," . $request->longitude;
+            $provinsi = explode('|', $request->provinsi);
+            $kabupaten = explode('|', $request->kabupaten);
+            $kecamatan = explode('|', $request->kecamatan);
+            $kelurahan = explode('|', $request->kelurahan);
+            
             $data = Property::findOrFail($id);
+            $data->location->id_provinsi = $provinsi[0];
+            $data->location->provinsi = $provinsi[1];
+            $data->location->id_kabupaten = $kabupaten[0];
+            $data->location->kabupaten = $kabupaten[1];
+            $data->location->id_kecamatan = $kecamatan[0];
+            $data->location->kecamatan = $kecamatan[1];
+            $data->location->id_kelurahan = $kelurahan[0];
+            $data->location->kelurahan = $kelurahan[1];
+            $data->location->area = $request->area;
+            $data->location->latlng = $request->latlng;
+            $data->location->save();
+
             $data->nama = $request->nama;
-            $data->lokasi = $lokasi;
             $data->deskripsi = $request->deskripsi;
             $data->harga = str_replace(',', '', $request->harga);
             $data->luas = $request->luas;
             $data->tipe = $request->tipe;
             $data->fasilitas = $request->fasilitas;
+            $data->harga_satuan = $request->harga_satuan ? str_replace(',', '', $request->harga_satuan) : 0;
+            $data->sub_tipe = $request->sub_tipe;
+            $data->panjang = $request->panjang;
+            $data->lebar = $request->lebar;
 
             // save foto
             if(isset($request->fotofile)){

@@ -64,6 +64,10 @@
                     <div class="form-group">
                         <label for="kabupaten">Kabupaten</label>
                         <select name="kabupaten" id="kabupaten" class="form-control @error('kabupaten') is-invalid @enderror">
+                            <option value=""></option>
+                            @foreach ($kabupaten as $kab)
+                                <option value="{{ $kab->id }}">{{ $kab->text }}</option>
+                            @endforeach
                         </select>
                         @error('kabupaten')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -74,6 +78,7 @@
                     <div class="form-group">
                         <label for="kecamatan">Kecamatan</label>
                         <select name="kecamatan" id="kecamatan" class="form-control @error('kecamatan') is-invalid @enderror">
+                            <option value=""></option>
                         </select>
                         @error('kecamatan')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -84,6 +89,7 @@
                     <div class="form-group">
                         <label for="kelurahan">Kelurahan</label>
                         <select name="kelurahan" id="kelurahan" class="form-control @error('kelurahan') is-invalid @enderror">
+                            <option value=""></option>
                         </select>
                         @error('kelurahan')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -101,9 +107,9 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="latitude">Latitude Longitude Lokasi</label>
-                        <input type="text" required name="latitude" class="form-control  @error('latitude') is-invalid @enderror" value="{{ old('latitude') }}">
-                        @error('latitude')
+                        <label for="latlng">Latitude Longitude Lokasi</label>
+                        <input type="text" required name="latlng" class="form-control  @error('latlng') is-invalid @enderror" value="{{ old('latlng') }}">
+                        @error('latlng')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -197,6 +203,7 @@
 <script>
     let fotoData
     $('input[name="harga"]').simpleMoneyFormat()
+    $('input[name="harga_satuan"]').simpleMoneyFormat()
     $('.foto').change(function(e){
         fotoData = Array.from(e.target.files)
         $('.image-foto').empty()
@@ -282,7 +289,7 @@
             kecamatan: 'required',
             kelurahan: 'required',
             area: 'required',
-            latitude: 'required',
+            latlng: 'required',
             deskripsi: 'required',
             tipe: 'required',
             sub_tipe: {
@@ -294,6 +301,18 @@
                 required: function(element){
                     return $('#tipe').val() == 'Tanah'
                 }
+            },
+            panjang: {
+                required: function(element){
+                    return $('#tipe').val() == 'Tanah'
+                },
+                number: true
+            },
+            lebar: {
+                required: function(element){
+                    return $('#tipe').val() == 'Tanah'
+                },
+                number: true
             },
             luas: {
                 required: true,
@@ -336,6 +355,7 @@
                     })
                 },
                 success: (res) => {
+                    // console.log(res)
                     if(res == 'Sukses') {
                         window.location.href = '{{ route("admin.properties.index") }}'
                     }
@@ -359,63 +379,40 @@
         placeholder: 'Pilih Kabupaten',
         width: '100%',
         theme: 'bootstrap4',
-        ajax: {
-            url: `{{ route('api.city') }}`,
-            type: 'GET',
-            data: function (params) {
-                return {
-                    id_province: $('#provinsi').val()
-                }
-            },
-            processResults: function (data) {
-                return {
-                    results: data
-                };
-            }
-        }
     })
+
     $('#kabupaten').change(function(e){
         $('#kecamatan').empty().trigger('change')
-        $('#kecamatan').select2({
-            placeholder: 'Pilih Kecamatan',
-            width: '100%',
-            theme: 'bootstrap4',
-            ajax: {
-                url: `{{ route('api.district') }}`,
-                type: 'GET',
-                data: function (params) {
-                    return {
-                        id_city: $('#kabupaten').val()
-                    }
-                },
-                processResults: function (data) {
-                    return {
-                        results: data
-                    };
-                }
+        $.ajax({
+            url: `{{ route('api.district') }}`,
+            data: {
+                id_city: $('#kabupaten').val()
+            },
+            success: (res) => {
+                $('#kecamatan').append(new Option('Pilih Kecamatan', ''))
+                res.forEach(data => {
+                    let opt = new Option(data.text, data.id, false, false)
+                    $('#kecamatan').append(opt)
+                })
+                $('#kecamatan').trigger('change')
             }
         })
     })
 
     $('#kecamatan').change(function(){
         $('#kelurahan').empty().trigger('change')
-        $('#kelurahan').select2({
-            placeholder: 'Pilih Kelurahan',
-            width: '100%',
-            theme: 'bootstrap4',
-            ajax: {
-                url: `{{ route('api.village') }}`,
-                type: 'GET',
-                data: function (params) {
-                    return {
-                        id_district: $('#kecamatan').val()
-                    }
-                },
-                processResults: function (data) {
-                    return {
-                        results: data
-                    };
-                }
+        $.ajax({
+            url: `{{ route('api.village') }}`,
+            data: {
+                id_district: $('#kecamatan').val()
+            },
+            success: (res) => {
+                $('#kelurahan').append(new Option('Pilih Kelurahan', ''))
+                res.forEach(data => {
+                    let opt = new Option(data.text, data.id, false, false)
+                    $('#kelurahan').append(opt)
+                })
+                $('#kelurahan').trigger('change')
             }
         })
     })
@@ -429,7 +426,7 @@
     $('#kecamatan').select2({
         placeholder: 'Pilih Kecamatan',
         width: '100%',
-        theme: 'bootstrap4'
+        theme: 'bootstrap4',
     })
 </script>
 

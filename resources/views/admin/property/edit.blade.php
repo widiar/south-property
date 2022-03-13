@@ -53,27 +53,65 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="lokasi">Nama Lokasi</label>
-                        <input type="text" required name="lokasi" class="form-control  @error('lokasi') is-invalid @enderror" value="{{ old('lokasi', $lokasi) }}">
-                        @error('lokasi')
+                        <label for="provinsi">Provinsi</label>
+                        <select name="provinsi" id="provinsi" class="form-control @error('provinsi') is-invalid @enderror">
+                            <option value="51|Bali" selected>Bali</option>
+                        </select>
+                        @error('provinsi')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="latitude">Latitude Lokasi</label>
-                        <input type="text" required name="latitude" class="form-control  @error('latitude') is-invalid @enderror" value="{{ old('latitude', $lat) }}">
-                        @error('latitude')
+                        <label for="kabupaten">Kabupaten</label>
+                        <select name="kabupaten" id="kabupaten" class="form-control @error('kabupaten') is-invalid @enderror">
+                            <option value=""></option>
+                            @foreach ($kabupaten as $kab)
+                                <option value="{{ $kab->id }}">{{ $kab->text }}</option>
+                            @endforeach
+                        </select>
+                        @error('kabupaten')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="longitude">Longitude Lokasi</label>
-                        <input type="text" required name="longitude" class="form-control  @error('longitude') is-invalid @enderror" value="{{ old('longitude', $long) }}">
-                        @error('longitude')
+                        <label for="kecamatan">Kecamatan</label>
+                        <select name="kecamatan" id="kecamatan" class="form-control @error('kecamatan') is-invalid @enderror">
+                            <option value=""></option>
+                        </select>
+                        @error('kecamatan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="kelurahan">Kelurahan</label>
+                        <select name="kelurahan" id="kelurahan" class="form-control @error('kelurahan') is-invalid @enderror">
+                            <option value=""></option>
+                        </select>
+                        @error('kelurahan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="area">Area Detail</label>
+                        <input type="text" required name="area" class="form-control  @error('area') is-invalid @enderror" value="{{ old('area', $data->location->area) }}">
+                        @error('area')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="latlng">Latitude Longitude Lokasi</label>
+                        <input type="text" required name="latlng" class="form-control  @error('latlng') is-invalid @enderror" value="{{ old('latlng', $data->location->latlng) }}">
+                        @error('latlng')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -90,9 +128,29 @@
                 <label for="tipe">Tipe</label>
                 <select required name="tipe" id="tipe" class="form-control  @error('tipe') is-invalid @enderror">
                     <option value="" selected disabled>Pilih Tipe</option>
-                    <option {{ ($data->tipe == 'Tanah') ? 'selected' : '' }} value="Tanah">Tanah</option>
-                    <option {{ ($data->tipe == 'Bangunan') ? 'selected' : '' }} value="Bangunan">Bangunan</option>
+                    <option {{ $data->tipe == 'Tanah' ? 'selected' : '' }} value="Tanah">Tanah</option>
+                    <option {{ $data->tipe == 'Rumah' ? 'selected' : '' }} value="Rumah">Rumah</option>
+                    <option {{ $data->tipe == 'Komersil' ? 'selected' : '' }} value="Komersil">Komersil</option>
                 </select>
+            </div>
+            <div class="form-group sub_tipe" style="display: none">
+                <label for="sub_tipe">Sub Type</label>
+                <select name="sub_tipe" id="sub_tipe" class="form-control  @error('sub_tipe') is-invalid @enderror">
+                </select>
+            </div>
+            <div class="form-group hargaAre" style="display: none">
+                <label for="panjang">Panjang Tahan (m)</label>
+                <input type="text" required name="panjang" class="form-control  @error('panjang') is-invalid @enderror" value="{{ old('panjang', $data->panjang) }}">
+                @error('panjang')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group hargaAre" style="display: none">
+                <label for="lebar">Lebar Tanah (m)</label>
+                <input type="text" required name="lebar" class="form-control  @error('lebar') is-invalid @enderror" value="{{ old('lebar', $data->lebar) }}">
+                @error('lebar')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="luas">Luas (m<sup>2</sup>)</label>
@@ -101,8 +159,16 @@
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="form-group hargaAre" style="display: none">
+                <label for="harga_satuan">Harga per are</label>
+                <input type="text" name="harga_satuan" class="form-control  @error('harga_satuan') is-invalid @enderror"
+                    value="{{ old('harga_satuan', $data->harga_satuan) }}">
+                @error('harga_satuan')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
             <div class="form-group">
-                <label for="harga">Harga <span id="tipe_harga"></span></label>
+                <label for="harga">Total Harga</label>
                 <input type="text" required name="harga" class="form-control  @error('harga') is-invalid @enderror"
                     value="{{ old('harga', $data->harga) }}">
                 @error('harga')
@@ -149,6 +215,7 @@
 <script>
     let fotoData
     $('input[name="harga"]').simpleMoneyFormat()
+    $('input[name="harga_satuan"]').simpleMoneyFormat()
     $('.foto').change(function(e){
         fotoData = Array.from(e.target.files)
         $('.image-foto').empty()
@@ -198,24 +265,73 @@
         changeLabelFoto()
     })
 
-    $('#tipe').change(function(e){
-        let tipe = $(this).val()
+    const type = () => {
+        let tipe = $('#tipe').val()
         if(tipe == 'Tanah'){
-            $('#tipe_harga').text('/are')
+            $('.hargaAre').show(300)
+            $('#sub_tipe').empty()
+            $('.sub_tipe').hide()
         }
         else {
-            $('#tipe_harga').text('')
+            $('.hargaAre').hide(300)
+            if(tipe == 'Rumah'){
+                let subtipe = `{!! $data->sub_tipe !!}`
+                $('#sub_tipe').html(`
+                    <option selected value="">Pilih Sub Type</option>
+                    <option ${ subtipe == 'Rumah' ? 'selected' : '' } value="Rumah">Rumah</option>
+                    <option ${ subtipe == 'Rumah Kosan' ? 'selected' : '' } value="Rumah Kosan">Rumah Kosan</option>
+                    <option ${ subtipe == 'Villa atau Guest House' ? 'selected' : '' } value="Villa atau Guest House">Villa atau Guest House</option>
+                `)
+            } else {
+                let subtipe = `{!! $data->sub_tipe !!}`
+                $('#sub_tipe').html(`
+                    <option selected value="">Pilih Sub Type</option>
+                    <option ${ subtipe == 'Ruko' ? 'selected' : '' } value="Ruko">Ruko</option>
+                    <option ${ subtipe == 'Kantor' ? 'selected' : '' } value="Kantor">Kantor</option>
+                    <option ${ subtipe == 'Gudang' ? 'selected' : '' } value="Gudang">Gudang</option>
+                `)
+            }
+            $('.sub_tipe').show(300)
         }
-    })
+    }
+
+    type()
+
+    $('#tipe').change(type)
 
     $('#form').validate({
         rules: {
             nama: 'required',
-            lokasi: 'required',
-            latitude: 'required',
-            longitude: 'required',
+            provinsi: 'required',
+            kabupaten: 'required',
+            kecamatan: 'required',
+            kelurahan: 'required',
+            area: 'required',
+            latlng: 'required',
             deskripsi: 'required',
             tipe: 'required',
+            sub_tipe: {
+                required: function(element){
+                    return $('#tipe').val() == 'Rumah' || $('#tipe').val() == 'Komersil'
+                }
+            },
+            harga_satuan: {
+                required: function(element){
+                    return $('#tipe').val() == 'Tanah'
+                }
+            },
+            panjang: {
+                required: function(element){
+                    return $('#tipe').val() == 'Tanah'
+                },
+                number: true
+            },
+            lebar: {
+                required: function(element){
+                    return $('#tipe').val() == 'Tanah'
+                },
+                number: true
+            },
             luas: {
                 required: true,
                 number: true
@@ -234,12 +350,13 @@
             e.preventDefault()
 
             let dataform = new FormData(form)
-            if (fotoData !== undefined)
+            if(fotoData !== undefined){
                 fotoData.forEach(file => {
                     if(file !== null) {
                         dataform.append('fotofile[]', file)
                     }
                 })
+            }
 
             $.ajax({
                 url: $(form).attr('action'),
@@ -247,8 +364,20 @@
                 type: 'POST',
                 contentType: false, 
                 processData: false, 
+                beforeSend: () => {
+                    Swal.fire({
+                        title: 'Loading',
+                        showConfirmButton: false,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                        }
+                    })
+                },
                 success: (res) => {
-                    if(res == 'Sukses') window.location.href = '{{ route("admin.properties.index") }}'
+                    // console.log(res)
+                    if(res == 'Sukses') {
+                        window.location.href = '{{ route("admin.properties.index") }}'
+                    }
                     else window.location.href = ''
                 }, 
                 error: (err) => {
@@ -258,6 +387,79 @@
 
         }
     })
+    
+    $('#provinsi').select2({
+        placeholder: 'Pilih Provinsi',
+        width: '100%',
+        theme: 'bootstrap4',
+    })
+
+    $('#kabupaten').select2({
+        placeholder: 'Pilih Kabupaten',
+        width: '100%',
+        theme: 'bootstrap4',
+    })
+
+    $('#kelurahan').select2({
+        placeholder: 'Pilih Kelurahan',
+        width: '100%',
+        theme: 'bootstrap4',
+    })
+
+    $('#kecamatan').select2({
+        placeholder: 'Pilih Kecamatan',
+        width: '100%',
+        theme: 'bootstrap4',
+    })
+
+    let first = true
+
+    $('#kabupaten').change(function(e){
+        if(!first) $('#kecamatan').empty().trigger('change')
+        $.ajax({
+            url: `{{ route('api.district') }}`,
+            data: {
+                id_city: $('#kabupaten').val()
+            },
+            success: (res) => {
+                $('#kecamatan').append(new Option('Pilih Kecamatan', ''))
+                res.forEach(data => {
+                    let opt = new Option(data.text, data.id, false, false)
+                    $('#kecamatan').append(opt)
+                })
+                if (first) {
+                    $('#kecamatan').val(`{!! $data->location->id_kecamatan !!}|{!! $data->location->kecamatan !!}`)
+                }
+                $('#kecamatan').trigger('change')
+            }
+        })
+    })
+
+    $('#kecamatan').change(function(){
+        if(!first) $('#kelurahan').empty().trigger('change')
+        $.ajax({
+            url: `{{ route('api.village') }}`,
+            data: {
+                id_district: $('#kecamatan').val()
+            },
+            success: (res) => {
+                $('#kelurahan').append(new Option('Pilih Kelurahan', ''))
+                res.forEach(data => {
+                    let opt = new Option(data.text, data.id, false, false)
+                    $('#kelurahan').append(opt)
+                })
+                if (first) {
+                    $('#kelurahan').val(`{!! $data->location->id_kelurahan !!}|{!! $data->location->kelurahan !!}`)
+                    first = false
+                }
+                $('#kelurahan').trigger('change')
+            }
+        })
+    })
+
+    $('#kabupaten').val(`{!! $data->location->id_kabupaten !!}|{!! $data->location->kabupaten !!}`).trigger('change')
+
+
     $('body').on('click', '.hapus-image', function(e) {
         let id = $(this).data('id')
         let button = $(this)
