@@ -68,13 +68,23 @@ class PropertyController extends Controller
                 'harga' => str_replace(',', '', $request->harga),
                 'luas' => $request->luas,
                 'tipe' => $request->tipe,
-                'fasilitas' => $request->fasilitas,
+                'fasilitas' => $request->fasilitas ? json_encode($request->fasilitas) : 'tanah',
                 'harga_satuan' => $request->harga_satuan ? str_replace(',', '', $request->harga_satuan) : 0,
                 'sub_tipe' => $request->sub_tipe,
                 'location_id' => $location->id,
                 'panjang' => $request->panjang,
                 'lebar' => $request->lebar,
             ]);
+
+            if(isset($request->file_sertif)){
+                foreach($request->file_sertif as $key => $value){
+                    $data->certificates()->create([
+                        'name' => $request->sertifikat[$key],
+                        'file' => $value->hashName(),
+                    ]);
+                    $value->storeAs('public/properties/certificates', $value->hashName());
+                }
+            }
 
             // save foto
             foreach ($request->fotofile as $file) {

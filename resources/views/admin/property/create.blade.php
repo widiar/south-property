@@ -173,12 +173,46 @@
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="form-group">
-                <label for="limit">Fasilitas <span class="badge badge-pill badge-secondary" title="Pisahkan dengan tanda |"><i class="fa fa-question"></i></span></label>
-                <input type="text" name="fasilitas" required class="form-control @error('fasilitas') is-invalid @enderror">
+            <div class="form-group sub_tipe" style="display: none">
+                <label for="limit">Fasilitas</label>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="fasilitas1" name="fasilitas[]" value="Fasilitas 1">
+                            <label for="fasilitas1" class="custom-control-label">Fasilitas 1</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="fasilitas2" name="fasilitas[]" value="Fasilitas 2">
+                            <label for="fasilitas2" class="custom-control-label">Fasilitas 2</label>
+                        </div>
+                    </div>
+                </div>
                 @error('fasilitas')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
+            </div>
+            <div class="hargaAre" style="display: none">
+                <div class="sertifikat">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="sertifikat">Nama Sertifikat</label>
+                            <input type="text" class="form-control" name="sertifikat[]">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="file_sertif[]">File Sertifikat</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="file_sertif[]" required accept="application/pdf">
+                                <label class="custom-file-label">Select file</label>
+                            </div>
+                            @error('file_sertif[]')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-sm btn-primary tambah-sertif">Tambah Sertifikat</button>
             </div>
             <div class="form-group">
                 <label for="text">Foto Property</label>
@@ -253,6 +287,32 @@
         changeLabelFoto()
     })
 
+    $('.tambah-sertif').click(function(e){
+        e.preventDefault()
+        let htmlSertifikat = `
+                <div class="row mb-3">
+                    <div class="form-group col-md-6">
+                        <label for="sertifikat">Nama Sertifikat</label>
+                        <input type="text" class="form-control" name="sertifikat[]">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="file_sertif[]">File Sertifikat</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="file_sertif[]" required accept="application/pdf">
+                            <label class="custom-file-label">Select file</label>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-danger hapus-sertifikat">Hapus</button>
+                </div>`
+        $('.sertifikat').append(htmlSertifikat)
+        bsCustomFileInput.init();
+    })
+
+    $('body').on('click', '.hapus-sertifikat', function(e){
+        e.preventDefault()
+        $(this).parent().remove()
+    })
+
     $('#tipe').change(function(e){
         let tipe = $(this).val()
         if(tipe == 'Tanah'){
@@ -297,6 +357,16 @@
                     return $('#tipe').val() == 'Rumah' || $('#tipe').val() == 'Komersil'
                 }
             },
+            'sertifikat[]': {
+                required: function(element){
+                    return $('#tipe').val() == 'Tanah'
+                }
+            },
+            'file-sertif[]': {
+                required: function(element){
+                    return $('#tipe').val() == 'Tanah'
+                }
+            },
             harga_satuan: {
                 required: function(element){
                     return $('#tipe').val() == 'Tanah'
@@ -326,7 +396,11 @@
                 required: true,
                 number: true
             },
-            fasilitas: 'required',
+            'fasilitas[]': {
+                required: function(element){
+                    return $('#tipe').val() == 'Rumah' || $('#tipe').val() == 'Komersil'
+                }
+            },
             'foto[]': 'required',
         },
         submitHandler: function(form, e) {
@@ -349,7 +423,7 @@
                     Swal.fire({
                         title: 'Loading',
                         showConfirmButton: false,
-                        onBeforeOpen: () => {
+                        willOpen: () => {
                             Swal.showLoading()
                         }
                     })
@@ -359,7 +433,7 @@
                     if(res == 'Sukses') {
                         window.location.href = '{{ route("admin.properties.index") }}'
                     }
-                    else window.location.href = ''
+                    else console.log(res)
                 }, 
                 error: (err) => {
                     console.log(err.responseJSON)

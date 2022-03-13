@@ -17,17 +17,24 @@ class Property extends Model
         return $this->hasMany(PropertyImages::class);
     }
 
+    public function location()
+    {
+        return $this->hasOne(PropertyLocation::class, 'id', 'location_id');
+    }
+
+    public function certificates()
+    {
+        return $this->hasMany(PropertyCertificate::class, 'property_id', 'id');
+    }
+
     public function delete()
     {
         foreach ($this->images as $img) {
             Storage::disk('public')->delete('properties/image/' . $img->name);
         }
         $this->images()->delete();
+        $this->certificates()->delete();
+        $this->location()->delete();
         parent::delete();
-    }
-
-    public function location()
-    {
-        return $this->hasOne(PropertyLocation::class, 'id', 'location_id');
     }
 }
