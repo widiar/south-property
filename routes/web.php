@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('dev', function(){
-//     $res = Http::get('http://indonesian-area.herokuapp.com/api/city/?id_province=51');
-//     dd($res->json());
+//     $data = Property::with('certificates')->find(16);
+//     dd($data->certificates()->where('id', 3)->first());
 // });
 
 Route::controller(SiteController::class)->group(function(){

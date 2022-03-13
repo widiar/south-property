@@ -175,12 +175,59 @@
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="form-group">
-                <label for="limit">Fasilitas <span class="badge badge-pill badge-secondary" title="Pisahkan dengan tanda |"><i class="fa fa-question"></i></span></label>
-                <input type="text" name="fasilitas" value="{{ old('fasilitas',$data->fasilitas) }}" required class="form-control @error('fasilitas') is-invalid @enderror">
+            <div class="form-group sub_tipe" style="display: none">
+                <label for="limit">Fasilitas</label>
+                @php
+                if($data->fasilitas == 'tanah'){
+                    $fasilitas = 'Tanah';
+                } else $fasilitas = json_decode($data->fasilitas);
+                @endphp
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="fasilitas1" name="fasilitas[]" {{ $fasilitas != 'Tanah' && in_array('Fasilitas 1', $fasilitas) ? 'checked' : '' }} value="Fasilitas 1">
+                            <label for="fasilitas1" class="custom-control-label">Fasilitas 1</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="fasilitas2" name="fasilitas[]" {{ $fasilitas != 'Tanah' && in_array('Fasilitas 2', $fasilitas) ? 'checked' : '' }} value="Fasilitas 2">
+                            <label for="fasilitas2" class="custom-control-label">Fasilitas 2</label>
+                        </div>
+                    </div>
+                </div>
                 @error('fasilitas')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
+            </div>
+            <div class="hargaAre sertif" style="display: none">
+                <div class="sertifikat">
+                    @foreach($data->certificates as $certificate)
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="sertifikat">Nama Sertifikat</label>
+                            <input type="text" class="form-control" name="sertifikat[{{ $certificate->id }}]" value="{{ $certificate->name }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="file_sertif[]">File Sertifikat</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="file_sertif[{{ $certificate->id }}]" accept="application/pdf">
+                                <label class="custom-file-label">Change file</label>
+                            </div>
+                            <a href="{{ Storage::url('properties/certificates/') . $certificate->file }}" target="_blank">
+                                <small class="text-info">Lihat file</small>
+                            </a>
+                            @error('file_sertif[]')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        @if(!$loop->first)
+                        <button type="button" class="btn btn-sm btn-danger hapus-sertifikat mb-3" data-id="{{ $certificate->id }}">Hapus</button>
+                        @endif
+                    </div>
+                    @endforeach
+                </div>
+                <button type="button" class="btn btn-sm btn-primary tambah-sertif">Tambah Sertifikat</button>
             </div>
             <div class="form-group">
                 <label for="text">Foto Property</label>
@@ -265,12 +312,63 @@
         changeLabelFoto()
     })
 
+    const addSertif = () => {
+        let htmlSertifikat = `
+                <div class="row mb-3">
+                    <div class="form-group col-md-6">
+                        <label for="sertifikat">Nama Sertifikat</label>
+                        <input type="text" class="form-control" name="sertifikat[]">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="file_sertif[]">File Sertifikat</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="file_sertif[]" required accept="application/pdf">
+                            <label class="custom-file-label">Select file</label>
+                        </div>
+                    </div>
+                </div>`
+        $('.sertifikat').html(htmlSertifikat)
+        bsCustomFileInput.init();
+    }
+
+    $('.tambah-sertif').click(function(e){
+        e.preventDefault()
+        let htmlSertifikat = `
+                <div class="row mb-3">
+                    <div class="form-group col-md-6">
+                        <label for="sertifikat">Nama Sertifikat</label>
+                        <input type="text" class="form-control" name="sertifikat[]">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="file_sertif[]">File Sertifikat</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="file_sertif[]" required accept="application/pdf">
+                            <label class="custom-file-label">Select file</label>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-danger hapus-sertifikat">Hapus</button>
+                </div>`
+        $('.sertifikat').append(htmlSertifikat)
+        bsCustomFileInput.init();
+    })
+
+    $('body').on('click', '.hapus-sertifikat', function(e){
+        e.preventDefault()
+        let id = $(this).data('id')
+        $('.sertif').append(`<input type="hidden" name="hapus_sertif[]" value="${id}">`)
+        $(this).parent().remove()
+    })
+
     const type = () => {
         let tipe = $('#tipe').val()
         if(tipe == 'Tanah'){
             $('.hargaAre').show(300)
             $('#sub_tipe').empty()
             $('.sub_tipe').hide()
+            let dataTipe = `{{ $data->tipe }}`
+            if(dataTipe != 'Tanah') {
+                addSertif()
+            }
         }
         else {
             $('.hargaAre').hide(300)
@@ -315,6 +413,11 @@
                     return $('#tipe').val() == 'Rumah' || $('#tipe').val() == 'Komersil'
                 }
             },
+            'sertifikat[]': {
+                required: function(element){
+                    return $('#tipe').val() == 'Tanah'
+                }
+            },
             harga_satuan: {
                 required: function(element){
                     return $('#tipe').val() == 'Tanah'
@@ -344,7 +447,11 @@
                 required: true,
                 number: true
             },
-            fasilitas: 'required',
+            'fasilitas[]': {
+                required: function(element){
+                    return $('#tipe').val() == 'Rumah' || $('#tipe').val() == 'Komersil'
+                }
+            },
         },
         submitHandler: function(form, e) {
             e.preventDefault()
@@ -368,7 +475,7 @@
                     Swal.fire({
                         title: 'Loading',
                         showConfirmButton: false,
-                        onBeforeOpen: () => {
+                        willOpen: () => {
                             Swal.showLoading()
                         }
                     })
@@ -378,7 +485,7 @@
                     if(res == 'Sukses') {
                         window.location.href = '{{ route("admin.properties.index") }}'
                     }
-                    else window.location.href = ''
+                    else console.log(res)
                 }, 
                 error: (err) => {
                     console.log(err.responseJSON)

@@ -139,6 +139,8 @@ class PropertyController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            // return response()->json($request->all());
+
             $provinsi = explode('|', $request->provinsi);
             $kabupaten = explode('|', $request->kabupaten);
             $kecamatan = explode('|', $request->kecamatan);
@@ -162,9 +164,9 @@ class PropertyController extends Controller
             $data->harga = str_replace(',', '', $request->harga);
             $data->luas = $request->luas;
             $data->tipe = $request->tipe;
-            $data->fasilitas = $request->fasilitas;
+            $data->fasilitas = $request->fasilitas ? json_encode($request->fasilitas) : 'tanah';
             $data->harga_satuan = $request->harga_satuan ? str_replace(',', '', $request->harga_satuan) : 0;
-            $data->sub_tipe = $request->sub_tipe;
+            $data->sub_tipe = $request->tipe == 'Tanah' ? 'Tanah' : $request->sub_tipe;
             $data->panjang = $request->panjang;
             $data->lebar = $request->lebar;
 
@@ -177,6 +179,35 @@ class PropertyController extends Controller
                     $file->storeAs('public/properties/image', $file->hashName());
                 }
             }
+
+            if(isset($request->hapus_sertif)){
+                foreach($request->hapus_sertif as $hapus){
+                    $data->certificates()->find($hapus)->delete();
+                }
+            }
+
+            if(isset($request->sertifikat)){
+                foreach($request->sertifikat as $key => $value){
+                    $cekUpdate = $data->certificates()->where('id', $key)->first();
+                    if($cekUpdate){
+                        $cekUpdate->name = $value;
+                        if(isset($request->file_sertif[$key])){
+                            $cekUpdate->file = $request->file_sertif[$key]->hashName();
+                            $request->file_sertif[$key]->storeAs('public/properties/certificates', $request->file_sertif[$key]->hashName());
+                        }
+                        $cekUpdate->save();
+                    }
+                    else {
+                        $data->certificates()->create([
+                            'name' => $value,
+                            'file' => $request->file_sertif[$key]->hashName(),
+                        ]);
+                        $request->file_sertif[$key]->storeAs('public/properties/certificates', $request->file_sertif[$key]->hashName());
+                    }
+                }
+            }
+
+
             $data->save();
             $request->session()->flash('success', 'Berhasil update data');
             return response()->json('Sukses');
