@@ -19,9 +19,12 @@ class SiteController extends Controller
         return view('home', compact('properties', 'banners', 'lokasiRumah', 'lokasiTanah', 'lokasiKomersil'));
     }
 
-    public function allProperty()
+    public function allProperty(Request $request)
     {
-        $properties = Property::with('images')->where('is_sold', 0)->orderBy('count_view', 'desc')->paginate(9);
+        if(isset($request->search)){
+            $properties = Property::with('images')->where('is_sold', 0)->where('nama', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+        }
+        else $properties = Property::with('images')->where('is_sold', 0)->orderBy('count_view', 'desc')->paginate(9);
         $title = 'Our Amazing Properties';
         return view('site.properties', compact('properties', 'title'));
     }
@@ -44,31 +47,45 @@ class SiteController extends Controller
         }
     }
 
-    public function properties($prop, $tipe, $subTipe)
+    public function properties(Request $request, $prop, $tipe, $subTipe)
     {
         if($tipe == 'jenis') {
             if($prop == 'Tanah') {
                 $title = 'Tanah';
-                $properties = Property::with('images')->where('is_sold', 0)->where('tipe', 'Tanah')->orderBy('count_view', 'desc')->paginate(9);
+                if(isset($request->search)){
+                    $properties = Property::with('images')->where('is_sold', 0)->where('tipe', 'Tanah')->where('nama', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+                }
+                else $properties = Property::with('images')->where('is_sold', 0)->where('tipe', 'Tanah')->orderBy('count_view', 'desc')->paginate(9);
             } else {
                 $sub_tipe = str_replace('-', ' ', $subTipe);
                 $title = $sub_tipe;
-                $properties = Property::with('images')->where('is_sold', 0)->where('sub_tipe', $sub_tipe)->orderBy('count_view', 'desc')->paginate(9);
+                if(isset($request->search)){
+                    $properties = Property::with('images')->where('is_sold', 0)->where('sub_tipe', $sub_tipe)->where('nama', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+                }
+                else $properties = Property::with('images')->where('is_sold', 0)->where('sub_tipe', $sub_tipe)->orderBy('count_view', 'desc')->paginate(9);
             }
         } else if($tipe == 'lokasi'){
             $lokasi = str_replace('-', ' ', $subTipe);
             $title = $prop . ' ' . $lokasi;
-            $properties = Property::with(['images', 'location' => function($q) use($lokasi) {
+            if(isset($request->search)){
+                $properties = Property::with(['images', 'location' => function($q) use($lokasi) {
+                    $q->where('kecamatan', $lokasi);
+                }])->where('is_sold', 0)->where('tipe', $prop)->where('nama', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+            }
+            else $properties = Property::with(['images', 'location' => function($q) use($lokasi) {
                 $q->where('kecamatan', $lokasi);
             }])->where('is_sold', 0)->where('tipe', $prop)->orderBy('count_view', 'desc')->paginate(9);
         }
         return view('site.properties', compact('properties', 'title'));
     }
 
-    public function popular($tipe)
+    public function popular(Request $request, $tipe)
     {
         $title = 'Popular ' . $tipe;
-        $properties = Property::with('images')->where('tipe', $tipe)->where('is_sold', 0)->orderBy('count_view', 'desc')->paginate(9);
+        if(isset($request->search)){
+            $properties = Property::with('images')->where('tipe', $tipe)->where('is_sold', 0)->where('nama', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+        }
+        else $properties = Property::with('images')->where('tipe', $tipe)->where('is_sold', 0)->orderBy('count_view', 'desc')->paginate(9);
         return view('site.properties', compact('properties', 'title'));
     }
 

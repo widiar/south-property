@@ -20,6 +20,16 @@
 <!--/ Property Grid Star /-->
 <section class="property-grid grid">
     <div class="container">
+        <form action="" method="GET">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <input type="text" value="{{ Request::get('search') }}" class="form-control" name="search" placeholder="Keyword" aria-label="Keyword">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
         <div class="row">
             @foreach ($properties as $property)
                 
