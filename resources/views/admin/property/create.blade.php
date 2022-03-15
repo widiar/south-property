@@ -221,7 +221,7 @@
                     <option value="5">5 Lantai</option>
                 </select>
             </div>
-            <div class="row">
+            <div class="row sub_tipe" style="display: none">
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="kamar_tidur">Kamar Tidur</label>
