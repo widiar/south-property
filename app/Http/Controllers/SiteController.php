@@ -9,12 +9,25 @@ use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
+    private function makeLocation($tipe)
+    {
+        $cek = Property::with('location')->where('is_sold', 0)->where('tipe', $tipe)->orderBy('count_view', 'desc')->get();
+        $data = [];
+        foreach($cek as $lokasi) {
+            if(count($data) > 6) break;
+            if(!in_array($lokasi->location->kecamatan, $data)) {
+                array_push($data, $lokasi->location->kecamatan);
+            }
+        }
+        return $data;
+    }
+
     public function index()
     {
         $properties = Property::with('images')->where('is_sold', 0)->orderBy('count_view', 'desc')->limit(5)->get();
-        $lokasiRumah = Property::with('location')->where('is_sold', 0)->where('tipe', 'Rumah')->orderBy('count_view', 'desc')->limit(6)->get();
-        $lokasiTanah = Property::with('location')->where('is_sold', 0)->where('tipe', 'Tanah')->orderBy('count_view', 'desc')->limit(6)->get();
-        $lokasiKomersil = Property::with('location')->where('is_sold', 0)->where('tipe', 'Komersial')->orderBy('count_view', 'desc')->limit(6)->get();
+        $lokasiRumah = $this->makeLocation('Rumah');
+        $lokasiTanah = $this->makeLocation('Tanah');
+        $lokasiKomersil = $this->makeLocation('Komersial');
         $banners = Banner::all();
         return view('home', compact('properties', 'banners', 'lokasiRumah', 'lokasiTanah', 'lokasiKomersil'));
     }

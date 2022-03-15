@@ -78,7 +78,7 @@
                 </div>
                 <div class="lokasi" style="display: none">
                     @foreach ($lokasiRumah as $item)
-                    <button type="button" class="btn btn-outline-success m-4 btn-lokasi" value="{{ $item->location->kecamatan }}">{{ $item->location->kecamatan }}</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-lokasi" value="{{ $item }}">{{ $item }}</button>
                     @endforeach
                 </div>
             </div>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="lokasi" style="display: none">
                     @foreach ($lokasiTanah as $item)
-                    <button type="button" class="btn btn-outline-success m-4 btn-lokasi" value="{{ $item->location->kecamatan }}">{{ $item->location->kecamatan }}</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-lokasi" value="{{ $item }}">{{ $item }}</button>
                     @endforeach
                 </div>
             </div>
@@ -104,7 +104,7 @@
                 </div>
                 <div class="lokasi" style="display: none">
                     @foreach ($lokasiKomersil as $item)
-                    <button type="button" class="btn btn-outline-success m-4 btn-lokasi" value="{{ $item->location->kecamatan }}">{{ $item->location->kecamatan }}</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-lokasi" value="{{ $item }}">{{ $item }}</button>
                     @endforeach
                 </div>
             </div>
