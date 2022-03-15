@@ -29,6 +29,7 @@
                     <th>Harga Property</th>
                     <th>Foto Property</th>
                     <th class="text-center">Aksi</th>
+                    <th class="text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody class="actionz">
@@ -56,7 +57,23 @@
                                 <button class="btn btn-sm btn-danger" type="submit"><i
                                         class="fas fa-trash"></i></button>
                             </form>
+                            @if($dt->is_sold == 0)
+                            <form action="{{ route('admin.properties.sold', $dt->id) }}" method="POST"
+                                class="sold mx-3">
+                                @csrf
+                                <button title="Sudah Terjual" class="btn btn-sm btn-warning" type="submit">
+                                    <i class="fas fa-wallet"></i>
+                                </button>
+                            </form>
+                            @endif
                         </div>
+                    </td>
+                    <td class="text-center">
+                        @if($dt->is_sold == 0)
+                        <h3 class="badge badge-success">Sale</h3>
+                        @else
+                        <h3 class="badge badge-danger">Sold</h3>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
@@ -107,6 +124,40 @@
             }
         })
         $('#fotoModal').modal('show')
+    })
+
+    $('body').on('submit', '.sold', function(e){
+        e.preventDefault()
+        let ul = $(this).attr('action')
+        // swal fire confirm button
+        Swal.fire({
+            title: "Apakah anda yakin?",
+            text: "Data yang sudah terjual tidak dapat dikembalikan!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ya, Terjual!",
+        }).then(result => {
+            if(result.isConfirmed){
+                $.ajax({
+                    url: ul,
+                    method: 'POST',
+                    success: (res) => {
+                        if(res.status == 'success'){
+                            Swal.fire({
+                                title: "Berhasil!",
+                                text: "Data berhasil diubah!",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(rs => {
+                                location.reload()
+                            })
+                        }
+                    }
+                })
+            }
+        })
+        
     })
 </script>
 @endsection

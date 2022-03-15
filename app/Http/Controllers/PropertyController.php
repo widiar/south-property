@@ -249,4 +249,13 @@ class PropertyController extends Controller
         $data->delete();
         return response()->json('deleted');
     }
+
+    public function sold(Property $property)
+    {
+        $property->is_sold = 1;
+        $property->save();
+        return response()->json([
+            'status' => 'success',
+        ]);
+    }
 }

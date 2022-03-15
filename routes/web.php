@@ -53,7 +53,7 @@ Route::prefix('admin')->group(function () {
                 // Route::delete('pesanan/delete/{id}', 'deletePesanan')->name('pesanan.delete');
             });
             Route::resource('banner', BannerController::class)->except('show');
-
+            Route::post('properties/{property}/sold', [PropertyController::class, 'sold'])->name('properties.sold');
             Route::delete('properties/image/', [PropertyController::class, 'deleteImage'])->name('properties.image.delete');
             Route::resource('properties', PropertyController::class);
         });

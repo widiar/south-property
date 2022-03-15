@@ -196,7 +196,9 @@
                 </div>
             </div>
         </div>
-        <button @if($property->is_sold) disabled title="Property sudah terjual" @endif class="btn btn-primary btn-block mt-4" data-toggle="modal" data-target="#bayarModal">Pesan Sekarang</button>
+        <a href="https://wa.me/6283189871080?text={{ $pesan }}">
+            <button @if($property->is_sold) disabled title="Property sudah terjual" @endif class="btn btn-primary btn-block mt-4">Pesan Sekarang</button>
+        </a>
     </div>
 </section>
 <!--/ Property Single End /-->
