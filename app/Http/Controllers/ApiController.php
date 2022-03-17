@@ -23,11 +23,11 @@ class ApiController extends Controller
     public function city(Request $request)
     {
         $id_province = explode('|', $request->id_province)[0];
-        $response = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=' . $id_province)->object()->kota_kabupaten;
+        $response = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=' . $id_province,)->object()->kota_kabupaten;
         $data = [];
         foreach ($response as $res) {
             array_push($data, [
-                'id' => $res->id . "|". $res->nama,
+                'id' => $res->id . "|" . $res->nama,
                 'text' => $res->nama
             ]);
         }
@@ -41,7 +41,7 @@ class ApiController extends Controller
         $data = [];
         foreach ($response as $res) {
             array_push($data, [
-                'id' => $res->id . "|". $res->nama,
+                'id' => $res->id . "|" . $res->nama,
                 'text' => $res->nama
             ]);
         }
@@ -55,7 +55,7 @@ class ApiController extends Controller
         $data = [];
         foreach ($response as $res) {
             array_push($data, [
-                'id' => $res->id . "|". $res->nama,
+                'id' => $res->id . "|" . $res->nama,
                 'text' => $res->nama
             ]);
         }

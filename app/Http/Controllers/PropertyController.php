@@ -30,9 +30,17 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        $kabupaten = Http::get(route('api.city'), [
-            'id_province' => 51
-        ])->object();
+        $response = Http::timeout(20)->connectTimeout(20)->get('https://dev.farizdotid.com/api/daerahindonesia/kota', [
+            'id_provinsi' => 51
+        ])->object()->kota_kabupaten;
+        $kabupaten = [];
+        foreach ($response as $res) {
+            array_push($kabupaten, [
+                'id' => $res->id . "|" . $res->nama,
+                'text' => $res->nama
+            ]);
+        }
+        $kabupaten = json_decode(json_encode($kabupaten));
         $facilities = Facility::all();
         return view('admin.property.create', compact('kabupaten', 'facilities'));
     }
@@ -83,8 +91,8 @@ class PropertyController extends Controller
                 'kamar_mandi_pegawai' => $request->kamar_mandi_pegawai,
             ]);
 
-            if(isset($request->file_sertif)){
-                foreach($request->file_sertif as $key => $value){
+            if (isset($request->file_sertif)) {
+                foreach ($request->file_sertif as $key => $value) {
                     $data->certificates()->create([
                         'name' => $request->sertifikat[$key],
                         'file' => $value->hashName(),
@@ -105,7 +113,6 @@ class PropertyController extends Controller
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);
         }
-
     }
 
     /**
@@ -129,9 +136,17 @@ class PropertyController extends Controller
     public function edit($id)
     {
         $data = Property::with('location')->findOrFail($id);
-        $kabupaten = Http::get(route('api.city'), [
-            'id_province' => 51
-        ])->object();
+        $response = Http::timeout(20)->connectTimeout(20)->get('https://dev.farizdotid.com/api/daerahindonesia/kota', [
+            'id_provinsi' => 51
+        ])->object()->kota_kabupaten;
+        $kabupaten = [];
+        foreach ($response as $res) {
+            array_push($kabupaten, [
+                'id' => $res->id . "|" . $res->nama,
+                'text' => $res->nama
+            ]);
+        }
+        $kabupaten = json_decode(json_encode($kabupaten));
         $facilities = Facility::all();
         // dd($data->location->area);
         return view('admin.property.edit', compact('data', 'kabupaten', 'facilities'));
@@ -153,7 +168,7 @@ class PropertyController extends Controller
             $kabupaten = explode('|', $request->kabupaten);
             $kecamatan = explode('|', $request->kecamatan);
             $kelurahan = explode('|', $request->kelurahan);
-            
+
             $data = Property::findOrFail($id);
             $data->location->id_provinsi = $provinsi[0];
             $data->location->provinsi = $provinsi[1];
@@ -184,7 +199,7 @@ class PropertyController extends Controller
             $data->kamar_mandi_pegawai = $request->kamar_mandi_pegawai;
 
             // save foto
-            if(isset($request->fotofile)){
+            if (isset($request->fotofile)) {
                 foreach ($request->fotofile as $file) {
                     $data->images()->create([
                         'name' => $file->hashName()
@@ -193,24 +208,23 @@ class PropertyController extends Controller
                 }
             }
 
-            if(isset($request->hapus_sertif)){
-                foreach($request->hapus_sertif as $hapus){
+            if (isset($request->hapus_sertif)) {
+                foreach ($request->hapus_sertif as $hapus) {
                     $data->certificates()->find($hapus)->delete();
                 }
             }
 
-            if(isset($request->sertifikat)){
-                foreach($request->sertifikat as $key => $value){
+            if (isset($request->sertifikat)) {
+                foreach ($request->sertifikat as $key => $value) {
                     $cekUpdate = $data->certificates()->where('id', $key)->first();
-                    if($cekUpdate){
+                    if ($cekUpdate) {
                         $cekUpdate->name = $value;
-                        if(isset($request->file_sertif[$key])){
+                        if (isset($request->file_sertif[$key])) {
                             $cekUpdate->file = $request->file_sertif[$key]->hashName();
                             $request->file_sertif[$key]->storeAs('public/properties/certificates', $request->file_sertif[$key]->hashName());
                         }
                         $cekUpdate->save();
-                    }
-                    else {
+                    } else {
                         $data->certificates()->create([
                             'name' => $value,
                             'file' => $request->file_sertif[$key]->hashName(),
@@ -224,7 +238,7 @@ class PropertyController extends Controller
             $data->save();
             $request->session()->flash('success', 'Berhasil update data');
             return response()->json('Sukses');
-        } catch(\Throwable $th) {
+        } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);
         }
     }
