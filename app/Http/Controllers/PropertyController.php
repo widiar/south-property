@@ -82,7 +82,7 @@ class PropertyController extends Controller
                 'harga_satuan' => $request->harga_satuan ? str_replace(',', '', $request->harga_satuan) : 0,
                 'sub_tipe' => $request->sub_tipe,
                 'location_id' => $location->id,
-                'panjang' => $request->panjang,
+                'luas_bangunan' => $request->luasBangunan,
                 'lebar' => $request->lebar,
                 'lantai' => $request->lantai,
                 'kamar_mandi' => $request->kamar_mandi,
@@ -190,7 +190,7 @@ class PropertyController extends Controller
             $data->fasilitas = $request->fasilitas ? json_encode($request->fasilitas) : 'tanah';
             $data->harga_satuan = $request->harga_satuan ? str_replace(',', '', $request->harga_satuan) : 0;
             $data->sub_tipe = $request->tipe == 'Tanah' ? 'Tanah' : $request->sub_tipe;
-            $data->panjang = $request->panjang;
+            $data->luas_bangunan = $request->luasBangunan;
             $data->lebar = $request->lebar;
             $data->lantai = $request->lantai;
             $data->kamar_mandi = $request->kamar_mandi;

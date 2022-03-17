@@ -82,19 +82,19 @@
                                         </span>
                                     </li>
                                     <li class="d-flex justify-content-between">
-                                        <strong>Luas {{ $property->tipe == 'Tanah' ? 'Tanah' : 'Bangunan' }}:</strong>
+                                        <strong>Luas Tanah :</strong>
                                         <span>{{ $property->luas }}m<sup>2</sup></span>
                                     </li>
                                     @if($property->tipe == 'Tanah')
                                     <li class="d-flex justify-content-between">
-                                        <strong>Panjang Tanah:</strong>
-                                        <span>{{ $property->panjang }}m</span>
-                                    </li>
-                                    <li class="d-flex justify-content-between">
-                                        <strong>Lebar Tanah:</strong>
+                                        <strong>Lebar Depan:</strong>
                                         <span>{{ $property->lebar }}m</span>
                                     </li>
                                     @else
+                                    <li class="d-flex justify-content-between">
+                                        <strong>Luas Bangunan :</strong>
+                                        <span>{{ $property->luas_bangunan }}m<sup>2</sup></span>
+                                    </li>
                                     <li class="d-flex justify-content-between">
                                         <strong>Jumlah Lantai:</strong>
                                         <span>{{ $property->lantai }} Lantai</span>

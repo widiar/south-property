@@ -64,7 +64,7 @@
 		$('.menu-list ul').slideUp(700);
 	});
 
-	$('.copyright-footer').find('span').html('<a href="https://ariwidiarsana.web.app/" target="_blank">SouthPropertyBali</a>')
+	// $('.copyright-footer').find('span').html('<a href="https://ariwidiarsana.web.app/" target="_blank">SouthPropertyBali</a>')
 
 	/*--/ Navbar Menu Reduce /--*/
 	$(window).trigger('scroll');

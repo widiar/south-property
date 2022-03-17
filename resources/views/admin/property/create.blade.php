@@ -136,22 +136,22 @@
                 <select name="sub_tipe" id="sub_tipe" class="form-control  @error('sub_tipe') is-invalid @enderror">
                 </select>
             </div>
-            <div class="form-group hargaAre" style="display: none">
-                <label for="panjang">Panjang Tahan (m)</label>
-                <input type="text" required name="panjang" class="form-control  @error('panjang') is-invalid @enderror" value="{{ old('panjang') }}">
-                @error('panjang')
+            <div class="form-group sub_tipe" style="display: none">
+                <label for="luasBangunan">Luas Bangunan (m<sup>2</sup>)</label>
+                <input type="text" required name="luasBangunan" class="form-control  @error('luasBangunan') is-invalid @enderror" value="{{ old('luasBangunan') }}">
+                @error('luasBangunan')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group hargaAre" style="display: none">
-                <label for="lebar">Lebar Tanah (m)</label>
+                <label for="lebar">Lebar Depan (m)</label>
                 <input type="text" required name="lebar" class="form-control  @error('lebar') is-invalid @enderror" value="{{ old('lebar') }}">
                 @error('lebar')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
-                <label for="luas">Luas (m<sup>2</sup>)</label>
+                <label for="luas">Luas Tanah (m<sup>2</sup>)</label>
                 <input type="text" required name="luas" class="form-control  @error('luas') is-invalid @enderror" value="{{ old('luas') }}">
                 @error('luas')
                 <div class="invalid-feedback">{{ $message }}</div>

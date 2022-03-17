@@ -63,7 +63,7 @@
           <div class="copyright-footer">
             <p class="copyright color-text-a">
               &copy; Copyright
-              <span class="color-a"><a href="https://ariwidiarsana.web.app/" target="_blank">SouthPropertyBali</a></span> All Rights Reserved.
+              <span class="color-a"><a href="#" target="_blank">SouthPropertyBali</a></span> All Rights Reserved.
             </p>
           </div>
         </div>
