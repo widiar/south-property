@@ -102,7 +102,10 @@
             <span></span>
             <span></span>
         </button>
-        <a class="navbar-brand text-brand" href="{{ route('home') }}">South<span class="color-b">Property</span></a>
+        {{-- <a class="navbar-brand text-brand" href="{{ route('home') }}">South<span class="color-b">Property</span></a> --}}
+        <a class="navbar-brand text-brand" href="{{ route('home') }}">
+            <img src="{{ asset('img/logo-white.png') }}" style="width: 100%; height: 50px;" alt="">
+        </a>
         <div></div>
         <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
             <ul class="navbar-nav">

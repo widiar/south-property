@@ -16,9 +16,9 @@
             <div class="w-footer-a">
               <ul class="list-unstyled">
                 <li class="color-a">
-                  <span class="color-text-a">Phone .</span> contact@example.com</li>
+                  <span class="color-text-a">Phone .</span><a href="https://wa.me/6281246851260 ">+62 8124 6851 260</a></li>
                 <li class="color-a">
-                  <span class="color-text-a">Email .</span> +54 356 945234</li>
+                  <span class="color-text-a">Email .</span> email@mail.com </li>
               </ul>
             </div>
           </div>
@@ -34,27 +34,27 @@
           <div class="socials-a">
             <ul class="list-inline">
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://www.facebook.com/s.property.3/" target="_blank">
                   <i class="fa fa-facebook" aria-hidden="true"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-twitter" aria-hidden="true"></i>
+                <a href="https://wa.me/6281246851260" target="_blank">
+                  <i class="fa fa-whatsapp" aria-hidden="true"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://www.instagram.com/s_propertybali/" target="_blank">
                   <i class="fa fa-instagram" aria-hidden="true"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                <a href="https://www.youtube.com/channel/UCGgjS4sjFK_OJqdSLoV0-qg" target="_blank">
+                  <i class="fa fa-youtube" aria-hidden="true"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
+                <a href="https://linktr.ee/SPropertyBali" target="_blank">
                   <i class="fa fa-dribbble" aria-hidden="true"></i>
                 </a>
               </li>

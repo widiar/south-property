@@ -74,7 +74,7 @@
                         <div class="card-header-d">
                             <div class="card-title-d align-self-center">
                                 <h3 class="title-d">
-                                    <p class="link-two">Ari</p>
+                                    <p class="link-two">Nama</p>
                                 </h3>
                             </div>
                         </div>
@@ -130,7 +130,7 @@
                         <div class="card-header-d">
                             <div class="card-title-d align-self-center">
                                 <h3 class="title-d">
-                                    <p class="link-two">Widiarsana</p>
+                                    <p class="link-two">Nama</p>
                                 </h3>
                             </div>
                         </div>

@@ -54,6 +54,7 @@ Route::prefix('admin')->group(function () {
             });
             Route::resource('banner', BannerController::class)->except('show');
             Route::post('properties/{property}/sold', [PropertyController::class, 'sold'])->name('properties.sold');
+            Route::post('properties/{property}/back', [PropertyController::class, 'back'])->name('properties.back');
             Route::delete('properties/image/', [PropertyController::class, 'deleteImage'])->name('properties.image.delete');
             Route::resource('properties', PropertyController::class);
         });

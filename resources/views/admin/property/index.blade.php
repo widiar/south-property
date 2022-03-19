@@ -65,6 +65,14 @@
                                     <i class="fas fa-wallet"></i>
                                 </button>
                             </form>
+                            @else
+                            <form action="{{ route('admin.properties.back', $dt->id) }}" method="POST"
+                                class="back mx-3">
+                                @csrf
+                                <button title="Kembalikan Menjadi Belum Terjual" class="btn btn-sm btn-info" type="submit">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                            </form>
                             @endif
                         </div>
                     </td>
@@ -136,6 +144,40 @@
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Ya, Terjual!",
+        }).then(result => {
+            if(result.isConfirmed){
+                $.ajax({
+                    url: ul,
+                    method: 'POST',
+                    success: (res) => {
+                        if(res.status == 'success'){
+                            Swal.fire({
+                                title: "Berhasil!",
+                                text: "Data berhasil diubah!",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(rs => {
+                                location.reload()
+                            })
+                        }
+                    }
+                })
+            }
+        })
+        
+    })
+
+    $('body').on('submit', '.back', function(e){
+        e.preventDefault()
+        let ul = $(this).attr('action')
+        // swal fire confirm button
+        Swal.fire({
+            title: "Apakah anda yakin?",
+            text: "Anda akan mengembalikan data ini ke status belum terjual!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ya!",
         }).then(result => {
             if(result.isConfirmed){
                 $.ajax({

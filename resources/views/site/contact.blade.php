@@ -44,8 +44,8 @@
                                     </a>
                                 </p>
                                 <p class="mb-1">Phone.
-                                    <a href="https://wa.me/6282247521875" target="_blank">
-                                        <span class="color-a">+54 356 945234</span>
+                                    <a href="https://wa.me/6281246851260 ">
+                                        <span class="color-a">+62 8124 6851 260</span>
                                     </a>
                                 </p>
                             </div>
@@ -79,27 +79,27 @@
                                 <div class="socials-footer">
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
-                                            <a href="https://www.facebook.com/ari.widiarsana" target="_blank" class="link-one">
+                                            <a href="https://www.facebook.com/s.property.3/" target="_blank" class="link-one">
                                             <i class="fa fa-facebook" aria-hidden="true"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="#" target="_blank" class="link-one">
-                                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                                            <a href="https://wa.me/6281246851260" target="_blank" class="link-one">
+                                            <i class="fa fa-whatsapp" aria-hidden="true"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="https://www.instagram.com/ari_widiarsana/" target="_blank" class="link-one">
+                                            <a href="https://www.instagram.com/s_propertybali/" target="_blank" class="link-one">
                                             <i class="fa fa-instagram" aria-hidden="true"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="#" class="link-one">
-                                            <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                                            <a href="https://www.youtube.com/channel/UCGgjS4sjFK_OJqdSLoV0-qg" class="link-one">
+                                            <i class="fa fa-youtube" aria-hidden="true"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="https://ariwidiarsana.web.app/" target="_blank" class="link-one">
+                                            <a href="https://linktr.ee/SPropertyBali" target="_blank" class="link-one">
                                             <i class="fa fa-dribbble" aria-hidden="true"></i>
                                             </a>
                                         </li>

@@ -6,8 +6,8 @@
 <meta content="" name="description">
 
 <!-- Favicons -->
-<link href="{{ asset('img/favicon.png') }}" rel="icon">
-<link href="{{ asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+<link href="{{ asset('img/logo.png') }}" rel="icon">
+<link href="{{ asset('img/logo.png') }}" rel="apple-touch-icon">
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
@@ -27,15 +27,29 @@
 <style>
     .rounded-btn {
         border-radius: 20px;
-        color: #2eca6a;
-        background-color: #d6fbe4; 
-        border-color: #d6fbe4;
+        color: #ff9700;
+        background-color: #fbe8d6; 
+        border-color: #fbe8d6;
         padding: 0.375rem 1.75rem;
     }
     .rounded-btn:hover, .rounded-btn:not(:disabled):not(.disabled).active {
         color: #fff;
-        background-color: #2eca6a;
-        border-color: #2eca6a;
+        background-color: #ff9700;
+        border-color: #ff9700;
+    }
+    .btn-outline-success {
+        color: #ff9700;
+        background-color: transparent;
+        background-image: none;
+        border-color: #ff9700;
+    }
+    .btn-outline-success:hover{
+        color: #fff;
+        background-color: #ff9700;
+        border-color: #ff9700;
+    }
+    .nav-tabs .nav-link.active{
+        color: #ff9700;
     }
     @media (max-width: 575px) {
         .col-cek{
@@ -46,5 +60,12 @@
     .btn-circle {
         border-radius: 50%;
         text-align: center;
+        color: #fff;
+        background-color: #ff9700;
+        border-color: #ff9700;
+    }
+    .btn-circle:hover{
+        background-color: #d68100;
+        border-color: #d68100
     }
 </style>

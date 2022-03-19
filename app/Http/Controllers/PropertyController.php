@@ -272,4 +272,13 @@ class PropertyController extends Controller
             'status' => 'success',
         ]);
     }
+
+    public function back(Property $property)
+    {
+        $property->is_sold = 0;
+        $property->save();
+        return response()->json([
+            'status' => 'success',
+        ]);
+    }
 }
