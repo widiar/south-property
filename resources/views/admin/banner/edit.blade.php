@@ -42,10 +42,18 @@
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" required name="title" class="form-control  @error('title') is-invalid @enderror"
-                    value="{{ old('title', $data->title) }}">
-                @error('title')
+                <label for="title">Title (ID)</label>
+                <input type="text" required name="title_id" class="form-control  @error('title_id') is-invalid @enderror"
+                    value="{{ old('title_id', json_decode($data->title)->id) }}">
+                @error('title_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="title">Title (EN)</label>
+                <input type="text" required name="title_en" class="form-control  @error('title_en') is-invalid @enderror"
+                    value="{{ old('title_en', json_decode($data->title)->en) }}">
+                @error('title_en')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
@@ -73,7 +81,8 @@
 <script>
     $('#form').validate({
         rules: {
-            title: 'required',
+            title_id: 'required',
+            title_en: 'required',
         }
     })
     $("#edit-image").click(function(){

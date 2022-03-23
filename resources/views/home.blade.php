@@ -16,9 +16,12 @@
                                     <p class="intro-title-top">
                                         South Property Bali
                                     </p>
+                                    @php
+                                        $lang = App::getLocale();
+                                    @endphp
                                     <h1 class="intro-title mb-4">
-                                        <span class="color-b">{{ explode(' ', $banner->title, 2)[0] }}</span>
-                                        {{ explode(' ', $banner->title, 2)[1] ?? '' }}
+                                        <span class="color-b">{{ explode(' ', json_decode($banner->title)->$lang, 2)[0] }}</span>
+                                        {{ explode(' ', json_decode($banner->title)->$lang, 2)[1] ?? '' }}
                                     </h1>
                                 </div>
                             </div>

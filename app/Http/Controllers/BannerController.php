@@ -39,7 +39,10 @@ class BannerController extends Controller
     {
         $foto = $request->foto;
         Banner::create([
-            'title' => $request->title,
+            'title' => json_encode([
+                'en' => $request->title_en,
+                'id' => $request->title_id
+            ]),
             'foto' => $foto->hashName(),
         ]);
         $foto->storeAs('public/banner', $foto->hashName());
@@ -79,7 +82,10 @@ class BannerController extends Controller
     public function update(Request $request, Banner $banner)
     {
         $data = $banner;
-        $data->title = $request->title;
+        $data->title = json_encode([
+            'en' => $request->title_en,
+            'id' => $request->title_id
+        ]);
         $foto = $request->file('foto');
         if ($foto) {
             Storage::disk('public')->delete('banner/' . $data->foto);

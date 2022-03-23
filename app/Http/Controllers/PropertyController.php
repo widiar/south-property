@@ -74,7 +74,10 @@ class PropertyController extends Controller
             ]);
             $data = Property::create([
                 'nama' => $request->nama,
-                'deskripsi' => $request->deskripsi,
+                'deskripsi' => json_encode([
+                    'en' => $request->deskripsi_en,
+                    'id' => $request->deskripsi_id
+                ]),
                 'harga' => str_replace(',', '', $request->harga),
                 'luas' => $request->luas,
                 'tipe' => $request->tipe,
@@ -183,7 +186,10 @@ class PropertyController extends Controller
             $data->location->save();
 
             $data->nama = $request->nama;
-            $data->deskripsi = $request->deskripsi;
+            $data->deskripsi = json_encode([
+                'en' => $request->deskripsi_en,
+                'id' => $request->deskripsi_id
+            ]);
             $data->harga = str_replace(',', '', $request->harga);
             $data->luas = $request->luas;
             $data->tipe = $request->tipe;

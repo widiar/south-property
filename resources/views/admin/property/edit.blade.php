@@ -118,9 +118,16 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="deskripsi">Deskripsi</label>
-                <textarea required name="deskripsi" id="deskripsi" cols="30" rows="10" class="form-control  @error('deskripsi') is-invalid @enderror">{{ old('deskripsi', $data->deskripsi) }}</textarea>
-                @error('deskripsi')
+                <label for="deskripsi">Deskripsi (ID)</label>
+                <textarea required name="deskripsi_id" id="deskripsi_id" cols="30" rows="10" class="form-control  @error('deskripsi_id') is-invalid @enderror">{{ old('deskripsi_id', json_decode($data->deskripsi)->id) }}</textarea>
+                @error('deskripsi_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="deskripsi">Deskripsi (EN)</label>
+                <textarea required name="deskripsi_en" id="deskripsi_en" cols="30" rows="10" class="form-control  @error('deskripsi_en') is-invalid @enderror">{{ old('deskripsi_en', json_decode($data->deskripsi)->en) }}</textarea>
+                @error('deskripsi_en')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
@@ -455,7 +462,8 @@
             kelurahan: 'required',
             area: 'required',
             latlng: 'required',
-            deskripsi: 'required',
+            deskripsi_id: 'required',
+            deskripsi_en: 'required',
             tipe: 'required',
             sub_tipe: {
                 required: function(element){

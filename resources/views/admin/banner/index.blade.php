@@ -39,7 +39,10 @@
                 <tr>
                     <td>{{ ++$no }}</td>
                     <td>
-                        {{ $dt->title }}
+                        @foreach (json_decode($dt->title) as $key => $title)
+                        <span class="badge badge-info">{{ $key }}</span> {{ $title }}
+                        <br>
+                        @endforeach
                     </td>
                     <td class="text-center">
                         <a href="{{ Storage::url('banner/') . $dt->foto }}" class="btn-detail">

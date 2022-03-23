@@ -136,9 +136,12 @@
                                 </div>
                             </div>
                         </div>
+                        @php
+                            $lang = App::getLocale();
+                        @endphp
                         <div class="property-description">
                             <p class="description color-text-a">
-                                {!! nl2br($property->deskripsi) !!}
+                                {!! nl2br(json_decode($property->deskripsi)->$lang) !!}
                             </p>
                         </div>
                         <div class="row section-t3">
