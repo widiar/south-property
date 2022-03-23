@@ -46,15 +46,16 @@ Terimakasih';
     {
         try {
             $pesanan = Pesanan::with('property')->findOrFail($id);
-            if($pesanan->property->tipe == 'Tanah'){
-                $terjual = $pesanan->property->terjual + $pesanan->jumlah * 100;
-                $pesanan->property->terjual = $terjual;
-                if($terjual >= $pesanan->property->luas){
-                    $pesanan->property->is_sold = 1;
-                }
-            } else {
-                $pesanan->property->is_sold = 1;
-            }
+            // if($pesanan->property->tipe == 'Tanah'){
+            //     $terjual = $pesanan->property->terjual + $pesanan->jumlah * 100;
+            //     $pesanan->property->terjual = $terjual;
+            //     if($terjual >= $pesanan->property->luas){
+            //         $pesanan->property->is_sold = 1;
+            //     }
+            // } else {
+            //     $pesanan->property->is_sold = 1;
+            // }
+            $pesanan->property->is_sold = 1;
             $pesanan->property->save();
             $pesanan->status = 1;
             $pesanan->save();
@@ -67,7 +68,6 @@ Terimakasih';
     public function deletePesanan($id)
     {
         try {
-            return response()->json('Sukses');
             $pesanan = Pesanan::findOrFail($id);
             $pesanan->delete();
             return response()->json('Sukses');

@@ -27,6 +27,11 @@ class Property extends Model
         return $this->hasMany(PropertyCertificate::class, 'property_id', 'id');
     }
 
+    public function pesanan()
+    {
+        return $this->hasMany(Pesanan::class, 'property_id', 'id');
+    }
+
     public function delete()
     {
         foreach ($this->images as $img) {
@@ -35,6 +40,7 @@ class Property extends Model
         $this->images()->delete();
         $this->certificates()->delete();
         $this->location()->delete();
+        $this->pesanan()->delete();
         parent::delete();
     }
 }

@@ -32,9 +32,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.properties.index') }}"
-                        class="nav-link{{request()->is('admin/properties*') ? ' active' : '' }}">
-                        <i class="nav-icon fas fa-building"></i>
+                    <a href="{{ route('admin.pesanan') }}"
+                        class="nav-link{{request()->is('admin/pesanan*') ? ' active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
                         <p>
                             Data Pesanan
                         </p>
