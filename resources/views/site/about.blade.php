@@ -38,11 +38,7 @@
                             </h3>
                         </div>
                         <p class="color-text-a">
-                            Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus magna justo, lacinia eget
-                            consectetur sed, convallis
-                            at tellus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum
-                            ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit
-                            neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+                            {{ __('site.about.text-1') }}
                         </p>
                     </div>
                 </div>
@@ -59,7 +55,7 @@
             <div class="col-md-12">
                 <div class="title-wrap d-flex justify-content-between">
                     <div class="title-box">
-                        <h2 class="title-a">Meet Our Team</h2>
+                        <h2 class="title-a">{{ __('site.about.title-1') }}</h2>
                     </div>
                 </div>
             </div>

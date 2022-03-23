@@ -60,4 +60,22 @@ return [
         'valid_hp' => 'Nomor handphone harus berupa angka dengan format awal 62 dan minimal 8 digit',
         'berhasil' => 'Pemesanan berhasil, Anda akan dihubungi oleh admin kami dalam waktu 2x24 jam',
     ],
+
+    'about' => [
+        'text-1' => 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.',
+        'title-1' => 'Tim Kami',
+    ],
+
+    'contact' => [
+        'title-1' => 'Hubungi Kami',
+        'title-2' => 'Kirim Pesan',
+        'title-3' => 'Temukan Kami',
+        'title-4' => 'Media Sosial',
+    ],
+
+    'footer' => [
+        'text-1' => 'Enim minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat duis sed aute irure.',
+        'text-2' => 'Email',
+        'text-2' => 'Telepon',
+    ],
 ];

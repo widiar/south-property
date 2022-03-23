@@ -113,13 +113,13 @@
                     <a class="nav-link {{request()->is('/') ? ' active' : '' }}" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{request()->is('about') ? ' active' : '' }}" href="{{ route('about') }}">About</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link{{request()->is('properties') || request()->is('property*') ? ' active' : '' }}" href="{{ route('properties') }}">Property</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link{{request()->is('contact') ? ' active' : '' }}" href="{{ route('contact') }}">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link{{request()->is('about') ? ' active' : '' }}" href="{{ route('about') }}">About</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

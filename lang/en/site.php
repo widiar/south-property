@@ -61,4 +61,22 @@ return [
         'valid_hp' => 'The mobile number must be a number with the initial format of 62 and a minimum of 8 digits',
         'berhasil' => 'Booking successful, you will be contacted by our admin within 2x24 hours',
     ],
+
+    'about' => [
+        'text-1' => 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.',
+        'title-1' => 'Meet our Team',
+    ],
+
+    'contact' => [
+        'title-1' => 'Contact Us',
+        'title-2' => 'Get in Touch',
+        'title-3' => 'Find Us',
+        'title-4' => 'Social Networks',
+    ],
+
+    'footer' => [
+        'text-1' => 'Enim minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat duis sed aute irure.',
+        'text-2' => 'Email',
+        'text-3' => 'Phone',
+    ],
 ];

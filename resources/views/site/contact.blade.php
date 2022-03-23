@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-8">
                 <div class="title-single-box">
-                    <h1 class="title-single">Contact US</h1>
+                    <h1 class="title-single">{{ __('site.contact.title-1') }}</h1>
                 </div>
             </div>
         </div>
@@ -35,15 +35,15 @@
                         </div>
                         <div class="icon-box-content table-cell">
                             <div class="icon-box-title">
-                                <h4 class="icon-title">Say Hello</h4>
+                                <h4 class="icon-title">{{ __('site.contact.title-2') }}</h4>
                             </div>
                             <div class="icon-box-content">
-                                <p class="mb-1">Email.
+                                <p class="mb-1">{{ __('site.footer.text-2') }}.
                                     <a href="mailto:contact@example.com" target="_blank">
                                         <span class="color-a">contact@example.com</span>
                                     </a>
                                 </p>
-                                <p class="mb-1">Phone.
+                                <p class="mb-1">{{ __('site.footer.text-3') }}.
                                     <a href="https://wa.me/6281246851260 ">
                                         <span class="color-a">+62 8124 6851 260</span>
                                     </a>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="icon-box-content table-cell">
                             <div class="icon-box-title">
-                                <h4 class="icon-title">Find us in</h4>
+                                <h4 class="icon-title">{{ __('site.contact.title-3') }}</h4>
                             </div>
                             <div class="icon-box-content">
                                 <p class="mb-1">
@@ -73,7 +73,7 @@
                         </div>
                         <div class="icon-box-content table-cell">
                             <div class="icon-box-title">
-                                <h4 class="icon-title">Social networks</h4>
+                                <h4 class="icon-title">{{ __('site.contact.title-4') }}</h4>
                             </div>
                             <div class="icon-box-content">
                                 <div class="socials-footer">
