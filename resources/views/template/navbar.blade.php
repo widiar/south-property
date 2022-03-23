@@ -121,6 +121,19 @@
                 <li class="nav-item">
                     <a class="nav-link{{request()->is('contact') ? ' active' : '' }}" href="{{ route('contact') }}">Contact</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @if(app()->getLocale() == 'id')
+                            <img class="img-center" src="{{ asset('img/id.jpg') }}" width="30px" height="20px" alt=""> ID
+                        @else
+                            <img class="img-center" src="{{ asset('img/en.webp') }}" width="30px" height="20px" alt=""> EN
+                        @endif
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{ route('language', 'id') }}"><img class="img-center" src="{{ asset('img/id.jpg') }}" width="30px" height="20px" alt=""> ID</a>
+                      <a class="dropdown-item" href="{{ route('language', 'en') }}"><img class="img-center" src="{{ asset('img/en.webp') }}" width="30px" height="20px" alt=""> EN</a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

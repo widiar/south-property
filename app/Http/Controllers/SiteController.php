@@ -38,7 +38,7 @@ class SiteController extends Controller
             $properties = Property::with('images')->where('is_sold', 0)->where('nama', 'like', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
         }
         else $properties = Property::with('images')->where('is_sold', 0)->orderBy('count_view', 'desc')->paginate(9);
-        $title = 'Our Amazing Properties';
+        $title = __('site.all_property');
         return view('site.properties', compact('properties', 'title'));
     }
 
@@ -66,14 +66,14 @@ class SiteController extends Controller
     {
         if($tipe == 'jenis') {
             if($prop == 'Tanah') {
-                $title = 'Tanah';
+                $title = __('site.tanah');
                 if(isset($request->search)){
                     $properties = Property::with('images')->where('is_sold', 0)->where('tipe', 'Tanah')->where('nama', 'like', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
                 }
                 else $properties = Property::with('images')->where('is_sold', 0)->where('tipe', 'Tanah')->orderBy('count_view', 'desc')->paginate(9);
             } else {
                 $sub_tipe = str_replace('-', ' ', $subTipe);
-                $title = $sub_tipe;
+                $title = __('site.' . strtolower($subTipe));
                 if(isset($request->search)){
                     $properties = Property::with('images')->where('is_sold', 0)->where('sub_tipe', $sub_tipe)->where('nama', 'like', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
                 }
@@ -81,7 +81,9 @@ class SiteController extends Controller
             }
         } else if($tipe == 'lokasi'){
             $lokasi = str_replace('-', ' ', $subTipe);
-            $title = $prop . ' ' . $lokasi;
+            if(app()->getLocale() == 'id') $kat = 'di';
+            else $kat = 'in';
+            $title = __('site.' . strtolower($prop)) . ' ' . $kat . ' ' . $lokasi;
             if(isset($request->search)){
                 $properties = Property::with(['images', 'location' => function($q) use($lokasi) {
                     $q->where('kecamatan', $lokasi);
@@ -109,9 +111,9 @@ class SiteController extends Controller
         try {
             $property = Property::findOrFail($id);
             $jumlah = 1;
-            if($property->tipe == 'Tanah') {
-                $jumlah = $request->jumlah;
-            }
+            // if($property->tipe == 'Tanah') {
+            //     $jumlah = $request->jumlah;
+            // }
             Pesanan::create([
                 'nama' => $request->nama,
                 'email' => $request->email,
@@ -119,10 +121,11 @@ class SiteController extends Controller
                 'harga' => $property->harga,
                 'jumlah' => $jumlah,
                 'property_id' => $property->id,
+                'gender' => $request->jenis_kelamin,
             ]);
             return response()->json([
                 'status' => 'success',
-                'msg' => 'Pemesanan berhasil, Anda akan dihubungi oleh admin kami dalam waktu 2x24 jam'
+                'msg' => __('site.pesanan.berhasil')
             ]);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);
@@ -137,5 +140,16 @@ class SiteController extends Controller
     public function contact()
     {
         return view('site.contact');
+    }
+
+    public function language($lang)
+    {
+        $arrLang = ['id', 'en'];
+        if (in_array($lang, $arrLang)) {
+            session()->put('locale', $lang);
+        } else {
+            abort(404);
+        }
+        return redirect()->back();
     }
 }

@@ -40,41 +40,41 @@
             <div class="col-md-12">
                 <div class="title-wrap d-flex justify-content-between">
                     <div class="title-box">
-                        <h2 class="title-a">Jelajahi Properti</h2>
+                        <h2 class="title-a">{{ __('site.home.title-1') }}</h2>
                     </div>
                 </div>
             </div>
         </div>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <a class="nav-link link-tipe active" data-value="Rumah" id="rumah-tab" data-toggle="tab" href="#rumah" role="tab" aria-controls="rumah" aria-selected="true">Rumah</a>
+              <a class="nav-link link-tipe active" data-value="Rumah" id="rumah-tab" data-toggle="tab" href="#rumah" role="tab" aria-controls="rumah" aria-selected="true">{{ __('site.rumah') }}</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link link-tipe" data-value="Tanah" id="tanah-tab" data-toggle="tab" href="#tanah" role="tab" aria-controls="tanah" aria-selected="false">Tanah</a>
+              <a class="nav-link link-tipe" data-value="Tanah" id="tanah-tab" data-toggle="tab" href="#tanah" role="tab" aria-controls="tanah" aria-selected="false">{{ __('site.tanah') }}</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link link-tipe" data-value="Komersial" id="komersil-tab" data-toggle="tab" href="#komersil" role="tab" aria-controls="komersil" aria-selected="false">Komersial</a>
+              <a class="nav-link link-tipe" data-value="Komersial" id="komersil-tab" data-toggle="tab" href="#komersil" role="tab" aria-controls="komersil" aria-selected="false">{{ __('site.komersial') }}</a>
             </li>
           </ul>
           <div class="tab-content mt-4" id="myTabContent">
             <div class="row">
                 <div class="col-md-2 col-cek">
-                    <button class="btn btn-primary rounded-btn active" value="populer">Populer</button>
+                    <button class="btn btn-primary rounded-btn active" value="populer">{{ __('site.popular') }}</button>
                 </div>
                 <div class="col-md-2 col-cek">
-                    <button class="btn btn-primary rounded-btn" value="jenis">Jenis</button>
+                    <button class="btn btn-primary rounded-btn" value="jenis">{{ __('site.jenis') }}</button>
                 </div>
                 <div class="col-md-2 col-cek">
-                    <button class="btn btn-primary rounded-btn" value="lokasi">Lokasi</button>
+                    <button class="btn btn-primary rounded-btn" value="lokasi">{{ __('site.lokasi') }}</button>
                 </div>
             </div>
             <div class="tab-pane fade show active mt-4" id="rumah" role="tabpanel" aria-labelledby="rumah-tab">
                 <div class="populer">
                 </div>
                 <div class="jenis" style="display: none">
-                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Rumah">Rumah</button>
-                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Rumah Kosan">Rumah Kosan</button>
-                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Villa atau Guest House">Villa atau Guest House</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Rumah">{{ __('site.rumah') }}</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Rumah Kosan">{{ __('site.rumah-kosan') }}</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Villa atau Guest House">{{ __('site.villa-atau-guest-house') }}</button>
                 </div>
                 <div class="lokasi" style="display: none">
                     @foreach ($lokasiRumah as $item)
@@ -86,7 +86,7 @@
                 <div class="populer">
                 </div>
                 <div class="jenis" style="display: none">
-                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Tanah">Tanah</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Tanah">{{ __('site.tanah') }}</button>
                 </div>
                 <div class="lokasi" style="display: none">
                     @foreach ($lokasiTanah as $item)
@@ -98,9 +98,9 @@
                 <div class="populer">
                 </div>
                 <div class="jenis" style="display: none">
-                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Ruko">Ruko</button>
-                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Kantor">Kantor</button>
-                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Gudang">Gudang</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Ruko">{{ __('site.ruko') }}</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Kantor">{{ __('site.kantor') }}</button>
+                    <button type="button" class="btn btn-outline-success m-4 btn-jenis" value="Gudang">{{ __('site.gudang') }}</button>
                 </div>
                 <div class="lokasi" style="display: none">
                     @foreach ($lokasiKomersil as $item)
@@ -123,10 +123,10 @@
             <div class="col-md-12">
                 <div class="title-wrap d-flex justify-content-between">
                     <div class="title-box">
-                        <h2 class="title-a">Most Viewed Properties</h2>
+                        <h2 class="title-a">{{ __('site.home.title-2') }}</h2>
                     </div>
                     <div class="title-link">
-                        <a href="{{ route('properties') }}">All Property
+                        <a href="{{ route('properties') }}">{{ __('site.home.text-1') }}
                             <span class="ion-ios-arrow-forward"></span>
                         </a>
                     </div>
@@ -152,19 +152,25 @@
                                     <div class="price-box d-flex">
                                         <span class="price-a">Rp {{ number_format($property->harga, '0', '.', '.') }}</span>
                                     </div>
-                                    <a href="{{ route('property', [$property->id]) }}" class="link-a property-link">Click here to view
+                                    <a href="{{ route('property', [$property->id]) }}" class="link-a property-link">{{ __('site.home.text-2') }}
                                         <span class="ion-ios-arrow-forward"></span>
                                     </a>
                                 </div>
                                 <div class="card-footer-a">
                                     <ul class="card-info d-flex justify-content-around">
                                         <li>
-                                            <h4 class="card-info-title">Luas</h4>
+                                            <h4 class="card-info-title">{{ __('site.property.luas-tanah') }}</h4>
                                             <span>{{ $property->luas }}m<sup>2</sup></span>
                                         </li>
                                         <li>
-                                            <h4 class="card-info-title">Tipe</h4>
-                                            <span>{{ $property->tipe }}</span>
+                                            <h4 class="card-info-title">{{ __('site.home.text-3') }}</h4>
+                                            @if($property->tipe == 'Tanah')
+                                            <span>{{ __('site.tanah') }}</span>
+                                            @elseif($property->tipe == 'Rumah')
+                                            <span>{{ __('site.house') }}</span>
+                                            @elseif($property->tipe == 'Komersial')
+                                            <span>{{ __('site.komersial') }}</span>
+                                            @endif
                                         </li>
                                     </ul>
                                 </div>

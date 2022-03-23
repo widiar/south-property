@@ -68,4 +68,16 @@
         background-color: #d68100;
         border-color: #d68100
     }
+    .btn-outline-success:not(:disabled):not(.disabled).active {
+        color: #fff;
+        background-color: #ff9700;
+        border-color: #ff9700;
+        box-shadow: 0 0 0 0.2rem rgb(255 151 4 / 50%) !important;
+    }
+
+    .img-center{
+        object-fit: cover;
+        object-position: center;
+        border: #d68100
+    }
 </style>

@@ -34,6 +34,7 @@ Route::controller(SiteController::class)->group(function(){
     Route::get('contact', 'contact')->name('contact');
     Route::get('properties/popular/{tipe}', 'popular')->name('properties.popular');
     Route::get('properties/{prop}/{tipe}/{subTipe}', 'properties')->name('properties.tipe');
+
 });
 
 //admin
@@ -60,3 +61,5 @@ Route::prefix('admin')->group(function () {
         });
     });
 });
+
+Route::get('{language}', [SiteController::class, 'language'])->name('language');

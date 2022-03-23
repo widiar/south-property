@@ -31,6 +31,15 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.properties.index') }}"
+                        class="nav-link{{request()->is('admin/properties*') ? ' active' : '' }}">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>
+                            Data Pesanan
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

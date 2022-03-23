@@ -51,7 +51,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="title-box-d section-t4">
-                                        <h3 class="title-d">Quick Summary</h3>
+                                        <h3 class="title-d">{{ __('site.property.ringkasan') }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -64,62 +64,62 @@
                                         </a></span>
                                     </li>
                                     <li class="d-flex justify-content-between">
-                                        <strong>Property Type:</strong>
+                                        <strong>{{ __('site.property.tipe') }}:</strong>
                                         <span>{{ $property->sub_tipe ?? 'Tanah' }}</span>
                                     </li>
                                     <li class="d-flex justify-content-between">
-                                        <strong>Total Harga:</strong>
+                                        <strong>{{ __('site.property.harga') }}:</strong>
                                         <span>{{ number_format($property->harga, '0', '.', '.') }}</span>
                                     </li>
                                     <li class="d-flex justify-content-between">
                                         <strong>Status:</strong>
                                         <span>
                                             @if($property->is_sold == 1)
-                                                Sold
+                                                {{ __('site.property.sold') }}
                                             @else
-                                                Sale
+                                                {{ __('site.property.sale') }}
                                             @endif
                                         </span>
                                     </li>
                                     <li class="d-flex justify-content-between">
-                                        <strong>Luas Tanah :</strong>
+                                        <strong>{{ __('site.property.luas-tanah') }} :</strong>
                                         <span>{{ $property->luas }}m<sup>2</sup></span>
                                     </li>
                                     @if($property->tipe == 'Tanah')
                                     <li class="d-flex justify-content-between">
-                                        <strong>Lebar Depan:</strong>
+                                        <strong>{{ __('site.property.lebar_depan') }}:</strong>
                                         <span>{{ $property->lebar }}m</span>
                                     </li>
                                     @else
                                     <li class="d-flex justify-content-between">
-                                        <strong>Luas Bangunan :</strong>
+                                        <strong>{{ __('site.property.luas-bangunan') }} :</strong>
                                         <span>{{ $property->luas_bangunan }}m<sup>2</sup></span>
                                     </li>
                                     <li class="d-flex justify-content-between">
-                                        <strong>Jumlah Lantai:</strong>
-                                        <span>{{ $property->lantai }} Lantai</span>
+                                        <strong>{{ __('site.property.jumlah_lantai') }}:</strong>
+                                        <span>{{ $property->lantai }} {{ __('site.property.lantai') }}</span>
                                     </li>
                                     @if($property->kamar_mandi > 0)
                                     <li class="d-flex justify-content-between">
-                                        <strong>Kamar Mandi:</strong>
+                                        <strong>{{ __('site.property.kamar_mandi') }}:</strong>
                                         <span>{{ $property->kamar_mandi }}</span>
                                     </li>
                                     @endif
                                     @if($property->kamar_tidur > 0)
                                     <li class="d-flex justify-content-between">
-                                        <strong>Kamar Tidur:</strong>
+                                        <strong>{{ __('site.property.kamar_tidur') }}:</strong>
                                         <span>{{ $property->kamar_tidur }}</span>
                                     </li>
                                     @endif
                                     @if($property->kamar_pegawai > 0)
                                     <li class="d-flex justify-content-between">
-                                        <strong>Kamar Pegawai:</strong>
+                                        <strong>{{ __('site.property.kamar_pegawai') }}:</strong>
                                         <span>{{ $property->kamar_pegawai }}</span>
                                     </li>
                                     @endif
                                     @if($property->kamar_mandi_pegawai > 0)
                                     <li class="d-flex justify-content-between">
-                                        <strong>Kamar Mandi Pegawai:</strong>
+                                        <strong>{{ __('site.property.kamar_mandi_pegawai') }}:</strong>
                                         <span>{{ $property->kamar_mandi_pegawai }}</span>
                                     </li>
                                     @endif
@@ -132,7 +132,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="title-box-d">
-                                    <h3 class="title-d">Property Description</h3>
+                                    <h3 class="title-d">{{ __('site.property.deskripsi') }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                         <div class="row section-t3">
                             <div class="col-sm-12">
                                 <div class="title-box-d">
-                                    <h3 class="title-d">{{ $property->tipe == 'Tanah' ? 'Sertifikat' : 'Fasilitas' }}</h3>
+                                    <h3 class="title-d">{{ $property->tipe == 'Tanah' ?__('site.property.sertifikat') : __('site.property.fasilitas') }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -179,7 +179,7 @@
                 <ul class="nav nav-pills-a nav-pills mb-3 section-t3" id="pills-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="pills-location-tab" data-toggle="pill" href="#pills-location" role="tab"
-                        aria-controls="pills-location" aria-selected="true">Location</a>
+                        aria-controls="pills-location" aria-selected="true">{{ __('site.property.lokasi') }}</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
@@ -196,9 +196,10 @@
                 </div>
             </div>
         </div>
-        <a href="https://wa.me/6283189871080?text={{ $pesan }}">
+        {{-- <a href="https://wa.me/6283189871080?text={{ $pesan }}">
             <button @if($property->is_sold) disabled title="Property sudah terjual" @endif class="btn btn-primary btn-block mt-4">Pesan Sekarang</button>
-        </a>
+        </a> --}}
+        <button @if($property->is_sold) disabled title="Property sudah terjual" @endif data-toggle="modal" data-target="#bayarModal" class="btn btn-primary btn-block mt-4">{{ __('site.property.pesan') }}</button>
     </div>
 </section>
 <!--/ Property Single End /-->
@@ -213,34 +214,42 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="nama">Nama Lengkap</label>
+                        <label for="nama">{{ __('site.pesanan.nama') }}</label>
                         <input type="text" class="form-control" name="nama"
-                            placeholder="Masukkan Nama Lengkap" value="{{ @$user->nama }}">
+                            placeholder="{{ __('site.pesanan.masukan') }} {{ __('site.pesanan.nama') }}" value="{{ @$user->nama }}">
                     </div>
                     <div class="form-group">
-                        <label for="telp">No. Handphone (WA)</label>
-                        <input type="text" class="form-control" name="telp" placeholder="Masukkan No. Handphone"
+                        <label for="telp">{{ __('site.pesanan.telepon') }}</label>
+                        <input type="text" class="form-control" name="telp" placeholder="{{ __('site.pesanan.masukan') }} {{ __('site.pesanan.telepon') }}"
                             value="{{ @$user->nik }}">
-                        <small class="text-info"><i>*Pastikan nomor adalah nomor yang aktif</i></small><br>
+                        <small class="text-info"><i>*{{ __('site.pesanan.info_hp') }}</i></small><br>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">{{ __('site.pesanan.email') }}</label>
                         <input type="email" class="form-control" name="email"
-                            placeholder="Masukkan Email" value="{{ @$user->nama }}">
-                        <small class="text-info"><i>*Pastikan email adalah email aktif</i></small><br>
+                            placeholder="{{ __('site.pesanan.masukan') }} Email" value="{{ @$user->nama }}">
+                        <small class="text-info"><i>*{{ __('site.pesanan.info_email') }}</i></small><br>
                     </div>
-                    @if($property->tipe == 'Tanah')
+                    <div class="form-group">
+                        <label for="">{{ __('site.pesanan.gender') }}</label>
+                        <select name="jenis_kelamin" class="form-control">
+                            <option value="" selected disabled>{{ __('site.pesanan.gender') }}</option>
+                            <option value="Laki-Laki">{{ __('site.pesanan.laki') }}</option>
+                            <option value="Perempuan">{{ __('site.pesanan.perempuan') }}</option>
+                        </select>
+                    </div>
+                    {{-- @if($property->tipe == 'Tanah')
                     <div class="form-group">
                         <label for="tanah">Tanah (are)</label>
                         <input type="number" required class="form-control" name="jumlah" placeholder="Masukkan Jumlah">
                     </div>
-                    @endif
+                    @endif --}}
                     <input type="hidden" name="jumlahhari" id="hari">
                     <input type="hidden" id="harga" value="{{ $property->harga }}">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Pesan</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('site.pesanan.tutup') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ __('site.pesanan.pesan') }}</button>
                 </div>
             </form>
         </div>
@@ -288,7 +297,7 @@
     // jquery validation make validation for handphone number Indonesia
     $.validator.addMethod('phone', function(value, element) {
         return this.optional(element) || /^(62)[0-9]{8,}$/.test(value);
-    }, 'Nomor handphone harus berupa angka dengan format awal 62 dan minimal 8 digit');
+    }, `{{ __('site.pesanan.valid_hp') }}`);
 
     $('#form-pemesanan').validate({
         rules: {
@@ -300,7 +309,8 @@
             email: {
                 required: true,
                 email: true
-            }
+            },
+            jenis_kelamin: 'required',
         },
         submitHandler: (form, e) => {
             e.preventDefault();
@@ -311,7 +321,7 @@
                 success: (data) => {
                     if (data.status == 'success') {
                         Swal.fire({
-                            title: 'Sukses',
+                            title: 'Success',
                             text: data.msg,
                             icon: 'success'
                         }).then((result) => {

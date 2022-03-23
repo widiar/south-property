@@ -50,19 +50,25 @@
                                 <div class="price-box d-flex">
                                     <span class="price-a">Rp {{ number_format($property->harga, '0', '.', '.') }}</span>
                                 </div>
-                                <a href="{{ route('property', [$property->id]) }}" class="link-a">Click here to view
+                                <a href="{{ route('property', [$property->id]) }}" class="link-a">{{ __('site.home.text-2') }}
                                     <span class="ion-ios-arrow-forward"></span>
                                 </a>
                             </div>
                             <div class="card-footer-a">
                                 <ul class="card-info d-flex justify-content-around">
                                     <li>
-                                        <h4 class="card-info-title">Luas</h4>
+                                        <h4 class="card-info-title">{{ __('site.property.luas-tanah') }}</h4>
                                         <span>{{ $property->luas }}m<sup>2</sup></span>
                                     </li>
                                     <li>
-                                        <h4 class="card-info-title">Tipe</h4>
-                                        <span>{{ $property->tipe }}</span>
+                                        <h4 class="card-info-title">{{ __('site.home.text-3') }}</h4>
+                                        @if($property->tipe == 'Tanah')
+                                        <span>{{ __('site.tanah') }}</span>
+                                        @elseif($property->tipe == 'Rumah')
+                                        <span>{{ __('site.house') }}</span>
+                                        @elseif($property->tipe == 'Komersial')
+                                        <span>{{ __('site.komersial') }}</span>
+                                        @endif
                                     </li>
                                 </ul>
                             </div>
