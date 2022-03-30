@@ -21,6 +21,10 @@
 		height: 200px;
 	}
 
+    .mobile {
+        display: none;
+    }
+
 	@media screen and (max-width: 768px) {
 		.img-info {
 			display: none;
@@ -37,65 +41,25 @@
 		.bank-img img {
 			width: 100px;
 		}
+
+        .desktop-only {
+            display: none;
+        }
+
+        .mobile {
+            display: unset;
+        }
+
+        .title-mobile {
+            border: 5px solid #ff9700;
+            padding: 10px;
+        }
+
+        .title-box-d .title-d:after {
+            width: 100%;
+        }
 	}
 
-
-
-    .slideshow-container {
-        width: 100%;
-        position: relative;
-        margin: auto;
-    }
-
-    /* Hide the images by default */
-    .mySlides {
-        display: none;
-    }
-
-    /* Next & previous buttons */
-    .prev, .next {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        width: auto;
-        margin-top: -22px;
-        padding: 16px;
-        color: white;
-        font-weight: bold;
-        font-size: 18px;
-        transition: 0.6s ease;
-        border-radius: 0 3px 3px 0;
-        user-select: none;
-    }
-
-    /* Position the "next button" to the right */
-    .next {
-        right: 0;
-        border-radius: 3px 0 0 3px;
-    }
-
-    /* On hover, add a black background color with a little bit see-through */
-    .prev:hover, .next:hover {
-        background-color: rgba(0,0,0,0.8);
-    }
-
-    /* Fading animation */
-    .faded {
-        -webkit-animation-name: fade;
-        -webkit-animation-duration: 1.5s;
-        animation-name: fade;
-        animation-duration: 1.5s;
-    }
-
-    @-webkit-keyframes faded {
-        from {opacity: .4}
-        to {opacity: 1}
-    }
-
-    @keyframes faded {
-        from {opacity: .4}
-        to {opacity: 1}
-    }
 </style>
 @endsection
 @section('content')
@@ -130,17 +94,17 @@
                     <div class="col-md-5 col-lg-4">
                         <div class="property-price d-flex justify-content-center foo">
                             <div class="card-header-c d-flex">
-                                <div class="card-box-ico">
+                                <div class="card-box-ico desktop-only">
                                     <span class="ion-money">Rp</span>
                                 </div>
                                 @if($property->tipe == 'Tanah')
                                 <div class="card-title-c align-self-center">
-                                    <h5 class="title-c">{{ number_format($property->harga_satuan, '0', '.', '.') }}</h5>
+                                    <h5 class="title-c title-mobile"><span class="mobile">Rp </span>{{ number_format($property->harga_satuan, '0', '.', '.') }}</h5>
                                     <h5>/ are</h5>
                                 </div>
                                 @else
                                 <div class="card-title-c align-self-center">
-                                    <h5 class="title-c">{{ number_format($property->harga, '0', '.', '.') }}</h5>
+                                    <h5 class="title-c title-mobile"><span class="mobile">Rp </span>{{ number_format($property->harga, '0', '.', '.') }}</h5>
                                 </div>
                                 @endif
                             </div>
