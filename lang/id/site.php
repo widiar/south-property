@@ -43,6 +43,7 @@ return [
         'sertifikat' => 'Sertifikat',
         'lantai' => 'Lantai',
         'pesan' => 'Pesan Sekarang',
+        'booked' => 'Sudah Dipesan',
     ],
 
     'pesanan' => [
@@ -59,6 +60,7 @@ return [
         'pesan' => 'Pesan',
         'valid_hp' => 'Nomor handphone harus berupa angka dengan format awal 62 dan minimal 8 digit',
         'berhasil' => 'Pemesanan berhasil, Anda akan dihubungi oleh admin kami dalam waktu 2x24 jam',
+        'booked' => 'Properti telah dipesan <br> Silahkan hubungi <a href="https://wa.me/6281246851260" target="_blank">Admin via Whatsapp</a>',
     ],
 
     'about' => [
@@ -78,4 +80,13 @@ return [
         'text-2' => 'Email',
         'text-2' => 'Telepon',
     ],
+
+    'img-bukti' => 'Bukti Pembayaran',
+
+    'trf-bank' => 'Silahkan Transfer ke Bank BCA',
+    'upload-bank' => 'Upload Bukti Pembayaran',
+    'detail-img' => 'Klik Gambar Untuk Lihat Detail',
+    'proses-bayar' => 'Proses Pembayaran',
+    'img-bukti' => 'Bukti Bayar',
+    'bayar' => 'Upload Bukti Resi',
 ];

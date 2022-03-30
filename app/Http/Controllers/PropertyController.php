@@ -287,4 +287,22 @@ class PropertyController extends Controller
             'status' => 'success',
         ]);
     }
+
+    public function booked(Property $property)
+    {
+        $property->is_book = 1;
+        $property->save();
+        return response()->json([
+            'status' => 'success',
+        ]);
+    }
+
+    public function backBooked(Property $property)
+    {
+        $property->is_book = 0;
+        $property->save();
+        return response()->json([
+            'status' => 'success',
+        ]);
+    }
 }

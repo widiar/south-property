@@ -106,6 +106,25 @@ class SiteController extends Controller
         return view('site.properties', compact('properties', 'title'));
     }
 
+    public function checkProperty($id)
+    {
+        try {
+            $property = Property::find($id);
+            if($property->is_sold == 1 || $property->is_book == 1){
+                return response()->json([
+                    'status' => 'booked',
+                    'msg' => __('site.pesanan.booked')
+                ]);
+            }
+            return response()->json([
+                'status' => 'success',
+                'msg' => 'Property is available'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 500);
+        }
+    }
+
     public function bookProperty(Request $request, $id)
     {
         try {
@@ -114,6 +133,7 @@ class SiteController extends Controller
             // if($property->tipe == 'Tanah') {
             //     $jumlah = $request->jumlah;
             // }
+            $bukti = $request->bukti;
             Pesanan::create([
                 'nama' => $request->nama,
                 'email' => $request->email,
@@ -122,7 +142,12 @@ class SiteController extends Controller
                 'jumlah' => $jumlah,
                 'property_id' => $property->id,
                 'gender' => $request->jenis_kelamin,
+                'bukti_bayar' => $bukti->hashName()
             ]);
+            $bukti->storeAs('public/pesanan/bukti_bayar', $bukti->hashName());
+
+            $property->is_book = 1;
+            $property->save();
             return response()->json([
                 'status' => 'success',
                 'msg' => __('site.pesanan.berhasil')

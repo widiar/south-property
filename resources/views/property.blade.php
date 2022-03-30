@@ -1,5 +1,103 @@
 @extends('template.master')
+@section('css')
+<style>
+    .bank-container {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+	}
 
+	.bank-img img {
+		object-fit: contain;
+		object-position: center;
+		width: 200px;
+	}
+
+	.img-detail {
+		object-fit: cover;
+		object-position: center;
+		width: 100%;
+		cursor: pointer;
+		height: 200px;
+	}
+
+	@media screen and (max-width: 768px) {
+		.img-info {
+			display: none;
+		}
+
+		.total-amount {
+			font-size: 26px;
+		}
+
+		.bank-img {
+			margin: 0 20px;
+		}
+
+		.bank-img img {
+			width: 100px;
+		}
+	}
+
+
+
+    .slideshow-container {
+        width: 100%;
+        position: relative;
+        margin: auto;
+    }
+
+    /* Hide the images by default */
+    .mySlides {
+        display: none;
+    }
+
+    /* Next & previous buttons */
+    .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+    }
+
+    /* Position the "next button" to the right */
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover, .next:hover {
+        background-color: rgba(0,0,0,0.8);
+    }
+
+    /* Fading animation */
+    .faded {
+        -webkit-animation-name: fade;
+        -webkit-animation-duration: 1.5s;
+        animation-name: fade;
+        animation-duration: 1.5s;
+    }
+
+    @-webkit-keyframes faded {
+        from {opacity: .4}
+        to {opacity: 1}
+    }
+
+    @keyframes faded {
+        from {opacity: .4}
+        to {opacity: 1}
+    }
+</style>
+@endsection
 @section('content')
 
 <!--/ Intro Single star /-->
@@ -74,7 +172,9 @@
                                     <li class="d-flex justify-content-between">
                                         <strong>Status:</strong>
                                         <span>
-                                            @if($property->is_sold == 1)
+                                            @if($property->is_book)
+                                                {{ __('site.property.booked') }}
+                                            @elseif($property->is_sold == 1)
                                                 {{ __('site.property.sold') }}
                                             @else
                                                 {{ __('site.property.sale') }}
@@ -213,7 +313,7 @@
             <div class="modal-header">
                 <h3 class="modal-title" id="pembayaranModal">Detail</h3>
             </div>
-            <form action="{{ route('book.property', $property->id) }}" method="POST" id="form-pemesanan">
+            <form action="" method="POST" id="form-pemesanan">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -247,7 +347,9 @@
                         <input type="number" required class="form-control" name="jumlah" placeholder="Masukkan Jumlah">
                     </div>
                     @endif --}}
-                    <input type="hidden" name="jumlahhari" id="hari">
+                    <div class="info my-2">
+                        <h4>Uang Muka Rp 10.000.000</h4>
+                    </div>
                     <input type="hidden" id="harga" value="{{ $property->harga }}">
                 </div>
                 <div class="modal-footer">
@@ -255,6 +357,72 @@
                     <button type="submit" class="btn btn-primary">{{ __('site.pesanan.pesan') }}</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="transaksiModal" data-backdrop="static" role="dialog" aria-labelledby="pembayaranModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="pembayaranModal">{{ __('site.bayar') }}</h3>
+            </div>
+            <form action="{{ route('book.property', $property->id) }}" method="POST" id="form-pembayaran"
+                enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <h3 class="text-center">{{ __('site.trf-bank') }}</h3>
+                    <h3 class="text-center">Total Rp <span class="bayar">10.000.000</span></h3>
+                    <div class="bank-container">
+                        <div class="bank-img">
+                            <img src="https://www.freepnglogos.com/uploads/logo-bca-png/bank-central-asia-logo-bank-central-asia-bca-format-cdr-png-gudril-1.png"
+                                alt="">
+                        </div>
+                        <div class="bank-text">
+                            <h3>a.n. Edward</h3>
+                            <h4>7720578128</h4>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bukti">{{ __('site.upload-bank') }}</label>
+                        <div class="custom-file">
+                            <input type="file" required name="bukti"
+                                class="file custom-file-input @error('bukti') is-invalid @enderror" id="bukti"
+                                value="{{ old('bukti') }}" accept="image/*">
+                            <label class="custom-file-label" for="bukti">
+                                <span class="d-inline-block text-truncate w-75">Browse File</span>
+                            </label>
+                            @error("bukti")
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <small class="form-text text-muted">upload format file .png, .jpg max 5mb.</small>
+                    </div>
+                    <img src="https://via.placeholder.com/1080x1080.png?text={{ __('site.img-bukti') }}" alt=""
+                        class="img-thumbnail img-detail">
+                    <small>{{ __('site.detail-img') }}</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">{{ __('site.proses-bayar') }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="imageModal" role="dialog" aria-labelledby="pembayaranModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="pembayaranModal">{{ __('site.img-bukti') }}</h3>
+            </div>
+            <div class="modal-body">
+                <img src="" alt="" class="img-thumbnail img-modal-detail" style="width: 100%">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
@@ -302,6 +470,16 @@
         return this.optional(element) || /^(62)[0-9]{8,}$/.test(value);
     }, `{{ __('site.pesanan.valid_hp') }}`);
 
+    $('#bukti').change(function(e){
+        let url = URL.createObjectURL(e.target.files[0])
+        $(".img-detail").attr("src", url)
+    })
+
+    $('.img-detail').click(function(){
+        $('.img-modal-detail').attr('src', $(this).attr('src'))
+        $('#imageModal').modal('show')
+    })
+
     $('#form-pemesanan').validate({
         rules: {
             nama: 'required',
@@ -317,23 +495,81 @@
         },
         submitHandler: (form, e) => {
             e.preventDefault();
-            $.ajax({
-                url: $(form).attr('action'),
-                type: 'POST',
-                data: $(form).serialize(),
-                success: (data) => {
-                    if (data.status == 'success') {
-                        Swal.fire({
-                            title: 'Success',
-                            text: data.msg,
-                            icon: 'success'
-                        }).then((result) => {
-                            if (result.isConfirmed) window.location.reload()
-                        });
-                    }
-                },
-                error: (res) => {
-                    console.log(res.ResponseJSON);
+            Swal.fire({
+                title: 'Checking',
+                timer: 20000,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    Swal.showLoading()
+                    Swal.stopTimer()
+                    $.ajax({
+                        url: `{{ route('check.property', $property->id) }}`,
+                        type: 'POST',
+                        data: $(form).serialize(),
+                        success: (data) => {
+                            Swal.close()
+                            if (data.status == 'success') {
+                                $('#bayarModal').modal('toggle');
+                                $('#transaksiModal').modal('show');
+                            } else {
+                                Swal.fire({
+                                    title: 'Property',
+                                    html: data.msg,
+                                    icon: 'info'
+                                }).then((result) => {
+                                    if (result.isConfirmed) window.location.reload()
+                                });
+                            }
+                        },
+                        error: (res) => {
+                            console.log(res.ResponseJSON);
+                        }
+                    })
+                }
+            })
+            
+        }
+    })
+    $('#form-pembayaran').validate({
+        rules: {
+            bukti: 'required'
+        },
+        submitHandler: (form, e) => {
+            e.preventDefault()
+            let dataform = new FormData($('#form-pemesanan')[0])
+            dataform.append('bukti', $('#bukti')[0].files[0])
+            //kasi swal
+            Swal.fire({
+                title: 'Loading',
+                timer: 20000,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    Swal.showLoading()
+                    Swal.stopTimer()
+                    $.ajax({
+                        url: $(form).attr('action'),
+                        data: dataform,
+                        type: 'POST',
+                        contentType: false, 
+                        processData: false,
+                        success: (res) => {
+                            Swal.close()
+                            if(res.status == 'success') {
+                                Swal.fire({
+                                    title: 'Success',
+                                    icon: 'success',
+                                    text: res.msg,
+                                }).then(res => {
+                                    if(res.isConfirmed) window.location.reload()
+                                })
+                            }
+                        },
+                        error: (err) => {
+                            console.log(err.responseJSON)
+                        }
+                    })
                 }
             })
         }

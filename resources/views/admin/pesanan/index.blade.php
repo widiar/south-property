@@ -28,6 +28,7 @@
                     <th>Jenis Kelamin</th>
                     <th>Property</th>
                     <th>Total Harga</th>
+                    <th>Bukti Pembayaran</th>
                     <th class="text-center">Aksi</th>
                     <th class="text-center">Status</th>
                 </tr>
@@ -50,6 +51,11 @@
                         </a>
                     </td>
                     <td>Rp {{ number_format($dt->harga * $dt->jumlah, '0', '.', '.') }}</td>
+                    <td class="text-center">
+                        <a href="{{ Storage::url('pesanan/bukti_bayar/') . $dt->bukti_bayar }}" class="bukti_bayar">
+                            <button class="btn btn-sm btn-info"><i class="fas fa-file-invoice-dollar"></i></button>
+                        </a>
+                    </td>
                     <td class="row justify-content-center">
                         <a href="https://wa.me/{{ $dt->no_hp}}?text={{ str_replace('%23nama', $dt->nama, $pesan) }}" target="_blank" class="mx-3">
                             <button class="btn btn-sm btn-primary">
@@ -84,6 +90,25 @@
                 @endif
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Detail</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="" alt="" class="img-thumbnail img-detail" style="width: 100%">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -126,5 +151,13 @@
             }
         })
     })
+
+    $('body').on('click', '.bukti_bayar', function(e){
+        e.preventDefault()
+        const url = $(this).attr('href')
+        $('.img-detail').attr('src', url)
+        $('#imageModal').modal('show')
+    })
+    
 </script>
 @endsection

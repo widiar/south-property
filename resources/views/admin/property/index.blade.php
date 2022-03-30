@@ -29,7 +29,7 @@
                     <th>Harga Property</th>
                     <th>Foto Property</th>
                     <th class="text-center">Aksi</th>
-                    <th class="text-center">Aksi</th>
+                    <th class="text-center">Status</th>
                 </tr>
             </thead>
             <tbody class="actionz">
@@ -59,17 +59,34 @@
                             </form>
                             @if($dt->is_sold == 0)
                             <form action="{{ route('admin.properties.sold', $dt->id) }}" method="POST"
-                                class="sold mx-3">
+                                class="sold ml-3" data-text="Terjual">
                                 @csrf
                                 <button title="Sudah Terjual" class="btn btn-sm btn-warning" type="submit">
-                                    <i class="fas fa-wallet"></i>
+                                    <i class="fas fa-money-bill-wave"></i>
                                 </button>
                             </form>
                             @else
                             <form action="{{ route('admin.properties.back', $dt->id) }}" method="POST"
-                                class="back mx-3">
+                                class="back ml-3" data-text="Terjual">
                                 @csrf
                                 <button title="Kembalikan Menjadi Belum Terjual" class="btn btn-sm btn-info" type="submit">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                            </form>
+                            @endif
+                            @if($dt->is_book == 0)
+                            <form action="{{ route('admin.properties.booked', $dt->id) }}" method="POST"
+                                class="sold mx-3" data-text="Terbooking">
+                                @csrf
+                                <button title="Sudah Terbooking" class="btn btn-sm btn-info" type="submit">
+                                    <i class="fas fa-wallet"></i>
+                                </button>
+                            </form>
+                            @else
+                            <form action="{{ route('admin.properties.back.booked', $dt->id) }}" method="POST"
+                                class="back mx-3" data-text="Terbooking">
+                                @csrf
+                                <button title="Kembalikan Menjadi Belum Terbooking" class="btn btn-sm btn-info" type="submit">
                                     <i class="fas fa-undo"></i>
                                 </button>
                             </form>
@@ -77,7 +94,9 @@
                         </div>
                     </td>
                     <td class="text-center">
-                        @if($dt->is_sold == 0)
+                        @if($dt->is_book == 1)
+                        <h3 class="badge badge-info">Sudah di Booking</h3>
+                        @elseif($dt->is_sold == 0)
                         <h3 class="badge badge-success">Sale</h3>
                         @else
                         <h3 class="badge badge-danger">Sold</h3>
@@ -137,10 +156,12 @@
     $('body').on('submit', '.sold', function(e){
         e.preventDefault()
         let ul = $(this).attr('action')
+        let text = $(this).data('text')
+        let msg = `Anda ingin menjadikan property ini Sudah ${text}?`
         // swal fire confirm button
         Swal.fire({
             title: "Apakah anda yakin?",
-            text: "Data yang sudah terjual tidak dapat dikembalikan!",
+            text: msg,
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Ya, Terjual!",
@@ -171,10 +192,12 @@
     $('body').on('submit', '.back', function(e){
         e.preventDefault()
         let ul = $(this).attr('action')
+        let text = $(this).data('text')
+        let msg = `Anda ingin mengembalikan status property ini menjadi Belum ${text}?`
         // swal fire confirm button
         Swal.fire({
             title: "Apakah anda yakin?",
-            text: "Anda akan mengembalikan data ini ke status belum terjual!",
+            text: msg,
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Ya!",

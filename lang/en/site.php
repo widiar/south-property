@@ -44,6 +44,7 @@ return [
         'sertifikat' => 'Certificate',
         'lantai' => 'Floor',
         'pesan' => 'Book Now',
+        'booked' => 'Booked',
     ],
 
     'pesanan' => [
@@ -60,6 +61,7 @@ return [
         'pesan' => 'Book',
         'valid_hp' => 'The mobile number must be a number with the initial format of 62 and a minimum of 8 digits',
         'berhasil' => 'Booking successful, you will be contacted by our admin within 2x24 hours',
+        'booked' => 'Property already booked <br> Please contact <a class="color-b" href="https://wa.me/6281246851260" target="_blank">Admin via Whatsapp</a>',
     ],
 
     'about' => [
@@ -79,4 +81,13 @@ return [
         'text-2' => 'Email',
         'text-3' => 'Phone',
     ],
+
+    'img-bukti' => 'Payment Proof',
+
+    'trf-bank' => 'Please Transfer to Bank BCA',
+    'upload-bank' => 'Upload Payment Proof',
+    'detail-img' => 'Click Image To View Details',
+    'proses-bayar' => 'Payment Process',
+    'img-bukti' => 'Payment Proof',
+    'bayar' => 'Upload Receipt',
 ];

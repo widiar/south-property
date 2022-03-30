@@ -28,6 +28,7 @@ Route::controller(SiteController::class)->group(function(){
     Route::get('property/{id}', 'property')->name('property');
     Route::post('property/{id}', 'propertyView')->name('property.view');
 
+    Route::post('check-property/{id}', 'checkProperty')->name('check.property');
     Route::post('book-property/{id}', 'bookProperty')->name('book.property');
 
     Route::get('about', 'about')->name('about');
@@ -56,6 +57,8 @@ Route::prefix('admin')->group(function () {
             Route::resource('banner', BannerController::class)->except('show');
             Route::post('properties/{property}/sold', [PropertyController::class, 'sold'])->name('properties.sold');
             Route::post('properties/{property}/back', [PropertyController::class, 'back'])->name('properties.back');
+            Route::post('properties/{property}/booked', [PropertyController::class, 'booked'])->name('properties.booked');
+            Route::post('properties/{property}/back-booked', [PropertyController::class, 'backBooked'])->name('properties.back.booked');
             Route::delete('properties/image/', [PropertyController::class, 'deleteImage'])->name('properties.image.delete');
             Route::resource('properties', PropertyController::class);
         });
