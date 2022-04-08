@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ApproveEmail;
 use App\Models\Pesanan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -55,6 +57,7 @@ Terimakasih';
             // } else {
             //     $pesanan->property->is_sold = 1;
             // }
+            Mail::to($pesanan->email)->send(new ApproveEmail($pesanan));
             $pesanan->property->is_sold = 1;
             $pesanan->property->save();
             $pesanan->status = 1;

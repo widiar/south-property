@@ -129,23 +129,34 @@
             confirmButtonText: 'Yes!'
             }).then((result) => {
             if (result.isConfirmed) {
-                $.ajax({
-                    url: $(this).attr('action'),
-                    method: 'PATCH',
-                    success: (res) => {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: `The data has been approved.`,
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 1500
-                        }).then((result) => {
-                            window.location.href = "";
-                        }) 
-                    },
-                    error: (res) => {
-                        Swal.fire("Oops", "Something Wrong!", "error");
-                        console.log(res.responseJSON)
+                Swal.fire({
+                    title: 'Loading',
+                    timer: 20000,
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        Swal.stopTimer()
+                        $.ajax({
+                            url: $(this).attr('action'),
+                            method: 'PATCH',
+                            success: (res) => {
+                                Swal.close()
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: `The data has been approved.`,
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then((result) => {
+                                    window.location.href = "";
+                                }) 
+                            },
+                            error: (res) => {
+                                Swal.fire("Oops", "Something Wrong!", "error");
+                                console.log(res.responseJSON)
+                            }
+                        })
                     }
                 })
             }

@@ -368,7 +368,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">{{ __('site.proses-bayar') }}</button>
+                    <button type="submit" class="btn btn-primary btn-bayar">{{ __('site.proses-bayar') }}</button>
                 </div>
             </form>
         </div>
@@ -503,6 +503,8 @@
             e.preventDefault()
             let dataform = new FormData($('#form-pemesanan')[0])
             dataform.append('bukti', $('#bukti')[0].files[0])
+            $('.btn-bayar').html('<i class="fa fa-spinner fa-spin"></i>')
+            $('.btn-bayar').attr('disabled', true)
             //kasi swal
             Swal.fire({
                 title: 'Loading',
@@ -532,6 +534,8 @@
                         },
                         error: (err) => {
                             console.log(err.responseJSON)
+                            $('.btn-bayar').html(`{{ __('site.proses-bayar') }}`)
+                            $('.btn-bayar').attr('disabled', false)
                         }
                     })
                 }
