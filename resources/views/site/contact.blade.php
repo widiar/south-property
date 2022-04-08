@@ -8,6 +8,7 @@
             <div class="col-md-12 col-lg-8">
                 <div class="title-single-box">
                     <h1 class="title-single">{{ __('site.contact.title-1') }}</h1>
+                    <span class="color-text-a">{{ __('site.contact.text-1') }}</span>
                 </div>
             </div>
         </div>
@@ -39,8 +40,8 @@
                             </div>
                             <div class="icon-box-content">
                                 <p class="mb-1">{{ __('site.footer.text-2') }}.
-                                    <a href="mailto:contact@example.com" target="_blank">
-                                        <span class="color-a">contact@example.com</span>
+                                    <a href="mailto:spropertybali150@gmail.com" target="_blank">
+                                        <span class="color-a">spropertybali150@gmail.com</span>
                                     </a>
                                 </p>
                                 <p class="mb-1">{{ __('site.footer.text-3') }}.

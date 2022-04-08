@@ -110,16 +110,16 @@
         <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link {{request()->is('/') ? ' active' : '' }}" href="{{ route('home') }}">Home</a>
+                    <a class="nav-link {{request()->is('/') ? ' active' : '' }}" href="{{ route('home') }}">{{ __('site.navbar.home') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{request()->is('properties') || request()->is('property*') ? ' active' : '' }}" href="{{ route('properties') }}">Property</a>
+                    <a class="nav-link{{request()->is('properties') || request()->is('property*') ? ' active' : '' }}" href="{{ route('properties') }}">{{ __('site.navbar.property') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{request()->is('contact') ? ' active' : '' }}" href="{{ route('contact') }}">Contact</a>
+                    <a class="nav-link{{request()->is('contact') ? ' active' : '' }}" href="{{ route('contact') }}">{{ __('site.navbar.contact') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{request()->is('about') ? ' active' : '' }}" href="{{ route('about') }}">About</a>
+                    <a class="nav-link{{request()->is('about') ? ' active' : '' }}" href="{{ route('about') }}">{{ __('site.navbar.about') }}</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

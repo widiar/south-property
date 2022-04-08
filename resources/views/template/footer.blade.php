@@ -9,16 +9,16 @@
             </div>
             <div class="w-body-a">
               <p class="w-text-a color-text-a">
-                Enim minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat duis
-                sed aute irure.
+                {{ __('site.footer.text-1') }}
               </p>
             </div>
             <div class="w-footer-a">
               <ul class="list-unstyled">
                 <li class="color-a">
-                  <span class="color-text-a">Phone .</span><a href="https://wa.me/6281246851260 ">+62 8124 6851 260</a></li>
+                  <span class="color-text-a">{{ __('site.footer.text-3') }} :</span><a href="https://wa.me/6281246851260 ">+62 8124 6851 260</a></li>
                 <li class="color-a">
-                  <span class="color-text-a">Email .</span> email@mail.com </li>
+                  <span class="color-text-a">{{ __('site.footer.text-2') }} :</span> <a href="mailto:spropertybali150@gmail.com" target="_blank">
+                    spropertybali150@gmail.com </a> </li>
               </ul>
             </div>
           </div>

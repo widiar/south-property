@@ -26,7 +26,7 @@
                 <div class="sinse-box">
                     <h3 class="sinse-title">South Property
                         <span></span>
-                        <br> Since 2020</h3>
+                        <br> Since 2016</h3>
                 </div>
             </div>
             <div class="col-md-12 section-t8">
@@ -70,7 +70,7 @@
                         <div class="card-header-d">
                             <div class="card-title-d align-self-center">
                                 <h3 class="title-d">
-                                    <p class="link-two">Nama</p>
+                                    <p class="link-two">I Putu Bagus Wibisana</p>
                                 </h3>
                             </div>
                         </div>
@@ -81,37 +81,7 @@
                             <div class="info-agents color-a">
                                 <p><strong>Phone: </strong> +54 356 945234</p>
                                 <p><strong>Email: </strong> mail@example.com</p>
-                            </div>
-                        </div>
-                        <div class="card-footer-d">
-                            <div class="socials-footer d-flex justify-content-center">
-                                <ul class="list-inline">
-                                    <li class="list-inline-item">
-                                        <a href="#" class="link-one">
-                                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="link-one">
-                                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="link-one">
-                                        <i class="fa fa-instagram" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="link-one">
-                                        <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="link-one">
-                                        <i class="fa fa-dribbble" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <p><strong>NIM: </strong> 180030174</p>
                             </div>
                         </div>
                     </div>
@@ -137,37 +107,6 @@
                             <div class="info-agents color-a">
                                 <p><strong>Phone: </strong> +54 356 945234</p>
                                 <p><strong>Email: </strong> mail@example.com</p>
-                            </div>
-                        </div>
-                        <div class="card-footer-d">
-                            <div class="socials-footer d-flex justify-content-center">
-                                <ul class="list-inline">
-                                    <li class="list-inline-item">
-                                        <a href="#" class="link-one">
-                                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="link-one">
-                                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="link-one">
-                                        <i class="fa fa-instagram" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="link-one">
-                                        <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="link-one">
-                                        <i class="fa fa-dribbble" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>

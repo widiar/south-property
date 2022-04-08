@@ -1,6 +1,14 @@
 <?php
 
 return [
+
+    'navbar' => [
+        'home' => 'Beranda',
+        'about' => 'Tentang Kami',
+        'property' => 'Properti',
+        'contact' => 'Kontak',
+    ],
+
     'rumah' => 'Rumah',
     'tanah' => 'Tanah',
     'komersial' => 'Komersial',
@@ -64,7 +72,7 @@ return [
     ],
 
     'about' => [
-        'text-1' => 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.',
+        'text-1' => 'South Property Bali merupakan salah satu usaha di bidang penjualan properti seperti villa, rumah, hotel, dan lainnya. Usaha ini didirikan oleh Jhoni Pranata yang telah berdiri sejak 2016 yang beralamat di Jalan Telagasaari no. 5 Desa Ungasan, Kecamatan Kuta Selatan, Kabupaten Badung, Bali.',
         'title-1' => 'Tim Kami',
     ],
 
@@ -73,12 +81,13 @@ return [
         'title-2' => 'Kirim Pesan',
         'title-3' => 'Temukan Kami',
         'title-4' => 'Media Sosial',
+        'text-1' => 'Anda dapat menghubungi kami dengan datang ke alamat yang tertera atau bisa menghubungi kami melalui email atau telepon berikut.',
     ],
 
     'footer' => [
-        'text-1' => 'Enim minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat duis sed aute irure.',
+        'text-1' => 'South Property Bali merupakan salah satu usaha di bidang penjualan properti seperti villa, rumah, hotel, dan lainnya.',
         'text-2' => 'Email',
-        'text-2' => 'Telepon',
+        'text-3' => 'Telepon',
     ],
 
     'img-bukti' => 'Bukti Pembayaran',
