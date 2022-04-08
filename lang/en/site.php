@@ -73,7 +73,7 @@ return [
     ],
 
     'about' => [
-        'text-1' => 'South Property Bali is one of the businesses in the field of property sales such as villas, houses, hotels, and others. This business was founded by Jhoni Pranata who has been established since 2016 having his address at Jalan Telagasaari no. 5 Ungasan Village, South Kuta District, Badung Regency, Bali.',
+        'text-1' => 'South Property Bali is one of the businesses in the field of property sales such as villas, houses, hotels, and others. This business was founded by Jhoni Pranata who has been established since 2016 having his address at Jalan Telagasari no. 5 Ungasan Village, South Kuta District, Badung Regency, Bali.',
         'title-1' => 'Meet our Team',
     ],
 

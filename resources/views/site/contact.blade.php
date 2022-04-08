@@ -23,8 +23,8 @@
             <div class="col-sm-12">
                 <div class="contact-map box">
                     <div id="map" class="contact-map">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.988020506745!2d115.1755673147849!3d-8.787194693688788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd2449a741c9279%3A0x1aa78cbee44ae62c!2sInstitut%20Teknologi%20Dan%20Bisnis%20Stikom%20Bali%20Kampus%20Jimbaran!5e0!3m2!1sen!2sid!4v1646670481269!5m2!1sen!2sid" 
-                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" frameborder="0"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.3672070185694!2d115.16069748764185!3d-8.81813832917329!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd25b3507660f8d%3A0xaa4f1f39b9cdd20e!2sJl.%20Telagasari%20No.5%2C%20Ungasan%2C%20Kec.%20Kuta%20Sel.%2C%20Kabupaten%20Badung%2C%20Bali%2080361!5e0!3m2!1sen!2sid!4v1649383621562!5m2!1sen!2sid" 
+                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
@@ -62,8 +62,8 @@
                             </div>
                             <div class="icon-box-content">
                                 <p class="mb-1">
-                                    Jl. Raya Kampus Udayana No.20, 
-                                    <br> Jimbaran, Badung, Indonesia.
+                                    Jl. Telagasari no. 5, Ungasan
+                                    <br> Kuta Selatan, Badung, Indonesia.
                                 </p>
                             </div>
                         </div>

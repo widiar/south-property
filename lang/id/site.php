@@ -72,7 +72,7 @@ return [
     ],
 
     'about' => [
-        'text-1' => 'South Property Bali merupakan salah satu usaha di bidang penjualan properti seperti villa, rumah, hotel, dan lainnya. Usaha ini didirikan oleh Jhoni Pranata yang telah berdiri sejak 2016 yang beralamat di Jalan Telagasaari no. 5 Desa Ungasan, Kecamatan Kuta Selatan, Kabupaten Badung, Bali.',
+        'text-1' => 'South Property Bali merupakan salah satu usaha di bidang penjualan properti seperti villa, rumah, hotel, dan lainnya. Usaha ini didirikan oleh Jhoni Pranata yang telah berdiri sejak 2016 yang beralamat di Jalan Telagasari no. 5 Desa Ungasan, Kecamatan Kuta Selatan, Kabupaten Badung, Bali.',
         'title-1' => 'Tim Kami',
     ],
 
