@@ -64,7 +64,7 @@
             <div class="col-md-6">
                 <div class="card-box-d">
                     <div class="card-img-d">
-                        <img src="{{ asset('img/agent-7.jpg') }}" alt="" class="img-d img-fluid">
+                        <img src="https://ik.imagekit.io/prbydmwbm8c/south-property/bagus_TY696Tswf?ik-sdk-version=javascript-1.4.3" alt="" class="img-d img-fluid">
                     </div>
                     <div class="card-overlay card-overlay-hover">
                         <div class="card-header-d">
@@ -76,7 +76,7 @@
                         </div>
                         <div class="card-body-d">
                             <p class="content-d color-text-a">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolorem similique quidem tempora et reprehenderit modi repudiandae perspiciatis dignissimos aspernatur!
+                                Mahasiswa Jurusan Sistem Informasi, Institut Teknologi dan Bisnis STIKOM Bali.
                             </p>
                             <div class="info-agents color-a">
                                 <p><strong>Phone: </strong> +54 356 945234</p>
@@ -90,23 +90,24 @@
             <div class="col-md-6">
                 <div class="card-box-d">
                     <div class="card-img-d">
-                        <img src="{{ asset('img/agent-6.jpg') }}" alt="" class="img-d img-fluid">
+                        <img src="https://ik.imagekit.io/prbydmwbm8c/south-property/fandi_QUM0MBrYR?ik-sdk-version=javascript-1.4.3" alt="" class="img-d img-fluid">
                     </div>
                     <div class="card-overlay card-overlay-hover">
                         <div class="card-header-d">
                             <div class="card-title-d align-self-center">
                                 <h3 class="title-d">
-                                    <p class="link-two">Nama</p>
+                                    <p class="link-two">Fandi Saidina Mulia Putra</p>
                                 </h3>
                             </div>
                         </div>
                         <div class="card-body-d">
                             <p class="content-d color-text-a">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolorem similique quidem tempora et reprehenderit modi repudiandae perspiciatis dignissimos aspernatur!
+                                Mahasiswa Jurusan Sistem Informasi, Institut Teknologi dan Bisnis STIKOM Bali.
                             </p>
                             <div class="info-agents color-a">
                                 <p><strong>Phone: </strong> +54 356 945234</p>
                                 <p><strong>Email: </strong> mail@example.com</p>
+                                <p><strong>NIM: </strong> 180030149</p>
                             </div>
                         </div>
                     </div>
