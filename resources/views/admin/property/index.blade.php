@@ -25,7 +25,7 @@
             <thead>
                 <tr>
                     <th>NO</th>
-                    <th>Nama Property</th>
+                    <th>Judul Iklan</th>
                     <th>Harga Property</th>
                     <th>Foto Property</th>
                     <th class="text-center">Aksi</th>
@@ -40,7 +40,11 @@
                 @foreach ($data as $dt)
                 <tr>
                     <td>{{ ++$no }}</td>
-                    <td>{{ $dt->nama }}</td>
+                    <td>
+                        <span class="badge badge-info">ID</span> {{ $dt->nama }}
+                        <br>
+                        <span class="badge badge-info">EN</span> {{ $dt->title_en }}
+                    </td>
                     <td>Rp {{ number_format($dt->harga, '0', '.', '.') }}</td>
                     <td class="text-center">
                         <button data-id="{{ $dt->id }}" class="btn btn-sm btn-primary btn-detail"><i class="fas fa-eye"></i></button>

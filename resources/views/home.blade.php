@@ -148,7 +148,11 @@
                             <div class="card-overlay-a-content">
                                 <div class="card-header-a">
                                     <h2 class="card-title-a">
+                                        @if($lang == 'id')
                                         <a class="porperty-link" href="{{ route('property', [$property->id]) }}">{{ $property->nama }}</a>
+                                        @else
+                                        <a class="porperty-link" href="{{ route('property', [$property->id]) }}">{{ $property->title_en }}</a>
+                                        @endif
                                     </h2>
                                 </div>
                                 <div class="card-body-a">

@@ -74,6 +74,7 @@ class PropertyController extends Controller
             ]);
             $data = Property::create([
                 'nama' => $request->nama,
+                'title_en' => $request->title_en,
                 'deskripsi' => json_encode([
                     'en' => $request->deskripsi_en,
                     'id' => $request->deskripsi_id
@@ -186,6 +187,7 @@ class PropertyController extends Controller
             $data->location->save();
 
             $data->nama = $request->nama;
+            $data->title_en = $request->title_en;
             $data->deskripsi = json_encode([
                 'en' => $request->deskripsi_en,
                 'id' => $request->deskripsi_id

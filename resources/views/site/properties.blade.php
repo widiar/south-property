@@ -18,6 +18,9 @@
 <!--/ Intro Single End /-->
 
 <!--/ Property Grid Star /-->
+@php
+    $lang = App::getLocale();
+@endphp
 <section class="property-grid grid">
     <div class="container">
         <form action="" method="GET">
@@ -43,7 +46,11 @@
                         <div class="card-overlay-a-content">
                             <div class="card-header-a">
                                 <h2 class="card-title-a">
+                                    @if($lang == 'id')
                                     <a class="porperty-link" href="{{ route('property', [$property->id]) }}">{{ $property->nama }}</a>
+                                    @else
+                                    <a class="porperty-link" href="{{ route('property', [$property->id]) }}">{{ $property->title_en }}</a>
+                                    @endif
                                 </h2>
                             </div>
                             <div class="card-body-a">

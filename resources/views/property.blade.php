@@ -64,13 +64,21 @@
 @endsection
 @section('content')
 
+@php
+    $lang = App::getLocale();
+@endphp
+
 <!--/ Intro Single star /-->
 <section class="intro-single">
     <div class="container">
       <div class="row">
         <div class="col-md-12 col-lg-8">
           <div class="title-single-box">
+              @if($lang == 'id')
             <h1 class="title-single">{{ $property->nama }}</h1>
+            @else
+            <h1 class="title-single">{{ $property->title_en }}</h1>
+            @endif
           </div>
         </div>
       </div>
@@ -200,9 +208,6 @@
                                 </div>
                             </div>
                         </div>
-                        @php
-                            $lang = App::getLocale();
-                        @endphp
                         <div class="property-description">
                             <p class="description color-text-a">
                                 {!! nl2br(json_decode($property->deskripsi)->$lang) !!}

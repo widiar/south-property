@@ -42,13 +42,27 @@
             id="form">
             @csrf
             @method('PUT')
-            <div class="form-group">
-                <label for="nama">Nama Property</label>
-                <input type="text" required name="nama" class="form-control  @error('nama') is-invalid @enderror"
-                    value="{{ old('nama', $data->nama) }}">
-                @error('nama')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nama">Judul Iklan (ID)</label>
+                        <input type="text" required name="nama" class="form-control  @error('nama') is-invalid @enderror"
+                            value="{{ old('nama', $data->nama) }}">
+                        @error('nama')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="title_en">Judul Iklan (EN)</label>
+                        <input type="text" required name="title_en" class="form-control  @error('title_en') is-invalid @enderror"
+                            value="{{ old('title_en', $data->title_en) }}">
+                        @error('title_en')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
