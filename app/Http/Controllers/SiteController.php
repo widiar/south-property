@@ -36,9 +36,9 @@ class SiteController extends Controller
     {
         if(isset($request->search)){
             if(app()->getLocale() == 'id')
-                $properties = Property::with('images')->where('is_sold', 0)->where('nama', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+                $properties = Property::with('images')->where('is_sold', 0)->where('nama', 'like', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
             else
-                $properties = Property::with('images')->where('is_sold', 0)->where('title_en', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+                $properties = Property::with('images')->where('is_sold', 0)->where('title_en', 'like', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
         }
         else $properties = Property::with('images')->where('is_sold', 0)->orderBy('count_view', 'desc')->paginate(9);
         $title = __('site.all_property');
@@ -72,16 +72,16 @@ class SiteController extends Controller
                 $title = __('site.tanah');
                 if(isset($request->search)){
                     if(app()->getLocale() == 'id')
-                        $properties = Property::with('images')->where('is_sold', 0)->where('tipe', 'Tanah')->where('nama', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+                        $properties = Property::with('images')->where('is_sold', 0)->where('tipe', 'Tanah')->where('nama', 'like', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
                     else
-                        $properties = Property::with('images')->where('is_sold', 0)->where('tipe', 'Tanah')->where('title_en', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+                        $properties = Property::with('images')->where('is_sold', 0)->where('tipe', 'Tanah')->where('title_en', 'like', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
                 }
                 else $properties = Property::with('images')->where('is_sold', 0)->where('tipe', 'Tanah')->orderBy('count_view', 'desc')->paginate(9);
             } else {
                 $sub_tipe = str_replace('-', ' ', $subTipe);
                 $title = __('site.' . strtolower($subTipe));
                 if(isset($request->search)){
-                    $properties = Property::with('images')->where('is_sold', 0)->where('sub_tipe', $sub_tipe)->where('nama', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+                    $properties = Property::with('images')->where('is_sold', 0)->where('sub_tipe', $sub_tipe)->where('nama', 'like', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
                 }
                 else $properties = Property::with('images')->where('is_sold', 0)->where('sub_tipe', $sub_tipe)->orderBy('count_view', 'desc')->paginate(9);
             }
@@ -94,11 +94,11 @@ class SiteController extends Controller
                 if(app()->getLocale() == 'id')
                     $properties = Property::with(['images', 'location' => function($q) use($lokasi) {
                         $q->where('kecamatan', $lokasi);
-                    }])->where('is_sold', 0)->where('tipe', $prop)->where('nama', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+                    }])->where('is_sold', 0)->where('tipe', $prop)->where('nama', 'like', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
                 else
                     $properties = Property::with(['images', 'location' => function($q) use($lokasi) {
                         $q->where('kecamatan', $lokasi);
-                    }])->where('is_sold', 0)->where('tipe', $prop)->where('title_en', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+                    }])->where('is_sold', 0)->where('tipe', $prop)->where('title_en', 'like', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
             }
             else $properties = Property::with(['images', 'location' => function($q) use($lokasi) {
                 $q->where('kecamatan', $lokasi);
@@ -112,9 +112,9 @@ class SiteController extends Controller
         $title = 'Popular ' . $tipe;
         if(isset($request->search)){
             if(app()->getLocale() == 'id')
-                $properties = Property::with('images')->where('tipe', $tipe)->where('is_sold', 0)->where('nama', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+                $properties = Property::with('images')->where('tipe', $tipe)->where('is_sold', 0)->where('nama', 'like', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
             else
-                $properties = Property::with('images')->where('tipe', $tipe)->where('is_sold', 0)->where('title_en', 'ilike', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
+                $properties = Property::with('images')->where('tipe', $tipe)->where('is_sold', 0)->where('title_en', 'like', '%'.$request->search.'%')->orderBy('count_view', 'desc')->paginate(9);
         }
         else $properties = Property::with('images')->where('tipe', $tipe)->where('is_sold', 0)->orderBy('count_view', 'desc')->paginate(9);
         return view('site.properties', compact('properties', 'title'));
