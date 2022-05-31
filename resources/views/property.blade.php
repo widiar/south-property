@@ -21,9 +21,9 @@
 		height: 200px;
 	}
 
-    .mobile {
+    /* .mobile {
         display: none;
-    }
+    } */
 
 	@media screen and (max-width: 768px) {
 		.img-info {
@@ -46,19 +46,19 @@
             display: none;
         }
 
-        .mobile {
+        /* .mobile {
             display: unset;
-        }
+        } */
 
-        .title-mobile {
-            border: 5px solid #ff9700;
-            padding: 10px;
-        }
-
-        .title-box-d .title-d:after {
-            width: 100%;
-        }
 	}
+    .title-mobile {
+        border: 5px solid #ff9700;
+        padding: 10px;
+    }
+
+    .title-box-d .title-d:after {
+        width: 100%;
+    }
 
 </style>
 @endsection
@@ -102,9 +102,9 @@
                     <div class="col-md-5 col-lg-4">
                         <div class="property-price d-flex justify-content-center foo">
                             <div class="card-header-c d-flex">
-                                <div class="card-box-ico desktop-only">
+                                {{-- <div class="card-box-ico desktop-only">
                                     <span class="ion-money">Rp</span>
-                                </div>
+                                </div> --}}
                                 @if($property->tipe == 'Tanah')
                                 <div class="card-title-c align-self-center">
                                     <h5 class="title-c title-mobile"><span class="mobile">Rp </span>{{ number_format($property->harga_satuan, '0', '.', '.') }}</h5>
@@ -432,6 +432,12 @@
                 icon: 'success'
             });
         }
+        $('body').on('hidden.bs.modal', function () {
+            if($('.modal.in').length > 0)
+            {
+                $('body').addClass('modal-open');
+            }
+        });
     });
 
     // jquery validation make validation for handphone number Indonesia
@@ -481,6 +487,7 @@
                             if (data.status == 'success') {
                                 $('#bayarModal').modal('toggle');
                                 $('#transaksiModal').modal('show');
+                                $('.modal').css('overflow-y', 'auto');
                             } else {
                                 Swal.fire({
                                     title: 'Property',
